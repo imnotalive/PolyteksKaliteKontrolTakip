@@ -1,0 +1,841 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="POLY_QDMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Qdms_Bolumler">
+          <Key>
+            <PropertyRef Name="BolumID" />
+          </Key>
+          <Property Name="BolumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bolumler" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Qdms_Cari">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CariNo" Type="nvarchar" MaxLength="40" />
+          <Property Name="CariAdi" Type="nvarchar" MaxLength="150" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="500" />
+          <Property Name="VergiDairesi" Type="nvarchar" MaxLength="30" />
+          <Property Name="VergiNo" Type="nvarchar" MaxLength="30" />
+          <Property Name="Tel1Aciklama" Type="nvarchar" MaxLength="20" />
+          <Property Name="TUlkeKodu1" Type="nvarchar" MaxLength="3" />
+          <Property Name="TAlanKodu1" Type="nvarchar" MaxLength="5" />
+          <Property Name="Tel1" Type="nvarchar" MaxLength="8" />
+          <Property Name="FUlkeKodu1" Type="nvarchar" MaxLength="3" />
+          <Property Name="FAlanKodu1" Type="nvarchar" MaxLength="5" />
+          <Property Name="Fax1" Type="nvarchar" MaxLength="8" />
+          <Property Name="ElektronikPosta" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ulke" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bolge" Type="nvarchar" MaxLength="30" />
+          <Property Name="Yetkili" Type="nvarchar" MaxLength="50" />
+          <Property Name="Notlar" Type="nvarchar" MaxLength="150" />
+          <Property Name="Uyari" Type="nvarchar" MaxLength="1" />
+          <Property Name="CariTuru" Type="nvarchar" MaxLength="12" />
+          <Property Name="Semt" Type="nvarchar" MaxLength="30" />
+          <Property Name="Il" Type="nvarchar" MaxLength="30" />
+          <Property Name="Ilce" Type="nvarchar" MaxLength="30" />
+          <Property Name="GSM" Type="nvarchar" MaxLength="25" />
+          <Property Name="WebAdres" Type="nvarchar" MaxLength="100" />
+          <Property Name="PostaKodu" Type="nvarchar" MaxLength="10" />
+          <Property Name="OdemeSekli" Type="nvarchar" MaxLength="30" />
+          <Property Name="TeslimSekli" Type="nvarchar" MaxLength="20" />
+          <Property Name="NakliyeSekli" Type="nvarchar" MaxLength="20" />
+          <Property Name="CalisilanDovizBirimi" Type="nvarchar" MaxLength="8" />
+          <Property Name="PlanlamaOnceligi" Type="int" />
+          <Property Name="KullanimdaMi" Type="bit" />
+          <Property Name="TicariUnvani" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Qdms_Kullanici">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciKodu" Type="nvarchar" MaxLength="50" />
+          <Property Name="PersonelKodu" Type="nvarchar" MaxLength="20" />
+          <Property Name="Birim" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bolum" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdSoyad" Type="nvarchar" MaxLength="500" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+          <Property Name="Email2" Type="nvarchar" MaxLength="30" />
+          <Property Name="Yetki" Type="nvarchar" MaxLength="10" />
+          <Property Name="Sifre" Type="int" />
+        </EntityType>
+        <EntityType Name="Qdms_MusteriSikayet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IcDis" Type="nvarchar" MaxLength="50" />
+          <Property Name="SikayetReklamasyonDuyuruTarihi" Type="datetime" />
+          <Property Name="PartiNo" Type="nvarchar" MaxLength="150" />
+          <Property Name="DtexFlaman" Type="nvarchar" MaxLength="150" />
+          <Property Name="KabulEdilenSikayetReklamasyonMiktari" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="Kalite" Type="nvarchar" MaxLength="50" />
+          <Property Name="SikayetSonucu" Type="nvarchar(max)" />
+          <Property Name="NumuneGelisTarihi" Type="datetime" />
+          <Property Name="CevapTarihi" Type="datetime" />
+          <Property Name="TeknikZiyareti" Type="bit" />
+          <Property Name="KapatilmaSuresi" Type="nvarchar" MaxLength="50" />
+          <Property Name="GecikmeNedeni" Type="nvarchar" MaxLength="500" />
+          <Property Name="IadeMiktari" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="IadeBedeli" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="IadeBedelBirimi" Type="nvarchar" MaxLength="50" />
+          <Property Name="IskontoBedeli" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="IskontoBedeliBirimi" Type="nvarchar" MaxLength="50" />
+          <Property Name="MutabakatFormu" Type="nvarchar" MaxLength="500" />
+          <Property Name="KokNeden" Type="nvarchar(max)" />
+          <Property Name="SonucOlarakYapilacakCalisma" Type="nvarchar(max)" />
+          <Property Name="Sorumlu" Type="nvarchar" MaxLength="500" />
+          <Property Name="AksiyonTermini" Type="datetime" />
+          <Property Name="AksiyonGerceklestirmeTermini" Type="datetime" />
+          <Property Name="NumuneTipi" Type="nvarchar" MaxLength="150" />
+          <Property Name="Cari" Type="int" />
+          <Property Name="SikayetReklamasyonGelisTarihi" Type="datetime" />
+          <Property Name="MusteriSikayetId" Type="int" />
+          <Property Name="IplikKullanimYeri" Type="nvarchar" MaxLength="500" />
+          <Property Name="FirmaYetkilisi" Type="nvarchar" MaxLength="500" />
+          <Property Name="SatisMusteriTemsilcisiAd" Type="nvarchar(max)" />
+          <Property Name="SatisMusteriTemsilcisiTarih" Type="datetime" />
+          <Property Name="Bobin" Type="int" />
+          <Property Name="Kumas" Type="nvarchar" MaxLength="500" />
+          <Property Name="Cile" Type="nvarchar" MaxLength="100" />
+          <Property Name="Diger" Type="nvarchar(max)" />
+          <Property Name="DtexFlamanIplikOzeliigi" Type="nvarchar(max)" />
+          <Property Name="SikayetIletisim" Type="nvarchar" MaxLength="100" />
+          <Property Name="Durum" Type="nvarchar" MaxLength="100" />
+          <Property Name="PartiNoSecme" Type="int" />
+          <Property Name="SevkTarihi1" Type="datetime" />
+          <Property Name="SevkTarihi2" Type="datetime" />
+          <Property Name="SevkTarihi3" Type="datetime" />
+          <Property Name="SevkMiktari1" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="SevkMiktari2" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="SevkMiktari3" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="SikayetDiger" Type="nvarchar(max)" />
+          <Property Name="SikayetSebebiID" Type="int" />
+          <Property Name="SikayetGrubuID" Type="int" />
+          <Property Name="LabOzet" Type="nvarchar(max)" />
+          <Property Name="YapilanAnalizler" Type="nvarchar(max)" />
+          <Property Name="TekstureYorum" Type="nvarchar(max)" />
+          <Property Name="BukumYorum" Type="nvarchar(max)" />
+          <Property Name="UretimYorum" Type="nvarchar(max)" />
+          <Property Name="TTYorum" Type="nvarchar(max)" />
+          <Property Name="LabYorum" Type="nvarchar(max)" />
+          <Property Name="PaketlemeYorum" Type="nvarchar(max)" />
+          <Property Name="SevkiyatYorum" Type="nvarchar(max)" />
+          <Property Name="SatinalmaYorum" Type="nvarchar(max)" />
+          <Property Name="MBYorum" Type="nvarchar(max)" />
+          <Property Name="EEYorum" Type="nvarchar(max)" />
+          <Property Name="ProsesYorum" Type="nvarchar(max)" />
+          <Property Name="TekstureSeciliMi" Type="bit" />
+          <Property Name="UretimSeciliMi" Type="bit" />
+          <Property Name="BukumSeciliMi" Type="bit" />
+          <Property Name="TTSeciliMi" Type="bit" />
+          <Property Name="LabSeciliMi" Type="bit" />
+          <Property Name="PaketlemeSeciliMi" Type="bit" />
+          <Property Name="SevkiyatSeciliMi" Type="bit" />
+          <Property Name="SatinalmaSeciliMi" Type="bit" />
+          <Property Name="MBSeciliMi" Type="bit" />
+          <Property Name="EESeciliMi" Type="bit" />
+          <Property Name="ProsesSeciliMi" Type="bit" />
+          <Property Name="Hazirlayan" Type="nvarchar" MaxLength="150" />
+          <Property Name="Onaylayan" Type="nvarchar" MaxLength="150" />
+          <Property Name="Kalite2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="OnaylandiMi" Type="bit" />
+        </EntityType>
+        <EntityType Name="Qdms_MusteriSikayetAna">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firma" Type="int" />
+          <Property Name="MusteriTemsilcisi" Type="nvarchar" MaxLength="500" />
+          <Property Name="GelisTarihi" Type="datetime" />
+          <Property Name="SonucTarihi" Type="datetime" />
+          <Property Name="PartiNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Kalite" Type="nvarchar" MaxLength="30" />
+          <Property Name="SevkTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Qdms_MusteriSikayetResim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SikayetId" Type="int" />
+          <Property Name="ImagePath" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Qdms_PartiNo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LotNo" Type="nvarchar" MaxLength="150" />
+          <Property Name="StokKodu" Type="nvarchar(max)" />
+          <Property Name="StokAdi" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Qdms_SikayetGrubu">
+          <Key>
+            <PropertyRef Name="SikayetGrubuID" />
+          </Key>
+          <Property Name="SikayetGrubuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SikayetGrubu" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Qdms_SikayetSebebi">
+          <Key>
+            <PropertyRef Name="SikayetSebebiID" />
+          </Key>
+          <Property Name="SikayetSebebiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SikayetSebebi" Type="nvarchar(max)" />
+          <Property Name="SikayetGrubuID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Qdms_MusteriSikayet_Qdms_MusteriSikayetAna">
+          <End Role="Qdms_MusteriSikayetAna" Type="Self.Qdms_MusteriSikayetAna" Multiplicity="0..1" />
+          <End Role="Qdms_MusteriSikayet" Type="Self.Qdms_MusteriSikayet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_MusteriSikayetAna">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Qdms_MusteriSikayet">
+              <PropertyRef Name="MusteriSikayetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qdms_MusteriSikayet_Qdms_PartiNo">
+          <End Role="Qdms_PartiNo" Type="Self.Qdms_PartiNo" Multiplicity="0..1" />
+          <End Role="Qdms_MusteriSikayet" Type="Self.Qdms_MusteriSikayet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_PartiNo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Qdms_MusteriSikayet">
+              <PropertyRef Name="PartiNoSecme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qdms_MusteriSikayet_Qdms_SikayetGrubu">
+          <End Role="Qdms_SikayetSebebi" Type="Self.Qdms_SikayetSebebi" Multiplicity="0..1" />
+          <End Role="Qdms_MusteriSikayet" Type="Self.Qdms_MusteriSikayet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_SikayetSebebi">
+              <PropertyRef Name="SikayetSebebiID" />
+            </Principal>
+            <Dependent Role="Qdms_MusteriSikayet">
+              <PropertyRef Name="SikayetSebebiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qdms_MusteriSikayetResim_Qdms_MusteriSikayet">
+          <End Role="Qdms_MusteriSikayet" Type="Self.Qdms_MusteriSikayet" Multiplicity="0..1" />
+          <End Role="Qdms_MusteriSikayetResim" Type="Self.Qdms_MusteriSikayetResim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_MusteriSikayet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Qdms_MusteriSikayetResim">
+              <PropertyRef Name="SikayetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qdms_MusteriTakipFormu_Qdms_Cari1">
+          <End Role="Qdms_Cari" Type="Self.Qdms_Cari" Multiplicity="0..1" />
+          <End Role="Qdms_MusteriSikayet" Type="Self.Qdms_MusteriSikayet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_Cari">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Qdms_MusteriSikayet">
+              <PropertyRef Name="Cari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qdms_SikayetSebebi_Qdms_SikayetGrubu">
+          <End Role="Qdms_SikayetGrubu" Type="Self.Qdms_SikayetGrubu" Multiplicity="0..1" />
+          <End Role="Qdms_SikayetSebebi" Type="Self.Qdms_SikayetSebebi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_SikayetGrubu">
+              <PropertyRef Name="SikayetGrubuID" />
+            </Principal>
+            <Dependent Role="Qdms_SikayetSebebi">
+              <PropertyRef Name="SikayetGrubuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="POLY_QDMSModelStoreContainer">
+          <EntitySet Name="Qdms_Bolumler" EntityType="Self.Qdms_Bolumler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qdms_Cari" EntityType="Self.Qdms_Cari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qdms_Kullanici" EntityType="Self.Qdms_Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qdms_MusteriSikayet" EntityType="Self.Qdms_MusteriSikayet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qdms_MusteriSikayetAna" EntityType="Self.Qdms_MusteriSikayetAna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qdms_MusteriSikayetResim" EntityType="Self.Qdms_MusteriSikayetResim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qdms_PartiNo" EntityType="Self.Qdms_PartiNo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qdms_SikayetGrubu" EntityType="Self.Qdms_SikayetGrubu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qdms_SikayetSebebi" EntityType="Self.Qdms_SikayetSebebi" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Qdms_MusteriSikayet_Qdms_MusteriSikayetAna" Association="Self.FK_Qdms_MusteriSikayet_Qdms_MusteriSikayetAna">
+            <End Role="Qdms_MusteriSikayetAna" EntitySet="Qdms_MusteriSikayetAna" />
+            <End Role="Qdms_MusteriSikayet" EntitySet="Qdms_MusteriSikayet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qdms_MusteriSikayet_Qdms_PartiNo" Association="Self.FK_Qdms_MusteriSikayet_Qdms_PartiNo">
+            <End Role="Qdms_PartiNo" EntitySet="Qdms_PartiNo" />
+            <End Role="Qdms_MusteriSikayet" EntitySet="Qdms_MusteriSikayet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qdms_MusteriSikayet_Qdms_SikayetGrubu" Association="Self.FK_Qdms_MusteriSikayet_Qdms_SikayetGrubu">
+            <End Role="Qdms_SikayetSebebi" EntitySet="Qdms_SikayetSebebi" />
+            <End Role="Qdms_MusteriSikayet" EntitySet="Qdms_MusteriSikayet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qdms_MusteriSikayetResim_Qdms_MusteriSikayet" Association="Self.FK_Qdms_MusteriSikayetResim_Qdms_MusteriSikayet">
+            <End Role="Qdms_MusteriSikayet" EntitySet="Qdms_MusteriSikayet" />
+            <End Role="Qdms_MusteriSikayetResim" EntitySet="Qdms_MusteriSikayetResim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qdms_MusteriTakipFormu_Qdms_Cari1" Association="Self.FK_Qdms_MusteriTakipFormu_Qdms_Cari1">
+            <End Role="Qdms_Cari" EntitySet="Qdms_Cari" />
+            <End Role="Qdms_MusteriSikayet" EntitySet="Qdms_MusteriSikayet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qdms_SikayetSebebi_Qdms_SikayetGrubu" Association="Self.FK_Qdms_SikayetSebebi_Qdms_SikayetGrubu">
+            <End Role="Qdms_SikayetGrubu" EntitySet="Qdms_SikayetGrubu" />
+            <End Role="Qdms_SikayetSebebi" EntitySet="Qdms_SikayetSebebi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="POLY_QDMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Qdms_Bolumler">
+          <Key>
+            <PropertyRef Name="BolumID" />
+          </Key>
+          <Property Name="BolumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bolumler" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Qdms_Cari">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CariNo" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CariAdi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VergiDairesi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="VergiNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Tel1Aciklama" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TUlkeKodu1" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="TAlanKodu1" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Tel1" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="FUlkeKodu1" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="FAlanKodu1" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Fax1" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ElektronikPosta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ulke" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bolge" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Yetkili" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notlar" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Uyari" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="CariTuru" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Semt" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Il" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Ilce" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GSM" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="WebAdres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PostaKodu" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="OdemeSekli" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TeslimSekli" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NakliyeSekli" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CalisilanDovizBirimi" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="PlanlamaOnceligi" Type="Int32" />
+          <Property Name="KullanimdaMi" Type="Boolean" />
+          <Property Name="TicariUnvani" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Qdms_MusteriSikayet" Relationship="Self.FK_Qdms_MusteriTakipFormu_Qdms_Cari1" FromRole="Qdms_Cari" ToRole="Qdms_MusteriSikayet" />
+        </EntityType>
+        <EntityType Name="Qdms_Kullanici">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciKodu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PersonelKodu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Birim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bolum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdSoyad" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Email2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Yetki" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Qdms_MusteriSikayet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IcDis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SikayetReklamasyonDuyuruTarihi" Type="DateTime" Precision="3" />
+          <Property Name="PartiNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DtexFlaman" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="KabulEdilenSikayetReklamasyonMiktari" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Kalite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SikayetSonucu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumuneGelisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="CevapTarihi" Type="DateTime" Precision="3" />
+          <Property Name="TeknikZiyareti" Type="Boolean" />
+          <Property Name="KapatilmaSuresi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GecikmeNedeni" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IadeMiktari" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="IadeBedeli" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="IadeBedelBirimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IskontoBedeli" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="IskontoBedeliBirimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MutabakatFormu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KokNeden" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SonucOlarakYapilacakCalisma" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sorumlu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AksiyonTermini" Type="DateTime" Precision="3" />
+          <Property Name="AksiyonGerceklestirmeTermini" Type="DateTime" Precision="3" />
+          <Property Name="NumuneTipi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Cari" Type="Int32" />
+          <Property Name="SikayetReklamasyonGelisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="MusteriSikayetId" Type="Int32" />
+          <Property Name="IplikKullanimYeri" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FirmaYetkilisi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SatisMusteriTemsilcisiAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SatisMusteriTemsilcisiTarih" Type="DateTime" Precision="3" />
+          <Property Name="Bobin" Type="Int32" />
+          <Property Name="Kumas" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Cile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Diger" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DtexFlamanIplikOzeliigi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SikayetIletisim" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Durum" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PartiNoSecme" Type="Int32" />
+          <Property Name="SevkTarihi1" Type="DateTime" Precision="3" />
+          <Property Name="SevkTarihi2" Type="DateTime" Precision="3" />
+          <Property Name="SevkTarihi3" Type="DateTime" Precision="3" />
+          <Property Name="SevkMiktari1" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="SevkMiktari2" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="SevkMiktari3" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="SikayetDiger" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SikayetSebebiID" Type="Int32" />
+          <Property Name="SikayetGrubuID" Type="Int32" />
+          <Property Name="LabOzet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YapilanAnalizler" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TekstureYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BukumYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UretimYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TTYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LabYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaketlemeYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SevkiyatYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SatinalmaYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MBYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EEYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProsesYorum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TekstureSeciliMi" Type="Boolean" />
+          <Property Name="UretimSeciliMi" Type="Boolean" />
+          <Property Name="BukumSeciliMi" Type="Boolean" />
+          <Property Name="TTSeciliMi" Type="Boolean" />
+          <Property Name="LabSeciliMi" Type="Boolean" />
+          <Property Name="PaketlemeSeciliMi" Type="Boolean" />
+          <Property Name="SevkiyatSeciliMi" Type="Boolean" />
+          <Property Name="SatinalmaSeciliMi" Type="Boolean" />
+          <Property Name="MBSeciliMi" Type="Boolean" />
+          <Property Name="EESeciliMi" Type="Boolean" />
+          <Property Name="ProsesSeciliMi" Type="Boolean" />
+          <Property Name="Hazirlayan" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Onaylayan" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Kalite2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="OnaylandiMi" Type="Boolean" />
+          <NavigationProperty Name="Qdms_Cari" Relationship="Self.FK_Qdms_MusteriTakipFormu_Qdms_Cari1" FromRole="Qdms_MusteriSikayet" ToRole="Qdms_Cari" />
+          <NavigationProperty Name="Qdms_MusteriSikayetAna" Relationship="Self.FK_Qdms_MusteriSikayet_Qdms_MusteriSikayetAna" FromRole="Qdms_MusteriSikayet" ToRole="Qdms_MusteriSikayetAna" />
+          <NavigationProperty Name="Qdms_PartiNo" Relationship="Self.FK_Qdms_MusteriSikayet_Qdms_PartiNo" FromRole="Qdms_MusteriSikayet" ToRole="Qdms_PartiNo" />
+          <NavigationProperty Name="Qdms_SikayetSebebi" Relationship="Self.FK_Qdms_MusteriSikayet_Qdms_SikayetGrubu" FromRole="Qdms_MusteriSikayet" ToRole="Qdms_SikayetSebebi" />
+          <NavigationProperty Name="Qdms_MusteriSikayetResim" Relationship="Self.FK_Qdms_MusteriSikayetResim_Qdms_MusteriSikayet" FromRole="Qdms_MusteriSikayet" ToRole="Qdms_MusteriSikayetResim" />
+        </EntityType>
+        <EntityType Name="Qdms_MusteriSikayetAna">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firma" Type="Int32" />
+          <Property Name="MusteriTemsilcisi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GelisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="SonucTarihi" Type="DateTime" Precision="3" />
+          <Property Name="PartiNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kalite" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SevkTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Qdms_MusteriSikayet" Relationship="Self.FK_Qdms_MusteriSikayet_Qdms_MusteriSikayetAna" FromRole="Qdms_MusteriSikayetAna" ToRole="Qdms_MusteriSikayet" />
+        </EntityType>
+        <EntityType Name="Qdms_MusteriSikayetResim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SikayetId" Type="Int32" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Qdms_MusteriSikayet" Relationship="Self.FK_Qdms_MusteriSikayetResim_Qdms_MusteriSikayet" FromRole="Qdms_MusteriSikayetResim" ToRole="Qdms_MusteriSikayet" />
+        </EntityType>
+        <EntityType Name="Qdms_PartiNo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LotNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="StokKodu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StokAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Qdms_MusteriSikayet" Relationship="Self.FK_Qdms_MusteriSikayet_Qdms_PartiNo" FromRole="Qdms_PartiNo" ToRole="Qdms_MusteriSikayet" />
+        </EntityType>
+        <EntityType Name="Qdms_SikayetGrubu">
+          <Key>
+            <PropertyRef Name="SikayetGrubuID" />
+          </Key>
+          <Property Name="SikayetGrubuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SikayetGrubu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Qdms_SikayetSebebi" Relationship="Self.FK_Qdms_SikayetSebebi_Qdms_SikayetGrubu" FromRole="Qdms_SikayetGrubu" ToRole="Qdms_SikayetSebebi" />
+        </EntityType>
+        <EntityType Name="Qdms_SikayetSebebi">
+          <Key>
+            <PropertyRef Name="SikayetSebebiID" />
+          </Key>
+          <Property Name="SikayetSebebiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SikayetSebebi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SikayetGrubuID" Type="Int32" />
+          <NavigationProperty Name="Qdms_MusteriSikayet" Relationship="Self.FK_Qdms_MusteriSikayet_Qdms_SikayetGrubu" FromRole="Qdms_SikayetSebebi" ToRole="Qdms_MusteriSikayet" />
+          <NavigationProperty Name="Qdms_SikayetGrubu" Relationship="Self.FK_Qdms_SikayetSebebi_Qdms_SikayetGrubu" FromRole="Qdms_SikayetSebebi" ToRole="Qdms_SikayetGrubu" />
+        </EntityType>
+        <Association Name="FK_Qdms_MusteriTakipFormu_Qdms_Cari1">
+          <End Role="Qdms_Cari" Type="Self.Qdms_Cari" Multiplicity="0..1" />
+          <End Role="Qdms_MusteriSikayet" Type="Self.Qdms_MusteriSikayet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_Cari">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Qdms_MusteriSikayet">
+              <PropertyRef Name="Cari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qdms_MusteriSikayet_Qdms_MusteriSikayetAna">
+          <End Role="Qdms_MusteriSikayetAna" Type="Self.Qdms_MusteriSikayetAna" Multiplicity="0..1" />
+          <End Role="Qdms_MusteriSikayet" Type="Self.Qdms_MusteriSikayet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_MusteriSikayetAna">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Qdms_MusteriSikayet">
+              <PropertyRef Name="MusteriSikayetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qdms_MusteriSikayet_Qdms_PartiNo">
+          <End Role="Qdms_PartiNo" Type="Self.Qdms_PartiNo" Multiplicity="0..1" />
+          <End Role="Qdms_MusteriSikayet" Type="Self.Qdms_MusteriSikayet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_PartiNo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Qdms_MusteriSikayet">
+              <PropertyRef Name="PartiNoSecme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qdms_MusteriSikayet_Qdms_SikayetGrubu">
+          <End Role="Qdms_SikayetSebebi" Type="Self.Qdms_SikayetSebebi" Multiplicity="0..1" />
+          <End Role="Qdms_MusteriSikayet" Type="Self.Qdms_MusteriSikayet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_SikayetSebebi">
+              <PropertyRef Name="SikayetSebebiID" />
+            </Principal>
+            <Dependent Role="Qdms_MusteriSikayet">
+              <PropertyRef Name="SikayetSebebiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qdms_MusteriSikayetResim_Qdms_MusteriSikayet">
+          <End Role="Qdms_MusteriSikayet" Type="Self.Qdms_MusteriSikayet" Multiplicity="0..1" />
+          <End Role="Qdms_MusteriSikayetResim" Type="Self.Qdms_MusteriSikayetResim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_MusteriSikayet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Qdms_MusteriSikayetResim">
+              <PropertyRef Name="SikayetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qdms_SikayetSebebi_Qdms_SikayetGrubu">
+          <End Role="Qdms_SikayetGrubu" Type="Self.Qdms_SikayetGrubu" Multiplicity="0..1" />
+          <End Role="Qdms_SikayetSebebi" Type="Self.Qdms_SikayetSebebi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qdms_SikayetGrubu">
+              <PropertyRef Name="SikayetGrubuID" />
+            </Principal>
+            <Dependent Role="Qdms_SikayetSebebi">
+              <PropertyRef Name="SikayetGrubuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="POLY_QDMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Qdms_Bolumler" EntityType="Self.Qdms_Bolumler" />
+          <EntitySet Name="Qdms_Cari" EntityType="Self.Qdms_Cari" />
+          <EntitySet Name="Qdms_Kullanici" EntityType="Self.Qdms_Kullanici" />
+          <EntitySet Name="Qdms_MusteriSikayet" EntityType="Self.Qdms_MusteriSikayet" />
+          <EntitySet Name="Qdms_MusteriSikayetAna" EntityType="Self.Qdms_MusteriSikayetAna" />
+          <EntitySet Name="Qdms_MusteriSikayetResim" EntityType="Self.Qdms_MusteriSikayetResim" />
+          <EntitySet Name="Qdms_PartiNo" EntityType="Self.Qdms_PartiNo" />
+          <EntitySet Name="Qdms_SikayetGrubu" EntityType="Self.Qdms_SikayetGrubu" />
+          <EntitySet Name="Qdms_SikayetSebebi" EntityType="Self.Qdms_SikayetSebebi" />
+          <AssociationSet Name="FK_Qdms_MusteriTakipFormu_Qdms_Cari1" Association="Self.FK_Qdms_MusteriTakipFormu_Qdms_Cari1">
+            <End Role="Qdms_Cari" EntitySet="Qdms_Cari" />
+            <End Role="Qdms_MusteriSikayet" EntitySet="Qdms_MusteriSikayet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qdms_MusteriSikayet_Qdms_MusteriSikayetAna" Association="Self.FK_Qdms_MusteriSikayet_Qdms_MusteriSikayetAna">
+            <End Role="Qdms_MusteriSikayetAna" EntitySet="Qdms_MusteriSikayetAna" />
+            <End Role="Qdms_MusteriSikayet" EntitySet="Qdms_MusteriSikayet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qdms_MusteriSikayet_Qdms_PartiNo" Association="Self.FK_Qdms_MusteriSikayet_Qdms_PartiNo">
+            <End Role="Qdms_PartiNo" EntitySet="Qdms_PartiNo" />
+            <End Role="Qdms_MusteriSikayet" EntitySet="Qdms_MusteriSikayet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qdms_MusteriSikayet_Qdms_SikayetGrubu" Association="Self.FK_Qdms_MusteriSikayet_Qdms_SikayetGrubu">
+            <End Role="Qdms_SikayetSebebi" EntitySet="Qdms_SikayetSebebi" />
+            <End Role="Qdms_MusteriSikayet" EntitySet="Qdms_MusteriSikayet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qdms_MusteriSikayetResim_Qdms_MusteriSikayet" Association="Self.FK_Qdms_MusteriSikayetResim_Qdms_MusteriSikayet">
+            <End Role="Qdms_MusteriSikayet" EntitySet="Qdms_MusteriSikayet" />
+            <End Role="Qdms_MusteriSikayetResim" EntitySet="Qdms_MusteriSikayetResim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qdms_SikayetSebebi_Qdms_SikayetGrubu" Association="Self.FK_Qdms_SikayetSebebi_Qdms_SikayetGrubu">
+            <End Role="Qdms_SikayetGrubu" EntitySet="Qdms_SikayetGrubu" />
+            <End Role="Qdms_SikayetSebebi" EntitySet="Qdms_SikayetSebebi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="POLY_QDMSModelStoreContainer" CdmEntityContainer="POLY_QDMSEntities">
+          <EntitySetMapping Name="Qdms_Bolumler">
+            <EntityTypeMapping TypeName="POLY_QDMSModel.Qdms_Bolumler">
+              <MappingFragment StoreEntitySet="Qdms_Bolumler">
+                <ScalarProperty Name="BolumID" ColumnName="BolumID" />
+                <ScalarProperty Name="Bolumler" ColumnName="Bolumler" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qdms_Cari">
+            <EntityTypeMapping TypeName="POLY_QDMSModel.Qdms_Cari">
+              <MappingFragment StoreEntitySet="Qdms_Cari">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CariNo" ColumnName="CariNo" />
+                <ScalarProperty Name="CariAdi" ColumnName="CariAdi" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="VergiDairesi" ColumnName="VergiDairesi" />
+                <ScalarProperty Name="VergiNo" ColumnName="VergiNo" />
+                <ScalarProperty Name="Tel1Aciklama" ColumnName="Tel1Aciklama" />
+                <ScalarProperty Name="TUlkeKodu1" ColumnName="TUlkeKodu1" />
+                <ScalarProperty Name="TAlanKodu1" ColumnName="TAlanKodu1" />
+                <ScalarProperty Name="Tel1" ColumnName="Tel1" />
+                <ScalarProperty Name="FUlkeKodu1" ColumnName="FUlkeKodu1" />
+                <ScalarProperty Name="FAlanKodu1" ColumnName="FAlanKodu1" />
+                <ScalarProperty Name="Fax1" ColumnName="Fax1" />
+                <ScalarProperty Name="ElektronikPosta" ColumnName="ElektronikPosta" />
+                <ScalarProperty Name="Ulke" ColumnName="Ulke" />
+                <ScalarProperty Name="Bolge" ColumnName="Bolge" />
+                <ScalarProperty Name="Yetkili" ColumnName="Yetkili" />
+                <ScalarProperty Name="Notlar" ColumnName="Notlar" />
+                <ScalarProperty Name="Uyari" ColumnName="Uyari" />
+                <ScalarProperty Name="CariTuru" ColumnName="CariTuru" />
+                <ScalarProperty Name="Semt" ColumnName="Semt" />
+                <ScalarProperty Name="Il" ColumnName="Il" />
+                <ScalarProperty Name="Ilce" ColumnName="Ilce" />
+                <ScalarProperty Name="GSM" ColumnName="GSM" />
+                <ScalarProperty Name="WebAdres" ColumnName="WebAdres" />
+                <ScalarProperty Name="PostaKodu" ColumnName="PostaKodu" />
+                <ScalarProperty Name="OdemeSekli" ColumnName="OdemeSekli" />
+                <ScalarProperty Name="TeslimSekli" ColumnName="TeslimSekli" />
+                <ScalarProperty Name="NakliyeSekli" ColumnName="NakliyeSekli" />
+                <ScalarProperty Name="CalisilanDovizBirimi" ColumnName="CalisilanDovizBirimi" />
+                <ScalarProperty Name="PlanlamaOnceligi" ColumnName="PlanlamaOnceligi" />
+                <ScalarProperty Name="KullanimdaMi" ColumnName="KullanimdaMi" />
+                <ScalarProperty Name="TicariUnvani" ColumnName="TicariUnvani" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qdms_Kullanici">
+            <EntityTypeMapping TypeName="POLY_QDMSModel.Qdms_Kullanici">
+              <MappingFragment StoreEntitySet="Qdms_Kullanici">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KullaniciKodu" ColumnName="KullaniciKodu" />
+                <ScalarProperty Name="PersonelKodu" ColumnName="PersonelKodu" />
+                <ScalarProperty Name="Birim" ColumnName="Birim" />
+                <ScalarProperty Name="Bolum" ColumnName="Bolum" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Yetki" ColumnName="Yetki" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qdms_MusteriSikayet">
+            <EntityTypeMapping TypeName="POLY_QDMSModel.Qdms_MusteriSikayet">
+              <MappingFragment StoreEntitySet="Qdms_MusteriSikayet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IcDis" ColumnName="IcDis" />
+                <ScalarProperty Name="SikayetReklamasyonDuyuruTarihi" ColumnName="SikayetReklamasyonDuyuruTarihi" />
+                <ScalarProperty Name="PartiNo" ColumnName="PartiNo" />
+                <ScalarProperty Name="DtexFlaman" ColumnName="DtexFlaman" />
+                <ScalarProperty Name="KabulEdilenSikayetReklamasyonMiktari" ColumnName="KabulEdilenSikayetReklamasyonMiktari" />
+                <ScalarProperty Name="Kalite" ColumnName="Kalite" />
+                <ScalarProperty Name="SikayetSonucu" ColumnName="SikayetSonucu" />
+                <ScalarProperty Name="NumuneGelisTarihi" ColumnName="NumuneGelisTarihi" />
+                <ScalarProperty Name="CevapTarihi" ColumnName="CevapTarihi" />
+                <ScalarProperty Name="TeknikZiyareti" ColumnName="TeknikZiyareti" />
+                <ScalarProperty Name="KapatilmaSuresi" ColumnName="KapatilmaSuresi" />
+                <ScalarProperty Name="GecikmeNedeni" ColumnName="GecikmeNedeni" />
+                <ScalarProperty Name="IadeMiktari" ColumnName="IadeMiktari" />
+                <ScalarProperty Name="IadeBedeli" ColumnName="IadeBedeli" />
+                <ScalarProperty Name="IadeBedelBirimi" ColumnName="IadeBedelBirimi" />
+                <ScalarProperty Name="IskontoBedeli" ColumnName="IskontoBedeli" />
+                <ScalarProperty Name="IskontoBedeliBirimi" ColumnName="IskontoBedeliBirimi" />
+                <ScalarProperty Name="MutabakatFormu" ColumnName="MutabakatFormu" />
+                <ScalarProperty Name="KokNeden" ColumnName="KokNeden" />
+                <ScalarProperty Name="SonucOlarakYapilacakCalisma" ColumnName="SonucOlarakYapilacakCalisma" />
+                <ScalarProperty Name="Sorumlu" ColumnName="Sorumlu" />
+                <ScalarProperty Name="AksiyonTermini" ColumnName="AksiyonTermini" />
+                <ScalarProperty Name="AksiyonGerceklestirmeTermini" ColumnName="AksiyonGerceklestirmeTermini" />
+                <ScalarProperty Name="NumuneTipi" ColumnName="NumuneTipi" />
+                <ScalarProperty Name="Cari" ColumnName="Cari" />
+                <ScalarProperty Name="SikayetReklamasyonGelisTarihi" ColumnName="SikayetReklamasyonGelisTarihi" />
+                <ScalarProperty Name="MusteriSikayetId" ColumnName="MusteriSikayetId" />
+                <ScalarProperty Name="IplikKullanimYeri" ColumnName="IplikKullanimYeri" />
+                <ScalarProperty Name="FirmaYetkilisi" ColumnName="FirmaYetkilisi" />
+                <ScalarProperty Name="SatisMusteriTemsilcisiAd" ColumnName="SatisMusteriTemsilcisiAd" />
+                <ScalarProperty Name="SatisMusteriTemsilcisiTarih" ColumnName="SatisMusteriTemsilcisiTarih" />
+                <ScalarProperty Name="Bobin" ColumnName="Bobin" />
+                <ScalarProperty Name="Kumas" ColumnName="Kumas" />
+                <ScalarProperty Name="Cile" ColumnName="Cile" />
+                <ScalarProperty Name="Diger" ColumnName="Diger" />
+                <ScalarProperty Name="DtexFlamanIplikOzeliigi" ColumnName="DtexFlamanIplikOzeliigi" />
+                <ScalarProperty Name="SikayetIletisim" ColumnName="SikayetIletisim" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+                <ScalarProperty Name="PartiNoSecme" ColumnName="PartiNoSecme" />
+                <ScalarProperty Name="SevkTarihi1" ColumnName="SevkTarihi1" />
+                <ScalarProperty Name="SevkTarihi2" ColumnName="SevkTarihi2" />
+                <ScalarProperty Name="SevkTarihi3" ColumnName="SevkTarihi3" />
+                <ScalarProperty Name="SevkMiktari1" ColumnName="SevkMiktari1" />
+                <ScalarProperty Name="SevkMiktari2" ColumnName="SevkMiktari2" />
+                <ScalarProperty Name="SevkMiktari3" ColumnName="SevkMiktari3" />
+                <ScalarProperty Name="SikayetDiger" ColumnName="SikayetDiger" />
+                <ScalarProperty Name="SikayetSebebiID" ColumnName="SikayetSebebiID" />
+                <ScalarProperty Name="SikayetGrubuID" ColumnName="SikayetGrubuID" />
+                <ScalarProperty Name="LabOzet" ColumnName="LabOzet" />
+                <ScalarProperty Name="YapilanAnalizler" ColumnName="YapilanAnalizler" />
+                <ScalarProperty Name="TekstureYorum" ColumnName="TekstureYorum" />
+                <ScalarProperty Name="BukumYorum" ColumnName="BukumYorum" />
+                <ScalarProperty Name="UretimYorum" ColumnName="UretimYorum" />
+                <ScalarProperty Name="TTYorum" ColumnName="TTYorum" />
+                <ScalarProperty Name="LabYorum" ColumnName="LabYorum" />
+                <ScalarProperty Name="PaketlemeYorum" ColumnName="PaketlemeYorum" />
+                <ScalarProperty Name="SevkiyatYorum" ColumnName="SevkiyatYorum" />
+                <ScalarProperty Name="SatinalmaYorum" ColumnName="SatinalmaYorum" />
+                <ScalarProperty Name="MBYorum" ColumnName="MBYorum" />
+                <ScalarProperty Name="EEYorum" ColumnName="EEYorum" />
+                <ScalarProperty Name="ProsesYorum" ColumnName="ProsesYorum" />
+                <ScalarProperty Name="TekstureSeciliMi" ColumnName="TekstureSeciliMi" />
+                <ScalarProperty Name="UretimSeciliMi" ColumnName="UretimSeciliMi" />
+                <ScalarProperty Name="BukumSeciliMi" ColumnName="BukumSeciliMi" />
+                <ScalarProperty Name="TTSeciliMi" ColumnName="TTSeciliMi" />
+                <ScalarProperty Name="LabSeciliMi" ColumnName="LabSeciliMi" />
+                <ScalarProperty Name="PaketlemeSeciliMi" ColumnName="PaketlemeSeciliMi" />
+                <ScalarProperty Name="SevkiyatSeciliMi" ColumnName="SevkiyatSeciliMi" />
+                <ScalarProperty Name="SatinalmaSeciliMi" ColumnName="SatinalmaSeciliMi" />
+                <ScalarProperty Name="MBSeciliMi" ColumnName="MBSeciliMi" />
+                <ScalarProperty Name="EESeciliMi" ColumnName="EESeciliMi" />
+                <ScalarProperty Name="ProsesSeciliMi" ColumnName="ProsesSeciliMi" />
+                <ScalarProperty Name="Hazirlayan" ColumnName="Hazirlayan" />
+                <ScalarProperty Name="Onaylayan" ColumnName="Onaylayan" />
+                <ScalarProperty Name="Kalite2" ColumnName="Kalite2" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OnaylandiMi" ColumnName="OnaylandiMi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qdms_MusteriSikayetAna">
+            <EntityTypeMapping TypeName="POLY_QDMSModel.Qdms_MusteriSikayetAna">
+              <MappingFragment StoreEntitySet="Qdms_MusteriSikayetAna">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Firma" ColumnName="Firma" />
+                <ScalarProperty Name="MusteriTemsilcisi" ColumnName="MusteriTemsilcisi" />
+                <ScalarProperty Name="GelisTarihi" ColumnName="GelisTarihi" />
+                <ScalarProperty Name="SonucTarihi" ColumnName="SonucTarihi" />
+                <ScalarProperty Name="PartiNo" ColumnName="PartiNo" />
+                <ScalarProperty Name="Kalite" ColumnName="Kalite" />
+                <ScalarProperty Name="SevkTarihi" ColumnName="SevkTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qdms_MusteriSikayetResim">
+            <EntityTypeMapping TypeName="POLY_QDMSModel.Qdms_MusteriSikayetResim">
+              <MappingFragment StoreEntitySet="Qdms_MusteriSikayetResim">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SikayetId" ColumnName="SikayetId" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qdms_PartiNo">
+            <EntityTypeMapping TypeName="POLY_QDMSModel.Qdms_PartiNo">
+              <MappingFragment StoreEntitySet="Qdms_PartiNo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LotNo" ColumnName="LotNo" />
+                <ScalarProperty Name="StokKodu" ColumnName="StokKodu" />
+                <ScalarProperty Name="StokAdi" ColumnName="StokAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qdms_SikayetGrubu">
+            <EntityTypeMapping TypeName="POLY_QDMSModel.Qdms_SikayetGrubu">
+              <MappingFragment StoreEntitySet="Qdms_SikayetGrubu">
+                <ScalarProperty Name="SikayetGrubuID" ColumnName="SikayetGrubuID" />
+                <ScalarProperty Name="SikayetGrubu" ColumnName="SikayetGrubu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qdms_SikayetSebebi">
+            <EntityTypeMapping TypeName="POLY_QDMSModel.Qdms_SikayetSebebi">
+              <MappingFragment StoreEntitySet="Qdms_SikayetSebebi">
+                <ScalarProperty Name="SikayetSebebiID" ColumnName="SikayetSebebiID" />
+                <ScalarProperty Name="SikayetSebebi" ColumnName="SikayetSebebi" />
+                <ScalarProperty Name="SikayetGrubuID" ColumnName="SikayetGrubuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

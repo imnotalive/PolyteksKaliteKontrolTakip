@@ -1,0 +1,585 @@
+﻿
+@model PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet
+
+@{
+    ViewBag.Title = "Satis";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.7.0.min.js"></script>
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(function () {
+
+        $('#SikayetGrubu').change(function () {
+
+            var id = $('#SikayetGrubu').val();
+
+            $.ajax({
+
+                url: '/MusteriSikayeti/GetList',
+
+                data: { p: id },
+
+                type: "POST",
+
+                dataType: "Json",
+
+                success: function (data) {
+
+                    console.log(data);
+
+                    $('#SikayetSebebi').empty();
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        $('#SikayetSebebi').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+
+                    }
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+
+@using (Html.BeginForm("Satis", "MusteriSikayeti", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+
+    @Html.AntiForgeryToken()
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header text-center bg-gradient-light text-white">
+                <div class="row align-items-center">
+                    <div class="col-md-12" style="color:black">
+                        <div class="card" style="background-color:steelblue">
+                            <div class="card-header">
+                                <center><h3 style="color: whitesmoke"><b>SATIŞ</b></h3></center>
+                                <center><h5 style="color: whitesmoke"><b>MÜŞTERİ ŞİKAYETİ GİRİŞİ</b></h5></center>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="col-md-12" style="color:black">
+                                    <div class="card" style="background-color:aliceblue">
+
+                                        <div class="card-header">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <b>FİRMA</b>
+                                                    <div class="col-md-12">
+                                                        @Html.DropDownList("Cari", null, "--CARİ SEÇİNİZ--", new { onchange = "Action(this.value);", @class = "form-control", required = "required" })
+                                                        @Html.ValidationMessageFor(model => model.Cari, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <b>YETKİLİ</b>
+                                                    <div class="col-md-12">
+
+                                                        @Html.TextBox("ChainCodesssss", null, new { @class = "form-control" })
+
+                                                        @Html.ValidationMessageFor(model => model.Cari, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <b>ADRES</b>
+                                                    <div class="col-md-12">
+                                                        @Html.TextBox("ChainCode", null, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.Cari, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <b>TEL</b>
+                                                    <div class="col-md-12">
+                                                        @Html.TextBox("ChainCodes", null, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.Cari, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <b>E-POSTA</b>
+                                                    <div class="col-md-12">
+                                                        @Html.TextBox("ChainCodess", null, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.Cari, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <b>ÜLKE</b>
+                                                    <div class="col-md-12">
+                                                        @Html.TextBox("ChainCodesss", null, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.Cari, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12" style="color:black">
+                                    <div class="card" style="background-color:aliceblue">
+
+                                        <div class="card-header">
+                                            <div class="form-row">
+                                                @*<div class="form-group col-md-4">
+                                                        <b>ŞİKAYET REKLAMASYON NUMARASI</b>
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.ReklamasyonNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.ReklamasyonNo, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>*@
+
+                                                <div class="form-group col-md-6">
+                                                    <b> ŞİKAYET REKLAMASYON GELİŞ TARİHİ</b>
+                                                    <div class="col-md-12">
+                                                        @Html.TextBoxFor(model => model.SikayetReklamasyonGelisTarihi, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "required" })
+                                                        @Html.ValidationMessageFor(model => model.SikayetReklamasyonGelisTarihi, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <b> ŞİKAYETİN YAPILDIĞI İLETİŞİM ARACI</b>
+                                                    <div class="col-md-12">
+                                                        @Html.DropDownListFor(model => model.SikayetIletisim, new List<SelectListItem>
+                              { new  SelectListItem { Text = "TELEFON", Value = "TELEFON" },
+                                new  SelectListItem { Text = "E-POSTA", Value = "E-POSTA" },
+
+
+                               new  SelectListItem { Text = "İNTERNET", Value = "INTERNET" },
+
+                                 new  SelectListItem { Text = "KİŞİSEL", Value = "KISISEL" },
+                                  new  SelectListItem { Text = "POSTA", Value = "POSTA" },
+                                   new  SelectListItem { Text = "DİĞER", Value = "DİGER" },
+
+
+
+                              }, "--SEÇİNİZ--", new { @style = "color:black", @class = "form-control", title = "Lütfen Seçiniz!", required = "required" })
+                                                        @Html.ValidationMessageFor(model => model.SikayetIletisim, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            @*<div class="form-group col-md-12">
+                                                    <b>ŞİKAYET REKLAMASYON KONUSU</b>
+                                                    <div class="col-md-12">
+                                                        @Html.TextAreaFor(model => model., 3, 50, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.SikayetSebebi, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="color:black">
+                                    <div class="card" style="background-color:aliceblue">
+                                        <div class="card-header">
+                                            <h5><b>DETAY :</b></h5>
+                                            <hr />
+                                            <div class="form-group">
+                                                <b>İPLİĞİN KULLANILDIĞI YERLER</b>
+                                                <div class="col-md-12">
+                                                    @Html.EditorFor(model => model.IplikKullanimYeri, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.IplikKullanimYeri, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <b> ŞİKAYET GRUBU</b>
+                                                    <div class="col-md-12">
+                                                        @if (ViewBag.CountryList != null)
+                                                        {
+                                                            @Html.DropDownListFor(model => model.SikayetGrubuID, ViewBag.CountryList as SelectList, "--Seçiniz--", new { @class = "form-control", required = "required" })
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-8">
+                                                    <b> ŞİKAYET SEBEBİ</b>
+                                                    <div class="col-md-12">
+
+                                                        @Html.DropDownListFor(model => model.SikayetSebebiID, new SelectList(" "), "--Seçiniz--", new { @class = "form-control", required = "required" })
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <script>
+                                                            $(document).ready(function () {
+                                                                $("#SikayetGrubuID").change(function () {
+                                                                    $.get("/MusteriSikayeti/GetStateList", { SikayetGrubuID: $("#SikayetGrubuID").val() }, function (data) {
+                                                                        $("#SikayetSebebiID").empty();
+                                                                        $.each(data, function (index, row) {
+                                                                            $("#SikayetSebebiID").append("<option value='" + row.SikayetSebebiID + "'>" + row.SikayetSebebi + "</option>")
+                                                                        });
+                                                                    });
+                                                                })
+                                                            });
+                                            </script>
+
+
+
+
+
+                                            <div class="form-group col-md-12">
+                                                <b>DİĞER</b>
+                                                <div class="col-md-12">
+                                                    @Html.EditorFor(model => model.SikayetDiger, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.SikayetDiger, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="color:black">
+                                <div class="card" style="background-color:aliceblue">
+                                    <div class="card-header">
+                                        <h5><b>ŞİKAYET İLE İLGİLİ OLARAK POLYTEKS'E GÖNDERİLEN :</b></h5>
+                                        <hr />
+                                        <div class="form-row">
+
+                                            <div class="form-group col-md-4">
+                                                <b> BOBİN(ADET)</b>
+                                                <div class="col-md-12">
+                                                    @Html.EditorFor(model => model.Bobin, new { htmlAttributes = new { @class = "form-control", required = "required", min = "0" } })
+                                                    @Html.ValidationMessageFor(model => model.Bobin, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-4">
+                                                <b> KUMAŞ (cm x cm)</b>
+                                                <div class="col-md-12">
+                                                    @Html.EditorFor(model => model.Kumas, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.Kumas, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-4">
+                                                <b>ÇİLE (cm x cm)</b>
+                                                <div class="col-md-12">
+                                                    @Html.EditorFor(model => model.Cile, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.Cile, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            @*<div class="form-group col-md-3">
+                                                                       <b>RESİM</b>
+                                                                       <div class="col-md-12">
+                                                                           @Html.DropDownListFor(model => model.Resim, new List<SelectListItem>
+                                                { new  SelectListItem { Text = "VAR", Value = "VAR" },
+                                                  new  SelectListItem { Text = "YOK", Value = "YOK" },
+
+
+
+
+
+
+                                                }, "--SEÇİNİZ--", new { @style = "color:black", @class = "form-control", title = "Lütfen Seçiniz!" })
+                                                                           @Html.ValidationMessageFor(model => model.Resim, "", new { @class = "text-danger" })
+                                                                       </div>
+                                                                   </div>*@
+                                        </div>
+                                        <hr />
+                                        <div class="form-group col-md-12">
+                                            <b>DİĞER(PROBLEM TÜRÜNÜ BELİRTİNİZ..)</b>
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.Diger, 3, 50, new { @class = "form-control", required = "required" })
+                                                @Html.ValidationMessageFor(model => model.Diger, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12" style="color:black">
+                                <div class="card" style="background-color:aliceblue">
+                                    <div class="card-header">
+                                        <h5><b>MÜŞTERİ SEVKİYATINA KONU ALAN İPLİK SEVKİYATINA AİT:</b></h5>
+                                        <hr />
+
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-2">
+                                                <b> SEVK TARİHİ-1</b>
+                                                <div class="col-md-12">
+                                                    @Html.TextBoxFor(model => model.SevkTarihi1, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.SevkTarihi1, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <b> SEVK MİKTARI-1</b>
+                                                <div class="col-md-12">
+                                                    @Html.EditorFor(model => model.SevkMiktari1, new { htmlAttributes = new { @class = "form-control", type = "number", required = "required" } })
+                                                    @Html.ValidationMessageFor(model => model.SevkMiktari1, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <b> SEVK TARİHİ-2</b>
+                                                <div class="col-md-12">
+                                                    @Html.TextBoxFor(model => model.SevkTarihi2, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.SevkTarihi2, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <b> SEVK MİKTARI-2</b>
+                                                <div class="col-md-12">
+                                                    @Html.EditorFor(model => model.SevkMiktari2, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.SevkMiktari2, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <b> SEVK TARİHİ-3</b>
+                                                <div class="col-md-12">
+                                                    @Html.TextBoxFor(model => model.SevkTarihi3, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.SevkTarihi3, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <b> SEVK MİKTARI-3</b>
+                                                <div class="col-md-12">
+                                                    @Html.EditorFor(model => model.SevkMiktari3, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.SevkMiktari3, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <b>PARTİ NO</b>
+                                                <div class="col-md-12">
+                                                    @Html.DropDownList("PartiNoSecme", null, "--LÜTFEN SEÇİNİZ--", new { onchange = "Actions(this.value);", @class = "form-control", required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.PartiNoSecme, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-8">
+
+                                                <b>DTEX/FLAMAN İPLİK ÖZELLİĞİ</b>
+                                                <div class="col-md-12">
+                                                    @Html.TextBox("StokAdi", null, new { @class = "form-control", required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.DtexFlamanIplikOzeliigi, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+
+                                            <div class="form-group col-md-6">
+                                                <b>KALİTE - 1 </b>
+                                                <div class="col-md-12">
+                                                    @Html.DropDownListFor(model => model.Kalite, new List<SelectListItem>
+                                                    { new  SelectListItem { Text = "100", Value = "100" },
+                                                   new  SelectListItem { Text = "100K", Value = "100K" },
+                                                   new  SelectListItem { Text = "300", Value = "300" },
+                                                   new  SelectListItem { Text = "300A", Value = "300A" },
+                                                   new  SelectListItem { Text = "500", Value = "500" },
+                                                      new  SelectListItem { Text = "B1EX", Value = "B1EX" },
+                                                   new  SelectListItem { Text = "000A", Value = "000A" },
+                                                   new  SelectListItem { Text = "000L", Value = "000L" },
+                                                   new  SelectListItem { Text = "000U", Value = "000U" },
+                                                   new  SelectListItem { Text = "000A.", Value = "000A." },
+
+                                                    }, "--SEÇİNİZ--", new { @style = "color:black", @class = "form-control", title = "Lütfen Seçiniz!", required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.Kalite, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <b>KALİTE - 2 </b>
+                                                <div class="col-md-12">
+                                                    @Html.DropDownListFor(model => model.Kalite2, new List<SelectListItem>
+                                                    { new  SelectListItem { Text = "100", Value = "100" },
+                                                   new  SelectListItem { Text = "100K", Value = "100K" },
+                                                   new  SelectListItem { Text = "300", Value = "300" },
+                                                   new  SelectListItem { Text = "300A", Value = "300A" },
+                                                   new  SelectListItem { Text = "500", Value = "500" },
+                                                      new  SelectListItem { Text = "B1EX", Value = "B1EX" },
+                                                   new  SelectListItem { Text = "000A", Value = "000A" },
+                                                   new  SelectListItem { Text = "000L", Value = "000L" },
+                                                   new  SelectListItem { Text = "000U", Value = "000U" },
+                                                   new  SelectListItem { Text = "000A.", Value = "000A." },
+
+                                                    }, "--SEÇİNİZ--", new { @style = "color:black", @class = "form-control", title = "Lütfen Seçiniz!" })
+                                                    @Html.ValidationMessageFor(model => model.Kalite2, "", new { @class = "text-danger" })
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="color:black">
+                                    <div class="card" style="background-color:aliceblue">
+                                        <div class="card-header">
+                                            <h5><b>SATIŞ/MÜŞTERİ TEMSİLCİSİ</b></h5>
+                                            <hr />
+                                            <div class="form-row">
+
+                                                <div class="form-group col-md-6">
+                                                    <b> ADI/SOYADI</b>
+                                                    <div class="col-md-12">
+                                                        @Html.DropDownListFor(model => model.SatisMusteriTemsilcisiAd, new List<SelectListItem>
+                              { new  SelectListItem { Text = "BARIŞ TATALLAR", Value = "BARIS TATALLAR" },
+                                new  SelectListItem { Text = "CAN TUĞRUL", Value = "CAN TUGRUL" },
+
+
+                               new  SelectListItem { Text = "BILGIYAN MUTLU", Value = "BILGIYAN MUTLU" },
+                                 new  SelectListItem { Text = "CEYLAN ÖNCÜ", Value = "CEYLAN ONCU" },
+                                 new  SelectListItem { Text = "BAHADIR AKKOÇ", Value = "BAHADIR AKKOC" },
+
+                                   new  SelectListItem { Text = "TUGAY BERFU PALA", Value = "TUGAY BERFU PALA" },
+                                           new  SelectListItem { Text = "SEMRA AYYILDIZ", Value = "SEMRA AYYILDIZ" },
+                                             new  SelectListItem { Text = "BETÜL KELEŞ", Value = "BETUL KELES" },
+                                                       new  SelectListItem { Text = "ÖMERCAN ÖNADIM", Value = "OMERCAN ONADIM" },
+
+                              }, "--SEÇİNİZ--", new { @style = "color:black", @class = "form-control", title = "Lütfen Seçiniz!", required = "required" })
+                                                        @*@Html.EditorFor(model => model.SatisMusteriTemsilcisiAd, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                        @Html.ValidationMessageFor(model => model.SatisMusteriTemsilcisiAd, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <b>TARİH</b>
+                                                    <div class="col-md-12">
+                                                        @Html.TextBoxFor(model => model.SatisMusteriTemsilcisiTarih, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "required" })
+                                                        @Html.ValidationMessageFor(model => model.SatisMusteriTemsilcisiTarih, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--<div class="card-header">
+
+                                                <b>RESİM</b>
+                                                <div class="form-group">
+                                                    <div class="form-row">
+                                                        <div class="col-md-4">
+
+                                                            <input type="file" multiple name="Resims1" id="Resims1"
+                                                                   class="form-control" />-->
+                                            @*<input type="file" id="Resims1" name="Resims1" class="btn btn-info" multiple="multiple" />*@
+                                            @*@Html.ValidationMessageFor(model => model.Resims1, "", new { @class = "text-danger" })*@
+                                            <!--</div>-->
+                                            @*<div class="col-md-4">
+
+
+                                                        <input type="file" id="Resims2" name="Resims2" class="btn btn-info" />
+                                                        @Html.ValidationMessageFor(model => model.Resims2, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="col-md-4">
+
+
+                                                        <input type="file" id="Resims3" name="Resims3" class="btn btn-info" />
+                                                        @Html.ValidationMessageFor(model => model.Resims3, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                </div>
+                                                <br />
+                                                <div class="form-row">
+                                                    <div class="col-md-6">
+
+
+                                                        <input type="file" id="Resims4" name="Resims4" class="btn btn-info" />
+                                                        @Html.ValidationMessageFor(model => model.Resims4, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="col-md-6">
+
+
+                                                        <input type="file" id="Resims5" name="Resims5" class="btn btn-info" />
+                                                        @Html.ValidationMessageFor(model => model.Resims5, "", new { @class = "text-danger" })
+                                                    </div>
+
+
+                                                </div>*@
+
+
+
+                                            <!--</div>
+                                            </div>  </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-12">
+                                            <input id="muc" type="submit" value="YENİ MÜŞTERİ ŞİKAYETİ OLUŞTUR" class="btn btn-success btn-block" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="color:black" class="b">
+                                <b>
+                                    <strong>&nbsp;F-142.01/00 </strong>
+
+
+                                </b>
+                            </div>
+
+                        </div>
+
+
+
+                        @*<div class="form-group">
+                                <div class="col-md-offset-2 col-md-12">
+                                    <div>
+                                        @Html.ActionLink("ŞİKAYET LİSTESİNE GİT", "DevamEdenSikayet", "MusteriSikayeti", new { @class = "btn btn-info" })
+                                    </div>
+                                </div>
+                            </div>*@
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+function Action(code) {
+    $.ajax({
+        url: '@Url.Action("Action", "MusteriSikayeti")',
+        type: "GET",
+        data: { "code": code },
+        "success": function (data) {
+            if (data != null) {
+                var vdata = data;
+          /*      $("#ChainName").val(vdata[0].CariAdi);*/
+                $("#ChainCode").val(vdata[0].Adres);
+                $("#ChainCodes").val(vdata[0].Tel1);
+                $("#ChainCodess").val(vdata[0].ElektronikPosta);
+                $("#ChainCodesss").val(vdata[0].Ulke);
+                $("#ChainCodesssss").val(vdata[0].Yetkili);
+            }
+        }
+    });
+    }
+
+     function Actions(code) {
+    $.ajax({
+        url: '@Url.Action("Actions", "MusteriSikayeti")',
+        type: "GET",
+        data: { "code": code },
+        "success": function (data) {
+        if (data != null) {
+        var vdata = data;
+        /*      $("#ChainName").val(vdata[0].CariAdi);*/
+        $("#StokAdi").val(vdata[0].StokAdi);
+
+        }
+        }
+        });
+        }
+
+</script>
+

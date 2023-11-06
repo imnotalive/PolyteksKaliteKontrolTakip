@@ -1,0 +1,235 @@
+﻿@model PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet
+@{
+    Layout = null;
+
+}
+
+
+
+<style>
+
+    img {
+        height: 100px;
+        width: 250px;
+    }
+
+    #left {
+        float: left;
+    }
+</style>
+<div class="container">
+    <div id="left">
+        <img src="~/Pictures/poly_logo.png" />
+    </div>
+    <br />
+    @if (Model.Qdms_Cari.CariAdi != null)
+    {
+
+
+        <center><h4 style="color: black"><b> @Model.Qdms_Cari.CariAdi FİRMASINDAN GELEN SATIŞIN TALEPTE BULUNDUĞU MÜŞTERİ ŞİKAYETİ DETAYLARI</b></h4></center>
+    }
+</div>
+<div>
+    @Html.HiddenFor(model => model.ID)
+</div>
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<body>
+    <div class="container text-lg-center">
+
+        <div class="bs-example">
+            <table class="table table-bordered table-hover table-striped table-responsive-xxl">
+                <thead class="table-striped">
+
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td style="color: black"><b>ŞİKAYET REKLAMASYON NUMARASI</b></td>
+                        <td style="color: black"> <b>#@Html.DisplayFor(model => model.ID)</b> </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>DURUM</b></td>
+                        <td style="color: black"> @Html.DisplayFor(model => model.Durum) </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>FİRMA</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Qdms_Cari.CariAdi)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>YETKİLİ</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Qdms_Cari.Yetkili)</td>
+                    </tr>
+
+                    <tr>
+                        <td style="color: black"><b>ADRES</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Qdms_Cari.Adres)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>TELEFON</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Qdms_Cari.Tel1)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>E - POSTA</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Qdms_Cari.ElektronikPosta)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>ÜLKE</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Qdms_Cari.Ulke)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>ŞİKAYET/REKLAMASYON GELİŞ TARİHİ</b></td>
+
+                        <td style="color: black">    @Convert.ToDateTime(Model.SikayetReklamasyonGelisTarihi).ToString("dd.MM.yyyy")</td>
+
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>ŞİKAYET/REKLAMASYON GRUBU</b></td>
+                        <td style="color: black">
+                            @Html.DisplayFor(model => model.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>ŞİKAYET/REKLAMASYON SEBEBİ</b></td>
+                        <td style="color: black">
+                            @Html.DisplayFor(model => model.Qdms_SikayetSebebi.SikayetSebebi)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>KALİTE</b></td>
+                        <td style="color: black">
+                            @Html.DisplayFor(model => model.Kalite)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="color: black"><b>İPLİĞİN KULLANILDIĞI YERLER</b></td>
+                        <td style="color: black">
+                            @Html.DisplayFor(model => model.IplikKullanimYeri)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>BOBİN</b></td>
+                        <td style="color: black">
+                            @Html.DisplayFor(model => model.Bobin)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>KUMAŞ(cm x cm)</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Kumas)</td>
+                    </tr>
+
+                    <tr>
+                        <td style="color: black"><b>ÇİLE(cm x cm)</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Cile)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>DİĞER</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Diger)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>PARTİ NO</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Qdms_PartiNo.LotNo)</td>
+                    </tr>
+
+                    <tr>
+                        <td style="color: black"><b>DTEX/FLAMAN İPLİK ÖZELLİĞİ</b></td>
+                        <td style="color: black">   @Html.DisplayFor(model => model.Qdms_PartiNo.StokAdi)</td>
+                    </tr>
+
+
+                    <tr>
+                        <td style="color: black"><b>SEVK TARİHİ</b></td>
+                        <td style="color: black">
+                            @Convert.ToDateTime(Model.SevkTarihi1).ToString("dd.MM.yyyy")
+                            @if (Model.SevkTarihi2 != null)
+                            {
+                                <span>&#47;</span>
+                                @Convert.ToDateTime(Model.SevkTarihi2).ToString("dd.MM.yyyy")
+                            }
+
+                            @if (Model.SevkTarihi3 != null)
+                            {<span>&#47;</span>
+                                @Convert.ToDateTime(Model.SevkTarihi3).ToString("dd.MM.yyyy")
+
+
+                            }
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td style="color: black"><b>SEVK MİKTARI(KG)</b></td>
+                        <td style="color: black">
+                            @string.Format("{0:#,0.00}", Model.SevkMiktari1)
+
+                            @if (Model.SevkMiktari2 != null)
+                            {
+                               
+                                string.Format("{0:#,0.00}", Model.SevkMiktari2);
+                            }
+
+                            @if (Model.SevkMiktari3 != null)
+                            {
+                                string.Format("{0:#,0.00}", Model.SevkMiktari3);
+
+
+                            }
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td style="color: black"><b>NUMUNE GELİŞ TARİHİ</b></td>
+                        <td style="color: black">    @Convert.ToDateTime(Model.NumuneGelisTarihi).ToString("dd.MM.yyyy")</td>
+
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>ÖZET</b></td>
+                        <td style="color: black">   @Html.DisplayFor(model => model.LabOzet)</td>
+
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>PERSONEL</b></td>
+                        <td style="color: black">   @Html.DisplayFor(model => model.SatisMusteriTemsilcisiAd)</td>
+
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>TARİH</b></td>
+                        <td style="color: black">  @Convert.ToDateTime(Model.SatisMusteriTemsilcisiTarih).ToString("dd.MM.yyyy")</td>
+
+                    </tr>
+                    @foreach (var item in Model.Qdms_MusteriSikayetResim)
+                    {
+                        if (Model.Qdms_MusteriSikayetResim != null)
+                        {
+                            <tr>
+                                <td style="color: black"><b>RESİM</b></td>
+                                <td style="color: black"> <img src="@Url.Content(item.ImagePath)" width="600" height="600" /> @*<img src="~/Content/upload/@Model.Resims"*@   @*/></td>*@
+
+                            </tr>
+                        }
+                    }
+
+
+
+                    <tr>
+                        <td style="color: black"><b>ŞİKAYET SONUCU</b></td>
+                        <td style="color: black">@Html.DisplayFor(model => model.SikayetSonucu)</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <div style="page-break-after: always;"></div>
+    <div>
+        @Html.ActionLink("PDF", "ExportPDF", new { id = Model.ID }, new { @class = "btn btn-danger" })
+    </div>
+</body>
+

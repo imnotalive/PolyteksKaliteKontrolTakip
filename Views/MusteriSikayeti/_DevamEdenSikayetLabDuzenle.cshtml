@@ -1,0 +1,447 @@
+﻿@model PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet
+
+
+@{
+    ViewBag.Title = "_DevamEdenSikayetLabDuzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+@using (Html.BeginForm())
+{
+
+
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header text-center bg-gradient-light text-white">
+                <div class="row align-items-center">
+                    <div class="col-md-12" style="color:black">
+                        <div class="card" style="background-color:bisque">
+                            <div class="card-header">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.ID)
+                                <center><h3><b>ŞİKAYET BİRİMİ #@Model.ID NOLU ŞİKAYET</b></h3></center>
+                                <hr />
+
+
+                                <div class="card-body">
+                                    <div class="col-md-12" style="color:black">
+                                        <div class="card" style="background-color:aliceblue">
+
+                                            <div class="card-header">
+                                                <div class="form-row">
+
+                                                    <div class="form-group col-md-6">
+                                                        @Html.Label("TARİH", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.SikayetReklamasyonGelisTarihi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                            @Html.ValidationMessageFor(model => model.SikayetReklamasyonGelisTarihi, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        @Html.Label("FİRMA", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.Qdms_Cari.CariAdi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                            @Html.ValidationMessageFor(model => model.Qdms_Cari.CariAdi, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        @Html.Label("PARTİ NUMARASI", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.Qdms_PartiNo.LotNo, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                            @Html.ValidationMessageFor(model => model.PartiNo, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        @Html.Label("DTEX/FLAMAN İPLİK ÖZELLİĞİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.Qdms_PartiNo.StokAdi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                            @Html.ValidationMessageFor(model => model.DtexFlamanIplikOzeliigi, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <b> ŞİKAYET GRUBU</b>
+                                                        <div class="col-md-12">
+
+                                                            @Html.EditorFor(model => model.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-8">
+                                                        <b> ŞİKAYET SEBEBİ</b>
+                                                        <div class="col-md-12">
+
+                                                            @Html.EditorFor(model => model.Qdms_SikayetSebebi.SikayetSebebi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                @*<div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <b> DEĞİŞTİRİLECEK ŞİKAYET GRUBU</b>
+                                                        <div class="col-md-12">
+
+                                                            @Html.DropDownListFor(model => model.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu, ViewBag.CountryList as SelectList, "--Seçiniz--", new { @class = "form-control", required = "required" })
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-8">
+                                                        <b> DEĞİŞTİRİLECEK ŞİKAYET SEBEBİ</b>
+                                                        <div class="col-md-12">
+
+                                                            @Html.DropDownListFor(model => model.Qdms_SikayetSebebi.SikayetSebebi, ViewBag.CountryLists as SelectList, "--Seçiniz--", new { @class = "form-control", required = "required" })
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $("#SikayetGrubuID").change(function () {
+                                                            $.get("/MusteriSikayeti/GetStateList", { SikayetGrubuID: $("#SikayetGrubuID").val() }, function (data) {
+                                                                $("#SikayetSebebiID").empty();
+                                                                $.each(data, function (index, row) {
+                                                                    $("#SikayetSebebiID").append("<option value='" + row.SikayetSebebiID + "'>" + row.SikayetSebebi + "</option>")
+                                                                });
+                                                            });
+                                                        })
+                                                    });
+                                                </script>*@
+
+
+
+
+
+                                                <div class="form-row">
+
+                                                    <div class="form-group col-md-3">
+                                                        @Html.Label("KALİTE", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.Kalite, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                            @Html.ValidationMessageFor(model => model.Kalite, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-md-3">
+                                                        @Html.Label("KALİTE2", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.Kalite2, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                            @Html.ValidationMessageFor(model => model.Kalite2, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        @Html.Label("SEVK MİKTARI - 1", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.SevkMiktari1, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                            @Html.ValidationMessageFor(model => model.SevkMiktari1, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        @Html.Label("SEVK TARİHİ - 1", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                        <div class="col-md-12">
+                                                            @Html.EditorFor(model => model.SevkTarihi1, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                            @Html.ValidationMessageFor(model => model.SevkTarihi1, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    @if (Model.SevkMiktari2 != null)
+                                                    {
+                                                        <div class="form-group col-md-3">
+                                                            @Html.Label("SEVK MİKTARI - 2", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                            <div class="col-md-12">
+                                                                @Html.EditorFor(model => model.SevkMiktari2, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                                @Html.ValidationMessageFor(model => model.SevkMiktari2, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    @if (Model.SevkTarihi2 != null)
+                                                    {
+                                                        <div class="form-group col-md-3">
+                                                            @Html.Label("SEVK TARİHİ - 2", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                            <div class="col-md-12">
+                                                                @Html.EditorFor(model => model.SevkTarihi2, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                                @Html.ValidationMessageFor(model => model.SevkTarihi2, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    @if (Model.SevkMiktari3 != null)
+                                                    {
+                                                        <div class="form-group col-md-3">
+                                                            @Html.Label("SEVK MİKTARI - 3", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                            <div class="col-md-12">
+                                                                @Html.EditorFor(model => model.SevkMiktari3, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                                @Html.ValidationMessageFor(model => model.SevkMiktari3, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    @if (Model.SevkTarihi3 != null)
+                                                    {
+                                                        <div class="form-group col-md-3">
+                                                            @Html.Label("SEVK TARİHİ - 3", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                            <div class="col-md-12">
+                                                                @Html.EditorFor(model => model.SevkTarihi3, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                                @Html.ValidationMessageFor(model => model.SevkTarihi3, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="col-md-12" style="color:black">
+                                                <div class="card" style="background-color:aliceblue">
+
+                                                    <div class="card-header">
+                                                        <div class="form-row">
+
+
+
+
+                                                            <div class="form-group col-md-6">
+                                                                @Html.Label("NUMUNE GELİŞ TARİHİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                                <div class="col-md-12">
+                                                                    @Html.TextBoxFor(model => model.NumuneGelisTarihi, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.NumuneGelisTarihi, "", new { @class = "text-danger" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                @Html.Label("İÇ/DIŞ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                                <div class="col-md-12">
+                                                                    @Html.DropDownListFor(model => model.IcDis, new List<SelectListItem>
+                                                            {
+                                                                    new  SelectListItem { Text = "İÇ", Value = "İÇ" },
+                                                                    new  SelectListItem { Text = "DIŞ", Value = "DIŞ" },
+                                                        }, "LÜTFEN SEÇİNİZ", new { @style = "color:black", @class = "form-control", required = "required", title = "Lütfen Seçiniz!" })
+                                                                    @Html.ValidationMessageFor(model => model.IcDis, "", new { @class = "text-danger" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+
+                                                        <div class="form-group">
+                                                            @Html.Label("ÖZET", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                            <div class="col-md-12">
+                                                                @Html.TextAreaFor(model => model.LabOzet, 10, 100, new { @class = "form-control", required = "required" })
+                                                                @Html.ValidationMessageFor(model => model.LabOzet, "", new { @class = "text-danger" })
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="card-body">
+                                            <div class="col-md-12" style="color:black">
+                                                <div class="card" style="background-color:aliceblue">
+
+                                                    <div class="card-header">
+
+
+                                                        @Html.Label("İLGİLİ BÖLÜMLERE MAİL GÖNDERME", htmlAttributes: new { @class = "control-label col-md-12" })
+
+                                                        <hr />
+
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-2">
+                                                                <div class="checkbox">
+                                                                    @*@Html.EditorFor(model => model.TekstureSeciliMi)*@
+                                                                    @Html.CheckBox("TekstureSeciliMi", Model.TekstureSeciliMi.GetValueOrDefault())  <b>TEKSTÜRE</b>
+                                                                    @Html.ValidationMessageFor(model => model.TekstureSeciliMi, "", new { @class = "text-danger" })
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                            @*@Html.LabelFor(model => model.UretimSeciliMi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                            <div class="form-group col-md-2">
+                                                                <div class="checkbox">
+                                                                    @*@Html.EditorFor(model => model.UretimSeciliMi)*@
+                                                                    @Html.CheckBox("UretimSeciliMi", Model.UretimSeciliMi.GetValueOrDefault())        <b>ÜRETİM</b>
+                                                                    @Html.ValidationMessageFor(model => model.UretimSeciliMi, "", new { @class = "text-danger" })
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group col-md-2">
+                                                                @*@Html.LabelFor(model => model.BukumSeciliMi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+                                                                <div class="checkbox">
+                                                                    @*@Html.EditorFor(model => model.BukumSeciliMi)*@
+                                                                    @Html.CheckBox("BukumSeciliMi", Model.BukumSeciliMi.GetValueOrDefault())            <b>BÜKÜM</b>
+                                                                    @Html.ValidationMessageFor(model => model.BukumSeciliMi, "", new { @class = "text-danger" })
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group col-md-2">
+                                                                @*@Html.LabelFor(model => model.TTSeciliMi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                                <div class="col-md-12">
+                                                                    <div class="checkbox">
+                                                                        @*@Html.EditorFor(model => model.TTSeciliMi)*@
+                                                                        @Html.CheckBox("TTSeciliMi", Model.TTSeciliMi.GetValueOrDefault())              <b>TEKNİK TEKSTİL</b>
+                                                                        @Html.ValidationMessageFor(model => model.TTSeciliMi, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                            <div class="form-group col-md-2">
+                                                                @*@Html.LabelFor(model => model.PaketlemeSeciliMi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                                <div class="col-md-12">
+                                                                    <div class="checkbox">
+                                                                        @*@Html.EditorFor(model => model.PaketlemeSeciliMi)*@
+                                                                        @Html.CheckBox("PaketlemeSeciliMi", Model.PaketlemeSeciliMi.GetValueOrDefault())    <b>PAKETLEME</b>
+                                                                        @Html.ValidationMessageFor(model => model.PaketlemeSeciliMi, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group col-md-2">
+                                                                @*@Html.LabelFor(model => model.SevkiyatSeciliMi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                                <div class="col-md-12">
+                                                                    <div class="checkbox">
+                                                                        @*@Html.EditorFor(model => model.SevkiyatSeciliMi)*@
+                                                                        @Html.CheckBox("SevkiyatSeciliMi", Model.SevkiyatSeciliMi.GetValueOrDefault())      <b>SEVKİYAT</b>
+                                                                        @Html.ValidationMessageFor(model => model.SevkiyatSeciliMi, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-2">
+                                                                @*@Html.LabelFor(model => model.SatinalmaSeciliMi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                                <div class="col-md-12">
+                                                                    <div class="checkbox">
+                                                                        @*@Html.EditorFor(model => model.SatinalmaSeciliMi)*@
+                                                                        @Html.CheckBox("SatinalmaSeciliMi", Model.SatinalmaSeciliMi.GetValueOrDefault())     <b>SATIN ALMA</b>
+                                                                        @Html.ValidationMessageFor(model => model.SatinalmaSeciliMi, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                                @*@Html.LabelFor(model => model.LabSeciliMi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                                <div class="col-md-12">
+                                                                    <div class="checkbox">
+                                                                        @*@Html.EditorFor(model => model.LabSeciliMi)*@
+                                                                        @Html.CheckBox("LabSeciliMi", Model.LabSeciliMi.GetValueOrDefault())                <b>LABORATUVAR</b>
+                                                                        @Html.ValidationMessageFor(model => model.LabSeciliMi, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="form-group col-md-2">
+                                                                @*@Html.LabelFor(model => model.MBSeciliMi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                                <div class="col-md-12">
+                                                                    <div class="checkbox">
+                                                                        @*@Html.EditorFor(model => model.MBSeciliMi)*@
+                                                                        @Html.CheckBox("MBSeciliMi", Model.MBSeciliMi.GetValueOrDefault())                  <b>MEKANİK BAKIM</b>
+                                                                        @Html.ValidationMessageFor(model => model.MBSeciliMi, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                                @*@Html.LabelFor(model => model.EESeciliMi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                                <div class="col-md-12">
+                                                                    <div class="checkbox">
+                                                                        @*@Html.EditorFor(model => model.EESeciliMi)*@
+                                                                        @Html.CheckBox("EESeciliMi", Model.EESeciliMi.GetValueOrDefault())                  <b>ELEKTRİK-ELEKTRONİK</b>
+                                                                        @Html.ValidationMessageFor(model => model.EESeciliMi, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group col-md-2">
+                                                                @*@Html.LabelFor(model => model.ProsesSeciliMi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                                <div class="col-md-12">
+                                                                    @*<div class="checkbox">*@
+                                                                    @Html.CheckBox("ProsesSeciliMi", Model.ProsesSeciliMi.GetValueOrDefault())              <b>PROSES KONTROL</b>
+
+                                                                    @Html.ValidationMessageFor(model => model.ProsesSeciliMi, "", new { @class = "text-danger" })
+                                                                    @*</div>*@
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-12">
+                                            <input type="submit" value="KAYDET" class="btn btn-success btn-block" />
+                                            @*<input type="submit" value="Create" class="btn btn-default"  />*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+}
+
+
+
+
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/ckeditor/lang/tr.js"></script>
+<script src="~/Scripts/ckeditor/config.js"></script>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+

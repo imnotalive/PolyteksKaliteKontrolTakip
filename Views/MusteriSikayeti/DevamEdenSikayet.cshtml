@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "DevamEdenSikayet";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h3 class="text-success">@ViewBag.msg</h3>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .tabLi a.nav-link {
+            background: #999;
+            color: white;
+            font-weight: bold;
+        }
+
+            .tabLi a.nav-link.active {
+                background: #333;
+                color: white;
+            }
+
+        .tabSoruCozum {
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+
+
+
+    <div class="container">
+        <CENTER>
+            <h3 style="color:green; padding:10px;">
+                <b>DEVAM EDEN MÜŞTERİ ŞİKAYETLERİ</b>
+            </h3>
+        </CENTER>
+        <br>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs tabLi nav-justified ">
+            @*justify-content-center*@
+            <li class="nav-item">
+                <button class="nav-link bg-info text-white tabGeri"><strong>&lt;</strong></button>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#tab-1">SATIŞ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-2">ŞİKAYET BİRİMİ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-3">YORUMLAR</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-4">SONUÇ</a>
+            </li>
+            @*<li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-3"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-3"></a>
+                </li>*@
+            <li class="nav-item">
+                <button class="nav-link bg-info text-white tabIleri"><strong>&gt;</strong></button>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content tabContainer">
+            <div id="tab-1" class="container tab-pane active">
+                <br>
+
+
+                <div id="result1"></div>
+            </div>
+            <div id="tab-2" class="container tab-pane">
+                <br>
+                <div id="result2"></div>
+            </div>
+            <div id="tab-3" class="container tab-pane">
+                <br>
+                <div id="result3"></div>
+            </div>
+            <div id="tab-4" class="container tab-pane">
+                <br>
+                <div id="result4"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $(document).ready(function (e) {
+
+            $('.tabIleri').click(function () {
+                var tabNumber = $('.tabContainer div.active').index();
+                var topPanel = $('.tabContainer div.tab-pane').length;
+                tabNumber++;
+                if (tabNumber >= topPanel) { tabNumber = 0; }
+                $("div.tab-pane").removeClass("active").addClass("fade");
+                $("div.tab-pane").eq(tabNumber).removeClass("fade").addClass("active");
+                $("ul.tabLi li a[data-toggle='tab']").removeClass("active").eq(tabNumber).addClass("active");
+            });
+            $('.tabGeri').click(function () {
+                var tabNumber = $('.tabContainer div.active').index();
+                var topPanel = $('.tabContainer div.tab-pane').length;
+                tabNumber--;
+                if (tabNumber < 0) { tabNumber = topPanel - 1; }
+                $("div.tab-pane").removeClass("active").addClass("fade");
+                $("div.tab-pane").eq(tabNumber).removeClass("fade").addClass("active");
+                $("ul.tabLi li a[data-toggle='tab']").removeClass("active").eq(tabNumber).addClass("active");
+            });
+
+        });
+
+
+    </script>
+    <script>
+
+        $(document).ready(function () {
+            /* $('#btn1').click(function () {*/
+            $('#result1').load('/MusteriSikayeti/_DevamEdenSikayetSatis');
+            /*  $('#btn1').remove();*/
+
+            /*  });*/
+        });
+        $(document).ready(function () {
+
+            $('#result2').load('/MusteriSikayeti/_DevamEdenSikayetLab');
+
+
+        });
+        $(document).ready(function () {
+
+            $('#result3').load('/MusteriSikayeti/_DevamEdenSikayetYorum');
+
+        });
+        $(document).ready(function () {
+
+            $('#result4').load('/MusteriSikayeti/_DevamEdenSikayetSonuc');
+
+        });
+
+    </script>
+</body>
+</html>
+
+

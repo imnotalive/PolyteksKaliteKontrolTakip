@@ -1,0 +1,252 @@
+﻿
+@model PagedList.IPagedList<PolyteksKaliteKontrolTakip.Models.Qdms_Cari>
+@using PagedList
+@using PagedList.Mvc
+
+
+@{
+    ViewBag.Title = "Cariler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@*<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
+    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/responsive.dataTables.min.css" rel="stylesheet" />*@
+@*<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>*@
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>*@
+
+
+<div class="col-md-12">
+    <div class="card" style="background-color: whitesmoke ">
+        <div class="card-header">
+
+            <center><h2><b>CARİ LİSTESİ</b></h2></center>
+            <hr />
+            <div class="container">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="Search" placeholder="ARA">
+                        <div class="input-group-append">
+                            <div class="input-group-text"><i class="fa fa-search"></i></div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <table class="table table-bordered table-striped table-hover table-sm display" id="example">
+                <tr>
+                    <th>
+                        CARİ NO
+                    </th>
+                    <th>
+                        CARİ ADI
+                    </th>
+                    <th>
+                        ADRES
+                    </th>
+                    <th>
+                        VERGİ DAİRESİ
+                    </th>
+                    <th>
+                        VERGİ NO
+                    </th>
+                    <th>
+                        TELEFON NUMARASI
+                    </th>
+                    <th>
+                        ÜLKE KODU
+                    </th>
+                    <th>
+                        ALAN KODU
+                    </th>
+                    <th>
+                        TEL
+                    </th>
+                    <th>
+                        FAX ÜLKE KODU
+                    </th>
+                    <th>
+                        FAX ALAN KODU
+                    </th>
+                    <th>
+                        FAX
+                    </th>
+                    <th>
+                        MAİL
+                    </th>
+                    <th>
+                        ÜLKE
+                    </th>
+
+                    <th>
+                        YETKİLİ
+                    </th>
+
+
+
+
+                    <th>
+                        İL
+                    </th>
+                    <th>
+                        İLÇE
+                    </th>
+
+
+
+                    <th>
+                        ÖDEME
+                    </th>
+                    <th>
+                        TESLİM
+                    </th>
+                    <th>
+                        NAKLİYE
+                    </th>
+                    <th>
+                        DÖVİZ
+                    </th>
+                    <th>
+                        NOTLAR
+                    </th>
+                    <th>
+                        WEB ADRES
+                    </th>
+
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr class="Search ">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CariNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CariAdi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Adres)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VergiDairesi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VergiNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tel1Aciklama)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TUlkeKodu1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TAlanKodu1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tel1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FUlkeKodu1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FAlanKodu1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fax1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ElektronikPosta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ulke)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Yetkili)
+                        </td>
+
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Il)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ilce)
+                        </td>
+
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OdemeSekli)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TeslimSekli)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NakliyeSekli)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CalisilanDovizBirimi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Notlar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WebAdres)
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+<br />
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@* @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Cariler", new { sayfa }))*@
+<b> Toplam Cari Sayısı: @Model.TotalItemCount </b>
+<br />
+<b>Sayfa @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount</b>
+@Html.PagedListPager(Model, page => Url.Action("Cariler",
+    new { page }))
+
+
+<script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#example").dataTable();
+    });
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            })
+        });
+    });
+
+</script>

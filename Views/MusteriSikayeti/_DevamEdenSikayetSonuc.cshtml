@@ -1,0 +1,116 @@
+﻿
+@model IEnumerable<PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet>
+@{
+    ViewBag.Title = "_DevamEdenSikayetSonuc";
+
+}
+
+
+<table class="table table-bordered table-striped table-hover table-responsive-sm">
+    @*<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">*@
+    <thead style="background-color:lightskyblue">
+        <tr class="text-center">
+
+            <th>
+                @Html.DisplayName("KOD")
+            </th>
+            <th>
+                @Html.DisplayName("KAYIT")
+            </th>
+            <th>
+                @Html.DisplayName("PERSONEL")
+            </th>
+            <th>
+                @Html.DisplayName("CARİ")
+            </th>
+            <th>
+                @Html.DisplayName("ŞİKAYET KONUSU")
+            </th>
+            <th>
+                @Html.DisplayName("GÜNCEL DURUM")
+            </th>
+            <th>
+                #
+            </th>
+            <th>
+                #
+            </th>
+
+            @*<th></th>
+                <th></th>
+                <th></th>*@
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr class="Search more">
+
+            <td>
+                <b> #@Html.DisplayFor(modelItem => item.ID)</b>
+            </td>
+            <td>
+                @Convert.ToDateTime(item.SikayetReklamasyonGelisTarihi).ToString("dd.MM.yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SatisMusteriTemsilcisiAd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qdms_Cari.CariAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu) / @Html.DisplayFor(modelItem => item.Qdms_SikayetSebebi.SikayetSebebi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Durum)
+            </td>
+
+
+            <td style="color: black">
+                <center>
+
+                    <a href="@Url.Action("_DevamEdenSikayetSonucDuzenle", "MusteriSikayeti", new { id = item.ID })" title="DÜZENLE" class="btn btn-primary"> <i class="fas fa-pen">   </i></a>
+                </center>
+            </td>
+            <td style="color: black" class="button_class">
+                @*@Html.ActionLink("DETAYLAR", "Details", new { id = item.ID }, new { @class = "btn btn-info" })*@
+                <center>
+                    <a href="@Url.Action("_DevamEdenSikayetSonucDetay", "MusteriSikayeti",new { id = item.ID })" title="DETAYLAR" class="btn btn-info"> <i class="fa fa-book" aria-hidden="true">  </i></a>
+                </center>
+            </td>
+
+
+
+            @*<td>
+                    <i class="fas fa-envelope"></i>
+                </td>*@
+        </tr>
+    }
+
+</table>
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            })
+        });
+    });
+
+</script>
+

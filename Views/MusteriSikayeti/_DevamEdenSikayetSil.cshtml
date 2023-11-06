@@ -1,0 +1,168 @@
+﻿@model PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet
+
+@{
+    ViewBag.Title = "_DevamEdenSikayetSil";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<CENTER><h2><b>@Model.Qdms_Cari.CariAdi MÜŞTERİ ŞİKAYETİ SİL</b></h2></CENTER>*@
+
+<h3>SİLMEK İSTEDİĞİNİZDEN EMİN MİSİNİZ?</h3>
+
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SikayetReklamasyonDuyuruTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SikayetReklamasyonDuyuruTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartiNo)
+        </dd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SikayetReklamasyonGelisTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SikayetReklamasyonGelisTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IplikKullanimYeri)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IplikKullanimYeri)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SatisMusteriTemsilcisiAd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SatisMusteriTemsilcisiAd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SatisMusteriTemsilcisiTarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SatisMusteriTemsilcisiTarih)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bobin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bobin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kumas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kumas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diger)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diger)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DtexFlamanIplikOzeliigi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DtexFlamanIplikOzeliigi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SikayetIletisim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SikayetIletisim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Durum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Durum)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qdms_Cari.CariAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qdms_Cari.CariAdi)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qdms_MusteriSikayetAna.MusteriTemsilcisi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qdms_MusteriSikayetAna.MusteriTemsilcisi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="SİL" class="btn btn-outline-danger" /> <br />
+            @Html.ActionLink("LİSTEYE GERİ DÖN", "DevamEdenSikayet", "MusteriSikayeti", new { @class = "btn btn-primary" })
+        </div>
+    }
+</div>

@@ -1,0 +1,583 @@
+﻿@model PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/Scripts/jquery-3.7.0.min.js"></script>
+<script>
+
+  
+        $(document).ready(function () {
+            $("#SikayetGrubuID").change(function () {
+                $.get("/MusteriSikayeti/GetStateList", { SikayetGrubuID: $("#SikayetGrubuID").val() }, function (data) {
+                    $("#SikayetSebebiID").empty();
+                    $.each(data, function (index, row) {
+                        $("#SikayetSebebiID").append("<option value='" + row.SikayetSebebiID + "'>" + row.SikayetSebebi + "</option>")
+                    });
+                });
+            })
+        });
+</script>
+
+
+<div class="card-body">
+    <div class="col-md-12" style="color:black">
+        <div class="card" style="background-color:bisque">
+
+            <div class="card-header">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <center>
+                        <h4>
+                            <b>
+                                MÜŞTERİ ŞİKAYET / REKLAMASYON VERİ TAKİP FORMU
+
+                            </b>
+                        </h4>
+                    </center>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ID)
+
+            <div class="form-row">
+                <div class="form-group col-md-1">
+
+                    @Html.Label("ID", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.ID,new { @class = "form-control", @readonly = true })
+                        @Html.ValidationMessageFor(model => model.SikayetReklamasyonGelisTarihi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+
+                    @Html.Label("ŞİKAYET/REKLAMASYON GELİŞ TARİHİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.SikayetReklamasyonGelisTarihi, "{0:dd.MM.yyyy}", new { @class = "form-control", @readonly = true })
+                        @Html.ValidationMessageFor(model => model.SikayetReklamasyonGelisTarihi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.Label("İÇ/DIŞ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.IcDis, new { @class = "form-control", @readonly = true })
+                        @Html.ValidationMessageFor(model => model.IcDis, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.Label("MÜŞTERİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.Qdms_Cari.CariAdi, new { @class = "form-control", @readonly = true })
+                        @Html.ValidationMessageFor(model => model.Cari, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.Label("ÜLKE", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Qdms_Cari.Ulke, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                        @Html.ValidationMessageFor(model => model.Qdms_Cari.Ulke, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+                    <hr />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            @Html.Label("ŞİKAYET GRUBU", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            @Html.Label("ŞİKAYET SEBEBİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Qdms_SikayetSebebi.SikayetSebebi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.Qdms_SikayetSebebi.SikayetSebebi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    @*<div class="form-row">
+                        @Html.Label("DEĞİŞTİRİLMEK İSTENEN :", htmlAttributes: new { @class = "control-label col-md-12" })
+                     
+                            <div class="form-group col-md-6">
+                                <b> ŞİKAYET GRUBU</b>
+                                <div class="col-md-12">
+                                    @if (ViewBag.CountryList != null)
+                                    {
+                                        @Html.DropDownListFor(model => model.SikayetGrubuID, ViewBag.CountryList as SelectList, "--Seçiniz--", new { @class = "form-control" })
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <b> ŞİKAYET SEBEBİ</b>
+                                <div class="col-md-12">
+
+                                    @Html.DropDownListFor(model => model.SikayetSebebiID, new SelectList(" "), "--Seçiniz--", new { @class = "form-control" })
+                                </div>
+
+                            </div>
+                        </div>*@
+                    
+                    <hr />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+
+                            @Html.Label("PARTİ NO", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Qdms_PartiNo.LotNo, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.Qdms_PartiNo.LotNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.Label("DTEX/FLAMAN ÖZELLİKLERİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Qdms_PartiNo.StokAdi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.Qdms_PartiNo.StokAdi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.Label("SEVK TARİHİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(model => model.SevkTarihi1, "{0:dd.MM.yyyy}", new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.SevkTarihi1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.Label("SEVK MİKTARI(KG)", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.SevkMiktari1, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.SevkMiktari1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            @Html.Label("KALİTE", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Kalite, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.Kalite, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.Label("NUMUNE GELİŞ TARİHİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(model => model.NumuneGelisTarihi, "{0:dd.MM.yyyy}", new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.NumuneGelisTarihi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+
+                    if (Model.BukumYorum != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("BÜKÜM YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.BukumYorum, 5, 50, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.BukumYorum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.TekstureYorum != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("TEKSTÜRE YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.TekstureYorum, 5, 50, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.TekstureYorum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.TTYorum != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("TEKNİK TEKSTİL YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.TTYorum, 5, 50,new { @class = "form-control", @readonly = true  })
+                                @Html.ValidationMessageFor(model => model.TTYorum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.SevkiyatYorum != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("SEVKİYAT YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.SevkiyatYorum, 5, 50, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.SevkiyatYorum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.SatinalmaYorum != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("SATIN ALMA YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.SatinalmaYorum, 5, 50, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.SatinalmaYorum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.YapilanAnalizler != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("LABORATUVAR YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.Raw(Model.YapilanAnalizler)
+                                @Html.ValidationMessageFor(model => model.YapilanAnalizler, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.UretimYorum != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("ÜRETİM YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.UretimYorum, 5, 50, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.UretimYorum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.MBYorum != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("MAKİNE BAKIM YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.MBYorum, 5, 50, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.MBYorum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.EEYorum != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("ELEKTRİK - ELEKTRONİK YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.EEYorum, 5, 50, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.EEYorum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.ProsesYorum != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("PROSES YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.ProsesYorum, 5, 50, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.ProsesYorum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.PaketlemeYorum != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("PAKETLEME YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.PaketlemeYorum, 5, 50, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.PaketlemeYorum, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.SikayetSonucu != null)
+                    {
+                        <div class="form-group col-md-12">
+                            @Html.Label("ŞİKAYET SONUCU", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.SikayetSonucu, 5, 50, new { @class = "form-control", @readonly = true })
+                                @Html.ValidationMessageFor(model => model.SikayetSonucu, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            @Html.Label("ŞİKAYET/REKLAMASYON DUYURU TARİHİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(model => model.SikayetReklamasyonDuyuruTarihi, "{0:dd.MM.yyyy}", new { type = "date", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SikayetReklamasyonDuyuruTarihi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.Label("GECİKME NEDENİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.GecikmeNedeni, new { htmlAttributes = new { @class = "form-control", onkeyup = "InputToUpper(this);" } })
+                                @Html.ValidationMessageFor(model => model.GecikmeNedeni, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+
+
+
+
+
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-12">
+
+                            <center>@Html.Label("İADE MİKTARI(KG)", htmlAttributes: new { @class = "control-label col-md-12" })</center>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.IadeMiktari, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IadeMiktari, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            @Html.Label("CEVAP TARİHİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(model => model.CevapTarihi, "{0:dd.MM.yyyy}", new { type = "date", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CevapTarihi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.Label("TEKNİK ZİYARET", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.TeknikZiyareti, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TeknikZiyareti, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.Label("KAPATILMA SÜRESİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.KapatilmaSuresi, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.KapatilmaSuresi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <hr />
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            @Html.Label("KÖK NEDEN", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.KokNeden, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.KokNeden, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group col-md-6">
+                            @Html.Label("NUMUNE TİPİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.DropDownListFor(model => model.NumuneTipi, new List<SelectListItem>
+                                                                                        {
+                                                                                                  new  SelectListItem { Text = "BOYALI KUMAŞ", Value = "BOYALI KUMAŞ" },
+                                                                                        new  SelectListItem { Text = "HAM KUMAŞ", Value = "HAM KUMAŞ" },
+
+                                                                                   new  SelectListItem { Text = "BOBİN", Value = "BOBİN" },
+
+                                                                                       new  SelectListItem { Text = "FİLE", Value = "FİLE" },
+
+                                        new  SelectListItem { Text = "İPLİK", Value = "İPLİK" },
+
+
+
+                                                                                        }, "LÜTFEN SEÇİNİZ", new { @style = "color:black", @class = "form-control", title = "Lütfen Seçiniz!" })
+                                @Html.ValidationMessageFor(model => model.NumuneTipi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                        <div class="col-md-6" style="color:black">
+                            <div class="card-body">
+                                <div class="card-header" style="background-color:cornflowerblue">
+                                    <center> <b>MUTABAKAT FORMU BİLGİLERİ</b></center>
+                                </div>
+                                <div class="card" style="background-color:lightsteelblue">
+                                    <div class="form-row">
+
+
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("KABUL EDİLEN ŞİKAYET/REKLAMASYON MİKTARI(KG)", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.KabulEdilenSikayetReklamasyonMiktari, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.KabulEdilenSikayetReklamasyonMiktari, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="form-row">
+
+
+                                        <div class="form-group col-md-6">
+                                            @Html.Label("KABUL EDİLEN ŞİKAYET/REKLAMASYON BEDELİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.IadeBedeli, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.IadeBedeli, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            @Html.Label("KABUL EDİLEN BEDEL BİRİMİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.IadeBedelBirimi, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.IadeBedelBirimi, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            @Html.Label("İSKONTO BEDELİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.IskontoBedeli, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.IskontoBedeli, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+
+                                            @Html.Label("İSKONTO BEDEL BİRİMİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.IskontoBedeliBirimi, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.IskontoBedeliBirimi, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="color:black">
+
+                            <div class="card-body">
+                                <div class="card-header" style="background-color:cornflowerblue">
+                                    <center> <b>AKSİYON BİLGİLERİ</b></center>
+                                </div>
+                                <div class="card" style="background-color:lightsteelblue">
+
+                                    <div class="form-group col-md-12">
+                                        @Html.Label("SONUÇ OLARAK YAPILACAK ÇALIŞMA", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.SonucOlarakYapilacakCalisma, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SonucOlarakYapilacakCalisma, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="form-group col-md-12">
+                                        @Html.Label("SORUMLU", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.Sorumlu, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Sorumlu, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <hr />
+                                    <div class="form-row">
+
+
+                                        <div class="form-group col-md-6">
+                                            @Html.Label("AKSİYON TERMİNİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextBoxFor(model => model.AksiyonTermini, "{0:dd.MM.yyyy}", new { type = "date", @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.AksiyonTermini, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            @Html.Label("AKSİYON GERÇEKLEŞTİRME TERMİNİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextBoxFor(model => model.AksiyonGerceklestirmeTermini, "{0:dd.MM.yyyy}", new { type = "date", @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.AksiyonGerceklestirmeTermini, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <hr />
+
+
+                
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            @Html.Label("HAZIRLAYAN", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.DropDownListFor(model => model.Hazirlayan, new List<SelectListItem>
+                                                                                         {
+                                                                                                   new  SelectListItem { Text = "GAMZE KARALÖK", Value = "GAMZE KARALÖK" },
+                                                                                         new  SelectListItem { Text = "SEZİN SUSMUŞ", Value = "SEZİN SUSMUŞ" },
+
+
+
+
+
+                                                                                         }, "LÜTFEN SEÇİNİZ", new { @style = "color:black", @class = "form-control", title = "Lütfen Seçiniz!" , required = "required" })
+                                @Html.ValidationMessageFor(model => model.Hazirlayan, "", new { @class = "text-danger" })
+                       
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-12">
+                            <input type="submit" value="DÜZENLE" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12">
+                        <div>
+                            @Html.ActionLink(" LİSTEYE GERİ DÖN", "Index", "MusteriTakipFormu", new { @class = "btn btn-info" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

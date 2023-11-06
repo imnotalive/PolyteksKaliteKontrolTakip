@@ -1,0 +1,376 @@
+﻿@model IList<PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet>
+
+@{
+    ViewBag.Title = "Analizler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<head>
+    <link href="~/Content/brands.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="~/Scripts/chartjs/jquery-1.4.2.min.js"></script>
+    <script src="~/Scripts/chartjs/jquery-ui-1.8.1.custom.min.js"></script>
+
+    <script src="~/Scripts/chartjs/main.js"></script>
+
+</head>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+
+            <div class="card card-dark card-outline">
+                <div class="card-body">
+                    <br />     <br />
+               
+                   
+                    <center><h5> <b>TOPLAM MÜŞTERİ ŞİKAYETİ:</b>  @Model.Count()</h5></center><br /><br />
+                    <center><h5> <b>TAMAMLANAN MÜŞTERİ ŞİKAYETLERİ:</b> @Model.Count(x => x.Durum == "Müşteri Şikayeti Sonuçlandı")</h5></center>
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card card-dark card-outline">
+                <div class="card-body">
+                    <br />     <br />
+                    @*<h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>*@
+                    <center><h5> <b>DEVAM EDEN ve YORUM BEKLEYEN MÜŞTERİ ŞİKAYETLERİ:</b> @Model.Count(x => x.Durum == "Bölümlerin Yorumu Bekleniyor")</h5></center><br />
+                    <center><h5> <b>YENİ AÇILAN MÜŞTERİ ŞİKAYETLERİ:</b> @Model.Count(x => x.Durum == "Şikayet Birimine Gönderildi")</h5></center><br />
+                    <center><h5> <b>SONUÇ BEKLEYEN MÜŞTERİ ŞİKAYETLERİ:</b> @Model.Count(x => x.Durum == "Sonuç Bekleniyor")</h5></center><br /><br />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card card-dark card-outline">
+                <div class="card-body">
+                    <br />     <br />
+
+
+                    <center>
+                        <h5>
+                            <b>
+                                MÜŞTERİ ŞİKAYETLERİ HATA SEBEPLERİ ve SAYILARI
+                            </b>
+                        </h5>
+                    </center>
+                    <hr />
+                   
+
+
+                    <div class="container text-lg-center">
+                        @*<div class="row">*@
+                        <div class="bs-example">
+                            <table class="table table-bordered table-hover table-striped table-responsive-xxl">
+                                <thead class="table-striped">
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="color: black"><b>YANLIŞ ETİKET BASILMASI</b></td>
+                                        <td style="color: black"> @Model.Count(x => x.SikayetSebebiID == 367) </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>SARIM HATASI</b></td>
+                                        <td style="color: black"> @Model.Count(x => x.SikayetSebebiID == 366)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>ABRAJ</b></td>
+                                        <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 2)</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="color: black"><b>DÜĞÜM</b></td>
+                                        <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 9)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>İNCELİ KALINLI BÖLGELER</b></td>
+                                        <td style="color: black"> @Model.Count(x => x.SikayetSebebiID == 27)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>TON FARKI</b></td>
+                                        <td style="color: black"> @Model.Count(x => x.SikayetSebebiID == 3)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>FLAMANTASYON</b></td>
+                                        <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 33)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>HAV ve FLAMANTASYON</b></td>
+                                        <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 33)</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="color: black"><b>SIYRILMA - TOPAKLANMA</b></td>
+                                        <td style="color: black">
+                                            @Model.Count(x => x.SikayetSebebiID == 35)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>FLAMANTASYON - PÜRÜZ</b></td>
+                                        <td style="color: black">
+                                            @Model.Count(x => x.SikayetSebebiID == 45)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>MARBLE EFEKT</b></td>
+                                        <td style="color: black">
+                                            @Model.Count(x => x.SikayetSebebiID == 84)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>PUNTA AÇILMASI</b></td>
+                                        <td style="color: black">
+                                            @Model.Count(x => x.SikayetSebebiID == 77)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>PUNTASIZ BÖLGELER</b></td>
+                                        <td style="color: black">
+                                            @Model.Count(x => x.SikayetSebebiID == 78)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>PUNTASIZ</b></td>
+                                        <td style="color: black">
+                                            @Model.Count(x => x.SikayetSebebiID == 88)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>KAT HATASI</b></td>
+                                        <td style="color: black">
+                                            @Model.Count(x => x.SikayetSebebiID == 89)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>ÇİFT KAT</b></td>
+                                        <td style="color: black">
+                                            @Model.Count(x => x.SikayetSebebiID == 92)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>KOD KARIŞIKLIĞI</b></td>
+                                        <td style="color: black">
+                                            @Model.Count(x => x.SikayetSebebiID == 103)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>DTEX FARKI:</b></td>
+                                        <td style="color: black"> @Model.Count(x => x.SikayetSebebiID == 106) </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>MUKAVEMET DÜŞÜKLÜĞÜNDEN KOPMA:</b></td>
+                                        <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 116)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>MUKAVEMET PROBLEMİ:</b></td>
+                                        <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 125)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>İZ:</b></td>
+                                        <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 127)</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="color: black"><b>ÇİZGİ VE BANT:</b></td>
+                                        <td style="color: black"> @Model.Count(x => x.SikayetSebebiID == 147)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>TEK TEL İZİ:</b></td>
+                                        <td style="color: black"> @Model.Count(x => x.SikayetSebebiID == 148)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>KUMAŞTA İZ:</b></td>
+                                        <td style="color: black"> @Model.Count(x => x.SikayetSebebiID == 134)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b> ÇİZGİLENME:</b></td>
+                                        <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 138)</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="color: black"><b>KAYNAMA ÇEKME PROBLEMİ:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 157)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>ÇÖZGÜDE İZ:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 172)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>YAĞ LEKESİ:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 182)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>ELASTAN KOPUĞU:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 190)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>ELASTANSIZ BÖLGE:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 193)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>DÜĞÜM: </b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 244)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>BOYA ALMAYAN BÖLGELER:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 245)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>TEKSTÜRE PROBLEMİ:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 248)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>RENK VE PARLAKLIK FARKI:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 264)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>RENK FARKI:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 265)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>BOYA ALIM FARKI:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 270)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>DÖNME:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 301)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>EFEKT PROBLEMİ:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 319)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>SERT TUŞE:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 347)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: black"><b>UÇUNTU:</b></td>
+                                        <td style="color: black">   @Model.Count(x => x.SikayetSebebiID == 353)</td>
+                                    </tr>
+
+
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+            <br />     <br />
+        </div>
+
+
+        <div class="col-sm-6">
+            <div class="card card-dark card-outline">
+                <div class="card-body">
+                    <br />     <br />
+                    @{
+
+                        DateTime son = new DateTime(2022, 12, 31);
+                        DateTime ilk = new DateTime(2023, 01, 01);
+                        var shortDT = ilk.ToString().Replace("12:00:00 AM", "");
+                    }
+                    <center><h5> <b>2022 YILI TOPLAM MÜŞTERİ ŞİKAYETLERİ:</b> @Model.Count(x => Convert.ToDateTime(x.SatisMusteriTemsilcisiTarih) <= ilk)</h5></center>
+                    <br /><br />
+                    <center><h5> <b>2023 YILI TOPLAM MÜŞTERİ ŞİKAYETLERİ:</b> @Model.Count(x => Convert.ToDateTime(x.SatisMusteriTemsilcisiTarih) >= son)</h5></center>
+                    <br />
+                    <br />
+                    <div style="float:right;width:700px;height:300px;">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    <br />
+                    <br />
+                    <script defer
+                            src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+                    </script>
+                    <script>
+
+
+
+
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'pie',
+                    options: {
+                        
+                            maintainAspectRatio: false,
+                        
+                    },
+                    // The data for our dataset
+                    data: {
+                        labels: ['2022', '2023'/*, '3', '4'*/],
+                        datasets: [{
+                            label: 'Veri Grafigi',
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            data: [ @Model.Count(x => Convert.ToDateTime(x.SatisMusteriTemsilcisiTarih) <= ilk), @Model.Count(x => Convert.ToDateTime(x.SatisMusteriTemsilcisiTarih) >= son)/*, 1, 1*/]
+                        }]
+                    },
+                 
+                    // Configuration options go here
+                    //options: {
+                      
+                    //}
+                });
+
+                       
+
+
+                    </script>
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            @*@Model.Count(a=>a.Qdms_Cari.ID==2)*@
+        </div>
+    </div>
+</div>

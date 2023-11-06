@@ -1,0 +1,167 @@
+﻿@model IEnumerable<PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <div class="col-md-12" style="color:black">
+        <div class="card" style="background-color:aliceblue">
+
+            <div class="card-header">
+
+                <center><h4><b>MÜŞTERİ ŞİKAYET/REKLAMASYON VERİ TAKİP FORMU</b></h4></center>
+                <hr />
+
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <a class="btn btn-primary" href="@Url.Action("ExcelMusteriTakipFormu","MusteriTakipFormu")">RAPOR İNDİR</a>
+                </div>
+
+                <hr />
+                <div class="container">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="Search" placeholder="ARA">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><i class="fa fa-search"></i></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <table class="table table-bordered table-hover table-responsive table-striped">
+                            <tr>
+                                <th style="width: 5px; padding:0;">
+                                    <center><b>MÜŞTERİ ŞİKAYET REKLAMASYON NUMARASI</b></center>
+                                </th>
+                                <th>
+                                    <center><b>GELİŞ TARİHİ</b> </center>
+                                </th>
+                                <th>
+                                    <center><b>CARİ ADI</b> </center>
+                                </th>
+                                <th>
+                                    <center><b>PARTİ NO</b> </center>
+                                </th>
+                                <th>
+                                    <center> <b>ŞİKAYET SEBEBİ</b> </center>
+                                </th>
+                                <th>
+                                    <center><b>SEVK TARİHİ</b> </center>
+                                </th>
+                                <th>
+                                    <center><b>NUMUNE TİPİ</b> </center>
+                                </th>
+                                <th>
+                                    <center><b>İADE MİKTARI</b> </center>
+                                </th>
+                                <th>
+                                    <center><b>KAPATILMA SÜRESİ</b> </center>
+                                </th>
+                                <th></th>
+                                <th></th>
+                            
+                            
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                        <tr class="Search">
+                            <td>
+                                <center><b> #@Html.DisplayFor(modelItem => item.ID)</b> </center>
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(item.SikayetReklamasyonGelisTarihi).ToString("dd.MM.yyyy")
+                            </td>
+                            <td style="width: 5px; padding:0;">
+                                @Html.DisplayFor(modelItem => item.Qdms_Cari.CariAdi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Qdms_PartiNo.LotNo)
+                            </td>
+                            <td style="width: 5px; padding:0;">
+                                @Html.DisplayFor(modelItem => item.Qdms_SikayetSebebi.SikayetSebebi)
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(item.SevkTarihi1).ToString("dd.MM.yyyy")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumuneTipi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IadeMiktari)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KapatilmaSuresi)
+                            </td>
+
+                            @*<td>
+            <center>
+
+                <a href="@Url.Action("EditSikayet", "MusteriTakipFormu", new { id = item.ID })" title="ŞİKAYET GRUBU DÜZENLEME" class="btn btn-danger"> <i class="fas fa-pen">   </i></a>
+            </center>
+        </td>*@
+
+                            <td>
+                                <center>
+
+                                    <a href="@Url.Action("Edit", "MusteriTakipFormu", new { id = item.ID })" title="DÜZENLE" class="btn btn-primary"> <i class="fas fa-pen">   </i></a>
+                                </center>
+                            </td>
+                            <td style="color: black" class="button_class">
+
+                                <center>
+                                    <a href="@Url.Action("Details", "MusteriTakipFormu",new { id = item.ID })" title="DETAYLAR" class="btn btn-info"> <i class="fa fa-book" aria-hidden="true">  </i></a>
+                                </center>
+                            </td>
+                            @*<td style="color: black" class="button_class">
+
+                                <center>
+                                    <a href="@Url.Action("MusteriRapor", "MusteriTakipFormu",new { id = item.ID })" title="MÜŞTERİ RAPOR" class="btn btn-info"> <i class="fa fa-book" aria-hidden="true">  </i></a>
+                                </center>
+                            </td>*@
+                        </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            })
+        });
+    });
+
+</script>
+
+<center><i><b>F-142-03</b></i></center>
+<b>
+
+    Toplam Müşteri Şikayet/Reklamasyon Veri Sayısı: @Model.Count()
+</b>
+<br />
+
+

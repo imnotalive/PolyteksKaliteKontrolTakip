@@ -1,0 +1,309 @@
+﻿
+@model PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet
+@{
+    ViewBag.Title = "_DevamEdenSikayetSonucDuzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-12">
+    <div class="card">
+        <div class="card-header text-center bg-gradient-light text-white">
+            @using (Html.BeginForm())
+            {
+
+                <div class="row align-items-center">
+                    <div class="col-md-12" style="color:black">
+                        <div class="card" style="background-color:bisque">
+                            <div class="card-header">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.ID)
+                                <center><h3><b>#@Model.ID NOLU ŞİKAYETE AİT YORUMLAR</b></h3></center>
+                                <hr />
+
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        @Html.Label("TARİH", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.SikayetReklamasyonGelisTarihi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                            @Html.ValidationMessageFor(model => model.SikayetReklamasyonGelisTarihi, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        @Html.Label("FİRMA", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.Qdms_Cari.CariAdi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                            @Html.ValidationMessageFor(model => model.Qdms_Cari.CariAdi, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-3">
+                                        @Html.Label("PARTİ NUMARASI", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.Qdms_PartiNo.LotNo, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                            @Html.ValidationMessageFor(model => model.PartiNo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        @Html.Label("DTEX/FLAMAN İPLİK ÖZELLİĞİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.Qdms_PartiNo.StokAdi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                            @Html.ValidationMessageFor(model => model.DtexFlamanIplikOzeliigi, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("ŞİKAYET SEBEBİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.Qdms_MusteriSikayetSebep1.SikayetSebebi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                @Html.ValidationMessageFor(model => model.SikayetSebebi, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <hr />
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        @Html.Label("ŞİKAYET REKLAMASYON NUMARASI", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                            @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        @Html.Label("İÇ/DIŞ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.IcDis, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                            @Html.ValidationMessageFor(model => model.Qdms_Cari.CariAdi, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        @Html.Label("ŞİKAYET GRUBU", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                            @Html.ValidationMessageFor(model => model.SikayetReklamasyonGelisTarihi, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        @Html.Label("ŞİKAYET SEBEBİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.Qdms_SikayetSebebi.SikayetSebebi, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                            @Html.ValidationMessageFor(model => model.Qdms_Cari.CariAdi, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                                <hr />
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        @Html.Label("ÖZET", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.TextAreaFor(model => model.LabOzet, 10, 100, new { @class = "form-control", @readonly = true })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (Model.YapilanAnalizler != null)
+                                {
+                                    <div class="col-md-12" style="color:black">
+                                        <div class="card" style="background-color:darkgray">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    @Html.Label("YAPILAN ANALİZ ve İNCELEMELER", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                    <div class="col-md-12 center">
+                                                        @Html.Raw(Model.YapilanAnalizler)
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+
+                                @if (Model.BukumSeciliMi == true)
+                                {
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("BÜKÜM YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.BukumYorum, 10, 100, new { @class = "form-control", @readonly = true })
+                                                @Html.ValidationMessageFor(model => model.BukumYorum, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }
+                                @if (Model.TekstureSeciliMi == true)
+                                {
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("TEKSTÜRE YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.TekstureYorum, 10, 100, new { @class = "form-control", @readonly = true })
+                                                @Html.ValidationMessageFor(model => model.TekstureYorum, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }          @if (Model.UretimSeciliMi == true)
+                                {
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("ÜRETİM YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.UretimYorum, 10, 100, new { @class = "form-control", @readonly = true })
+                                                @Html.ValidationMessageFor(model => model.UretimYorum, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }          @if (Model.TTSeciliMi == true)
+                                {
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("TEKNİK TEKSTİL YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.TTYorum, 10, 100, new { @class = "form-control", @readonly = true })
+                                                @Html.ValidationMessageFor(model => model.TTYorum, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }          @if (Model.SevkiyatSeciliMi == true)
+                                {
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("SEVKİYAT YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.SevkiyatYorum, 10, 100, new { @class = "form-control", @readonly = true })
+                                                @Html.ValidationMessageFor(model => model.SevkiyatYorum, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }          @if (Model.PaketlemeSeciliMi == true)
+                                {
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("PAKETLEME YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.PaketlemeYorum, 10, 100, new { @class = "form-control", @readonly = true })
+                                                @Html.ValidationMessageFor(model => model.PaketlemeYorum, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }          @if (Model.MBSeciliMi == true)
+                                {
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("MAKİNE BAKIM YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.MBYorum, 10, 100, new { @class = "form-control", @readonly = true })
+                                                @Html.ValidationMessageFor(model => model.MBYorum, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }          @if (Model.EESeciliMi == true)
+                                {
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("ELEKTRİK ELEKTRONİK YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.EEYorum, 10, 100, new { @class = "form-control", @readonly = true })
+                                                @Html.ValidationMessageFor(model => model.EEYorum, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }
+
+
+                                @if (Model.ProsesSeciliMi == true)
+                                {
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("PROSES YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.ProsesYorum, 10, 100, new { @class = "form-control", @readonly = true })
+                                                @Html.ValidationMessageFor(model => model.ProsesYorum, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }          @if (Model.SatinalmaSeciliMi == true)
+                                {
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("SATIN ALMA YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => model.SatinalmaYorum, 10, 100, new { @class = "form-control", @readonly = true })
+                                                @Html.ValidationMessageFor(model => model.SatinalmaYorum, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        @Html.Label("SONUÇ", htmlAttributes: new { @class = "control-label col-md-12" })
+                                        <div class="col-md-12">
+                                            @Html.TextAreaFor(model => model.SikayetSonucu, 10, 200, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.SikayetSonucu, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-12">
+                                        <input type="submit" value="KAYDET" class="btn btn-success btn-block" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            @if (Model.SikayetSonucu != null)
+            {
+                if (User.IsInRole("A"))
+                {
+                    using (Html.BeginForm("DevamEdenSikayetSonucOnay", "MusteriSikayeti", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(model => model.ID)
+                        <input type="submit" value="ONAYLA" class="btn btn-danger btn-group-lg" />
+
+
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>

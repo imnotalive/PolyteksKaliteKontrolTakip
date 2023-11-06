@@ -1,0 +1,203 @@
+﻿@model PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet
+
+@{
+    ViewBag.Title = "MusteriRapor";
+    Layout = null;
+
+
+}
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+
+    img {
+        height: 50px;
+        width: 200px;
+    }
+
+    #left {
+        float: left;
+    }
+</style>
+
+
+
+<div class="container">
+    <div id="left">
+        <img src="~/Pictures/poly_logo.png" />
+    </div>
+    <br />
+    <center><h4 style="color: black"><b>  MÜŞTERİ ŞİKAYET / REKLAMASYON RAPOR FORMU</b></h4></center>
+</div>
+<br />
+<br />
+
+<div>
+    @Html.HiddenFor(model => model.ID)
+</div>
+<body>
+    <div class="container text-lg-center">
+        <div class="row">
+            <div class="bs-example">
+                <table class="table table-bordered table-hover table-striped table-responsive-xxl">
+                    <thead>
+                        <tr class="text-center">
+                            <th>
+                                @Html.DisplayName("TARİH")
+                            </th>
+                            <th>
+                                @Html.DisplayName("ŞİKAYET/REKLAMASYON NO")
+                            </th>
+                            <th>
+                                @Html.DisplayName("İÇ/DIŞ")
+                            </th>
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+
+                                @Convert.ToDateTime(Model.SikayetReklamasyonGelisTarihi).ToString("dd.MM.yyyy")
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(item => item.ID)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(item => item.IcDis)
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-hover table-striped table-responsive-xxl">
+                    <thead class="table-striped">
+
+                    </thead>
+                    <tr>
+                        <td style="color: black"><b>FİRMA</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Qdms_Cari.CariAdi)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>PARTİ NO</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.Qdms_PartiNo.LotNo)</td>
+                    </tr>
+
+                    <tr>
+                        <td style="color: black"><b>DTEX/FLAMAN</b></td>
+                        <td style="color: black">   @Html.DisplayFor(model => model.Qdms_PartiNo.StokAdi)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>ŞİKAYET SEBEBİ</b></td>
+                        <td style="color: black">
+                            @Html.DisplayFor(model => model.Qdms_SikayetSebebi.SikayetSebebi)
+                        </td>
+                    </tr>
+
+                </table>
+
+
+
+                <div class="float-left"><h5 style="color: black"><b>ANALİZ SONUÇ VE YORUMLAR :</b></h5></div>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <td style="color: black"><b>ÖZET</b></td>
+                        <td style="color: black">   @Html.DisplayFor(model => model.LabOzet)</td>
+
+                    </tr>
+
+
+
+                    @if (Model.YapilanAnalizler != null)
+                    {
+                        <tr>
+                            <td style="color: black"><b>YAPILAN ANALİZLER</b></td>
+                            <td style="color: black">@Html.Raw(Model.YapilanAnalizler)</td>
+
+                        </tr>
+                    }
+
+
+
+                    @foreach (var item in Model.Qdms_MusteriSikayetResim)
+                    {
+                        if (Model.Qdms_MusteriSikayetResim != null)
+                        {
+                            <tr>
+                                <td style="color: black"><b>GÖRSELLER</b></td>
+                                <td>  <img src="@item.ImagePath" class="img-fluid" /></td>
+                            </tr>
+
+                            @*<tr>
+                                  <td><img src="@Url.Content(item.ImagePath)" width="600" height="600" /></td>
+                                </tr>*@
+
+                        }
+                    }
+
+
+
+                    @if (Model.SikayetSonucu != null)
+                    {
+                        <tr>
+                            <td style="color: black"><b>ŞİKAYET SONUCU</b></td>
+                            <td style="color: black">@Html.DisplayFor(model => model.SikayetSonucu)</td>
+
+                        </tr>
+                    }
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="text-center">
+                                <th>
+                                    <b>HAZIRLAYAN</b>
+                                </th>
+                                <th>
+                                    <b>ONAYLAYAN</b>
+                                </th>
+
+
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+
+
+                                    <CENTER><b>@Model.Hazirlayan</b></CENTER>
+
+
+                                </td>
+                                <td>
+                                    <CENTER> <b>BERAT SÜZGÜN</b></CENTER>
+                                </td>
+
+
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </table>
+
+            </div>
+        </div>
+        <center><b>F-142.05/00</b></center>
+    </div>
+    <div style="page-break-after: always;"></div>
+    <div>
+        @Html.ActionLink("PDF", "ExportPDFS", new { id = Model.ID }, new { @class = "btn btn-danger" })
+    </div>
+
+</body>
+
