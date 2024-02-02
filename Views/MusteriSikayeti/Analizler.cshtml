@@ -26,8 +26,8 @@
             <div class="card card-dark card-outline">
                 <div class="card-body">
                     <br />     <br />
-               
-                   
+
+
                     <center><h5> <b>TOPLAM MÜŞTERİ ŞİKAYETİ:</b>  @Model.Count()</h5></center><br /><br />
                     <center><h5> <b>TAMAMLANAN MÜŞTERİ ŞİKAYETLERİ:</b> @Model.Count(x => x.Durum == "Müşteri Şikayeti Sonuçlandı")</h5></center>
                     <br />
@@ -63,7 +63,7 @@
                         </h5>
                     </center>
                     <hr />
-                   
+
 
 
                     <div class="container text-lg-center">
@@ -311,9 +311,9 @@
                     // The type of chart we want to create
                     type: 'pie',
                     options: {
-                        
+
                             maintainAspectRatio: false,
-                        
+
                     },
                     // The data for our dataset
                     data: {
@@ -337,14 +337,14 @@
                             data: [ @Model.Count(x => Convert.ToDateTime(x.SatisMusteriTemsilcisiTarih) <= ilk), @Model.Count(x => Convert.ToDateTime(x.SatisMusteriTemsilcisiTarih) >= son)/*, 1, 1*/]
                         }]
                     },
-                 
+
                     // Configuration options go here
                     //options: {
-                      
+
                     //}
                 });
 
-                       
+
 
 
                     </script>
@@ -364,13 +364,100 @@
 
 
 
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card card-dark card-outline">
+            <div class="card-body">
+                <br />     <br />
+
+                <center>
+                    <h5>
+                        <b>
+                            İŞLETMELERE GÖRE ŞİKAYET SAYILARI
+                        </b>
+                    </h5>
+                </center>
+                <hr />
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="container text-lg-center">
+                                @*<div class="row">*@
+                                <div class="bs-example">
+                                    <table class="table table-bordered table-hover table-striped table-responsive-xxl">
+                                        <thead class="table-striped">
+
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="color: black"><b>LABORATUVAR</b></td>
+                                                <td style="color: black">@Model.Count(a => a.LabSeciliMi == true) </td>
+                                            </tr>
 
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            @*@Model.Count(a=>a.Qdms_Cari.ID==2)*@
-        </div>
-    </div>
+
+
+                                            <tr>
+                                                <td style="color: black"><b>TEKNİK TEKSTİL</b></td>
+                                                <td style="color: black">   @Model.Count(a => a.TTSeciliMi == true)</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: black"><b>TEKSTÜRE</b></td>
+                                                <td style="color: black">   @Model.Count(a => a.TekstureSeciliMi == true)</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="color: black"><b>ÜRETİM</b></td>
+                                                <td style="color: black">       @Model.Count(a => a.UretimSeciliMi == true)</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: black"><b>BÜKÜM</b></td>
+                                                <td style="color: black">     @Model.Count(a => a.BukumSeciliMi == true)</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: black"><b>MAKİNE BAKIM</b></td>
+                                                <td style="color: black">   @Model.Count(a => a.MBSeciliMi == true)</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: black"><b>ELEKTRİK - ELEKTRONİK</b></td>
+                                                <td style="color: black"> @Model.Count(a => a.EESeciliMi == true)</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: black"><b>SEVKİYAT</b></td>
+                                                <td style="color: black">  @Model.Count(x => x.SevkiyatSeciliMi == true)</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="color: black"><b>PAKETLEME</b></td>
+                                                <td style="color: black">
+                                                    @Model.Count(x => x.PaketlemeSeciliMi == true)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: black"><b>SATIN ALMA</b></td>
+                                                <td style="color: black">
+                                                    @Model.Count(x => x.SatinalmaSeciliMi == true)
+                                                </td>
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+</div>
 </div>

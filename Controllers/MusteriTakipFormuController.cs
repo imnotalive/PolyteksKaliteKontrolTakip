@@ -180,6 +180,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
                 fisDetays.YapilanAnalizler = qdms_MusteriTakipFormu.YapilanAnalizler; 
                 fisDetays.SikayetSebebiID = qdms_MusteriTakipFormu.SikayetSebebiID; 
                 fisDetays.SikayetGrubuID = qdms_MusteriTakipFormu.SikayetGrubuID;
+                fisDetays.Hazirlayan = qdms_MusteriTakipFormu.Hazirlayan;
 
                 
                 db.SaveChanges();
@@ -225,6 +226,8 @@ namespace PolyteksKaliteKontrolTakip.Controllers
                                              new DataColumn("AKSİYON GERÇEKLEŞME TARİHİ"),
 
                                         new DataColumn("AKSİYON TERMİNİ"),
+                                        new DataColumn("TEKNİK ZİYARET"),
+                                        new DataColumn("İADE MİKTARI"),
 
 
 
@@ -243,6 +246,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
             foreach (var list in liste)
             {
 
+             
                 dt.Rows.Add(list.ID, list.IcDis, 
                     list.SikayetReklamasyonGelisTarihi.GetValueOrDefault().ToString("dd.MM.yyyy"),
                     list.SikayetReklamasyonDuyuruTarihi.GetValueOrDefault().ToString("dd.MM.yyyy"), 
@@ -264,7 +268,17 @@ namespace PolyteksKaliteKontrolTakip.Controllers
                   list.NumuneTipi,
                   list.Sorumlu,
                   list.SonucOlarakYapilacakCalisma,
-                  list.AksiyonGerceklestirmeTermini.GetValueOrDefault().ToString("dd.MM.yyyy"),list.AksiyonTermini.GetValueOrDefault().ToString("dd.MM.yyyy"));
+                  list.AksiyonGerceklestirmeTermini.GetValueOrDefault().ToString("dd.MM.yyyy"),
+                  list.AksiyonTermini.GetValueOrDefault().ToString("dd.MM.yyyy"),
+
+                  list.TeknikZiyareti.GetValueOrDefault() ? "EVET":"HAYIR",
+                  list.IadeMiktari.GetValueOrDefault().ToString("N")
+
+
+
+
+
+                  );
             }
 
             dt.Rows.Add("F-142_03");

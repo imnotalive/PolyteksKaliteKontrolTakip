@@ -81,7 +81,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
             };
         }
 
-        [Authorize(Roles = "A,S")]
+        [AllowAnonymous]
         public ActionResult TamamlananSikayet()
         {
             var asd = db.Qdms_MusteriSikayet.OrderByDescending(a => a.ID).Where(a => a.Durum.Trim() == "Müşteri Şikayeti Sonuçlandı").ToList();
@@ -247,62 +247,65 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Satis(Qdms_MusteriSikayet qdms_MusteriSikayet, HttpPostedFileBase imgfile)
+        public ActionResult Satis(Qdms_MusteriSikayet qdms_MusteriSikayet)
         {
-            Qdms_MusteriSikayet di = new Qdms_MusteriSikayet();
 
-            if (imgfile != null && Request.Files.Count > 0)
+            if (ModelState.IsValid)
             {
 
-                var dosyaadi = Path.GetFileName(Request.Files[0].FileName);
-                string uzanti = Path.GetExtension(Request.Files[0].FileName);
-                if (uzanti.ToLower().Equals(".jpg") || uzanti.ToLower().Equals(".jpeg") || uzanti.ToLower().Equals(".png"))
-                {
-                    try
-
-                    {
-                        string yol = "~/Image/" + dosyaadi;
-                        Request.Files[0].SaveAs(Server.MapPath(yol));
-                        //qdms_MusteriSikayet.Qdms_MusteriSikayetResim. = "~/Image/" + dosyaadi;
-                        List<Qdms_SikayetGrubu> CountryList = db.Qdms_SikayetGrubu.ToList();
-                        ViewBag.CountryList = new SelectList(CountryList, "SikayetGrubuID", "SikayetGrubu");
-                        ViewBag.Cari = new SelectList(db.Qdms_Cari, "ID", "CariAdi", qdms_MusteriSikayet.Cari);
-                        ViewBag.PartiNoSecme = new SelectList(db.Qdms_PartiNo, "ID", "LotNo", qdms_MusteriSikayet.PartiNoSecme);
-                        qdms_MusteriSikayet.Durum = "Şikayet Birimine Gönderildi";
-                        db.Qdms_MusteriSikayet.Add(qdms_MusteriSikayet);
-                        db.SaveChanges();
-                        return View("DevamEdenSikayet");
-
-
-                    }
-                    catch (Exception ex)
-                    {
-
-                        Response.Write("<script>alert('HATA!!! BİLGİ İŞLEME BİLDİRİNİZ.....!'); </script>");
-
-                    }
-
-                }
-
-                else
-
-                {
-
-                    Response.Write("<script>alert('HATA!!! Sadece jpg,jpeg veya png formatları kabul edilir.....!'); </script>");
-                    return View("Index");
-
-                }
+                qdms_MusteriSikayet.Durum = "Şikayet Birimine Gönderildi";
+                qdms_MusteriSikayet.Status = 0;
+                db.Qdms_MusteriSikayet.Add(qdms_MusteriSikayet);
+                db.SaveChanges();
 
 
 
-
-
+                ViewBag.Cari = new SelectList(db.Qdms_Cari, "ID", "CariNo", qdms_MusteriSikayet.Cari);
+                ViewBag.MusteriSikayetId = new SelectList(db.Qdms_MusteriSikayetAna, "ID", "MusteriTemsilcisi", qdms_MusteriSikayet.MusteriSikayetId);
+                ViewBag.PartiNoSecme = new SelectList(db.Qdms_PartiNo, "ID", "LotNo", qdms_MusteriSikayet.PartiNoSecme);
+                ViewBag.SikayetSebebiID = new SelectList(db.Qdms_SikayetSebebi, "SikayetSebebiID", "SikayetSebebi", qdms_MusteriSikayet.SikayetSebebiID);
+                return View("DevamEdenSikayet");
             }
 
-      
+
+
+
 
             return View(qdms_MusteriSikayet);
+        }
+        [AllowAnonymous]
+        public ActionResult SikayetResimEkleme(int? id)
 
+        {
+
+            Qdms_MusteriSikayet qdms_MusteriSikayet = db.Qdms_MusteriSikayet.Find(id);
+            ViewBag.SikayetId = new SelectList(db.Qdms_MusteriSikayet, "ID", "Cari");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SikayetResimEkleme(int? id, Qdms_MusteriSikayetResim cokluResims, List<HttpPostedFileBase> ImagePath)
+        {
+
+            Qdms_MusteriSikayet fisDetays = db.Qdms_MusteriSikayet.FirstOrDefault(x => x.ID == id);
+            if (ModelState.IsValid)
+            {
+                foreach (var item in ImagePath)
+
+                    if (item.ContentLength > 0)
+                    {
+                        var image = Path.GetFileName(item.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Image"), image);
+                        item.SaveAs(path);
+                        cokluResims.SikayetId = fisDetays.ID;
+                        cokluResims.ImagePath = "/Image/" + image;
+                        db.Qdms_MusteriSikayetResim.Add(cokluResims);
+                        db.SaveChanges();
+                    }
+                return RedirectToAction("DevamEdenSikayet");
+            }
+
+            ViewBag.SikayetId = new SelectList(db.Qdms_MusteriSikayet, "ID", "Cari", cokluResims.SikayetId);
+            return View(cokluResims);
 
         }
 
@@ -562,6 +565,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
         #endregion
 
         #region ŞİKAYET BİRİMİ
+        [AllowAnonymous]
         public ActionResult _DevamEdenSikayetLab(Qdms_MusteriSikayet vm)
         {
 
@@ -572,7 +576,6 @@ namespace PolyteksKaliteKontrolTakip.Controllers
         }
 
 
-  
 
         [AllowAnonymous]
         public ActionResult _DevamEdenSikayetLabDuzenle(int? id)
@@ -587,29 +590,55 @@ namespace PolyteksKaliteKontrolTakip.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CountryList = new SelectList(db.Qdms_SikayetGrubu, "SikayetGrubuID", "SikayetGrubu", qdms_MusteriSikayet.SikayetGrubuID);
-            ViewBag.CountryLists = new SelectList(db.Qdms_SikayetSebebi, "SikayetSebebiID", "SikayetSebebi", qdms_MusteriSikayet.SikayetSebebiID);
+
             ViewBag.Cari = new SelectList(db.Qdms_Cari, "ID", "CariNo", qdms_MusteriSikayet.Cari);
             ViewBag.PartiNoSecme = new SelectList(db.Qdms_PartiNo, "ID", "LotNo", qdms_MusteriSikayet.PartiNoSecme);
             return PartialView(qdms_MusteriSikayet);
         }
 
 
-
-        [HttpPost]
         [AllowAnonymous]
-
-
+        [HttpPost]
         public ActionResult _DevamEdenSikayetLabDuzenle(Qdms_MusteriSikayet qdms_MusteriSikayet, int? id)
         {
-            Qdms_MusteriSikayet fisDetays = db.Qdms_MusteriSikayet.FirstOrDefault(x => x.ID == id);
 
-            fisDetays.Durum = "";
-            fisDetays.Status = 1;
+
+            if (ModelState.IsValid)
+            {
+                Qdms_MusteriSikayet fisDetays = db.Qdms_MusteriSikayet.FirstOrDefault(x => x.ID == id);
+
+
+
+                fisDetays.LabOzet = qdms_MusteriSikayet.LabOzet;
+                fisDetays.IcDis = qdms_MusteriSikayet.IcDis;
+                fisDetays.NumuneGelisTarihi = qdms_MusteriSikayet.NumuneGelisTarihi;
+
+                fisDetays.UretimSeciliMi = qdms_MusteriSikayet.UretimSeciliMi;
+                fisDetays.BukumSeciliMi = qdms_MusteriSikayet.BukumSeciliMi;
+                fisDetays.TekstureSeciliMi = qdms_MusteriSikayet.TekstureSeciliMi;
+                fisDetays.TTSeciliMi = qdms_MusteriSikayet.TTSeciliMi;
+                fisDetays.SevkiyatSeciliMi = qdms_MusteriSikayet.SevkiyatSeciliMi;
+                fisDetays.SatinalmaSeciliMi = qdms_MusteriSikayet.SatinalmaSeciliMi;
+                fisDetays.MBSeciliMi = qdms_MusteriSikayet.MBSeciliMi;
+                fisDetays.EESeciliMi = qdms_MusteriSikayet.EESeciliMi;
+                fisDetays.ProsesSeciliMi = qdms_MusteriSikayet.ProsesSeciliMi;
+                fisDetays.LabSeciliMi = qdms_MusteriSikayet.LabSeciliMi;
+                fisDetays.PaketlemeSeciliMi = qdms_MusteriSikayet.PaketlemeSeciliMi;
+                fisDetays.Durum = "Bölümlerin Yorumu Bekleniyor";
+                fisDetays.Status = 1;
+
+
+                db.SaveChanges();
+                return RedirectToAction("DevamEdenSikayet");
+            }
+
+
+
             ViewBag.BolumID = db.Qdms_Bolumler.Select(c => c.Bolumler).ToList();
 
             ViewBag.Cari = new SelectList(db.Qdms_Cari, "ID", "CariAdi", qdms_MusteriSikayet.Cari);
             ViewBag.PartiNoSecme = new SelectList(db.Qdms_PartiNo, "ID", "LotNo", qdms_MusteriSikayet.PartiNoSecme);
+            ViewBag.SikayetSebebiID = new SelectList(db.Qdms_SikayetSebebi, "SikayetSebebiID", "SikayetSebebi", qdms_MusteriSikayet.SikayetSebebiID);
             return View(qdms_MusteriSikayet);
 
         }
@@ -623,10 +652,11 @@ namespace PolyteksKaliteKontrolTakip.Controllers
         {
             Qdms_MusteriSikayet qdms_MusteriSikayet = db.Qdms_MusteriSikayet.FirstOrDefault(x => x.ID == id);
             qdms_MusteriSikayet.OnaylandiMi = true;
-            qdms_MusteriSikayet.Onaylayan = Kullanici.AdSoyad;
+            qdms_MusteriSikayet.Onaylayan = User.Identity.Name;
             qdms_MusteriSikayet.Durum = "Müşteri Şikayeti Sonuçlandı";
             qdms_MusteriSikayet.Status = 3;
-            return View();
+            db.SaveChanges();
+            return RedirectToAction("DevamEdenSikayet");
         }
         #endregion
 
@@ -664,31 +694,234 @@ namespace PolyteksKaliteKontrolTakip.Controllers
         [HttpPost]
         public ActionResult _DevamEdenSikayetYorumDuzenle(Qdms_MusteriSikayet qdms_MusteriSikayet, int? id)
         {
+            int i = 0;
             Qdms_MusteriSikayet fisDetays = db.Qdms_MusteriSikayet.FirstOrDefault(x => x.ID == id);
-          
+            List<Qdms_MusteriSikayet> filteredList = new List<Qdms_MusteriSikayet>();
+            var posts = from p in db.Qdms_MusteriSikayet
+                        select p;
+
+
             if (ModelState.IsValid)
             {
-                fisDetays.UretimYorum = qdms_MusteriSikayet.UretimYorum;
-                fisDetays.BukumYorum = qdms_MusteriSikayet.BukumYorum;
-                fisDetays.TekstureYorum = qdms_MusteriSikayet.TekstureYorum;
-                fisDetays.TTYorum = qdms_MusteriSikayet.TTYorum;
-                fisDetays.SevkiyatYorum = qdms_MusteriSikayet.SevkiyatYorum;
-                fisDetays.SatinalmaYorum = qdms_MusteriSikayet.SatinalmaYorum;
-                fisDetays.MBYorum = qdms_MusteriSikayet.MBYorum;
-                fisDetays.EEYorum = qdms_MusteriSikayet.EEYorum;
-                fisDetays.ProsesYorum = qdms_MusteriSikayet.ProsesYorum;
-                fisDetays.LabYorum = qdms_MusteriSikayet.LabYorum;
-                fisDetays.PaketlemeYorum = qdms_MusteriSikayet.PaketlemeYorum;
-                fisDetays.Durum = "Sonuç Bekleniyor";
+                if (fisDetays.BukumSeciliMi == true ||
+                   fisDetays.TekstureSeciliMi == true ||
+                  fisDetays.SatinalmaSeciliMi == true ||
+                   fisDetays.UretimSeciliMi == true ||
+                   fisDetays.TTSeciliMi == true ||
+                   fisDetays.ProsesSeciliMi == true ||
+                      fisDetays.PaketlemeSeciliMi == true ||
+                   fisDetays.MBSeciliMi == true ||
+                  fisDetays.EESeciliMi == true ||
+                  fisDetays.LabSeciliMi == true ||
+                   fisDetays.SevkiyatSeciliMi == true)
+                {
 
-                db.SaveChanges();
-                return RedirectToAction("DevamEdenSikayet");
+
+                    if (fisDetays.BukumSeciliMi == true && fisDetays.BukumYorum == null)
+                    {
+                        i++;
+
+                    }
+                    if (fisDetays.TekstureSeciliMi == true && fisDetays.TekstureYorum == null)
+                    {
+                        i++;
+
+                    }
+                    if (fisDetays.SatinalmaSeciliMi == true && fisDetays.SatinalmaYorum == null)
+                    {
+                        i++;
+
+                    }
+                    if (fisDetays.UretimSeciliMi == true && fisDetays.UretimYorum == null)
+                    {
+                        i++;
+
+                    }
+                    if (fisDetays.TTSeciliMi == true && fisDetays.TTYorum == null)
+                    {
+                        i++;
+
+                    }
+                    if (fisDetays.ProsesSeciliMi == true && fisDetays.ProsesYorum == null)
+                    {
+                        i++;
+
+                    }
+                    if (fisDetays.PaketlemeSeciliMi == true && fisDetays.PaketlemeYorum == null)
+                    {
+                        i++;
+
+                    }
+                    if (fisDetays.MBSeciliMi == true && fisDetays.MBYorum == null)
+                    {
+                        i++;
+
+                    }
+                    if (fisDetays.EESeciliMi == true && fisDetays.EEYorum == null)
+                    {
+                        i++;
+
+                    }
+
+
+
+                    if (fisDetays.LabSeciliMi == true && fisDetays.YapilanAnalizler == null)
+                    {
+                        i++;
+
+                    }
+                    if (fisDetays.SevkiyatSeciliMi == true && fisDetays.SevkiyatYorum == null)
+                    {
+                        i++;
+
+                    }
+
+                    if (i > 1)
+                    {
+                        if (qdms_MusteriSikayet.YapilanAnalizler != null)
+                        {
+                            fisDetays.YapilanAnalizler = qdms_MusteriSikayet.YapilanAnalizler.ToString();
+                        }
+                        fisDetays.UretimYorum = qdms_MusteriSikayet.UretimYorum;
+                        fisDetays.BukumYorum = qdms_MusteriSikayet.BukumYorum;
+                        fisDetays.TekstureYorum = qdms_MusteriSikayet.TekstureYorum;
+                        fisDetays.TTYorum = qdms_MusteriSikayet.TTYorum;
+                        fisDetays.SevkiyatYorum = qdms_MusteriSikayet.SevkiyatYorum;
+                        fisDetays.SatinalmaYorum = qdms_MusteriSikayet.SatinalmaYorum;
+                        fisDetays.MBYorum = qdms_MusteriSikayet.MBYorum;
+                        fisDetays.EEYorum = qdms_MusteriSikayet.EEYorum;
+                        fisDetays.ProsesYorum = qdms_MusteriSikayet.ProsesYorum;
+                        fisDetays.LabYorum = qdms_MusteriSikayet.LabYorum;
+                        fisDetays.PaketlemeYorum = qdms_MusteriSikayet.PaketlemeYorum;
+
+                        db.SaveChanges();
+
+                    }
+
+
+                    if (i == 1)
+                    {
+                        if (qdms_MusteriSikayet.YapilanAnalizler != null)
+                        {
+                            fisDetays.YapilanAnalizler = qdms_MusteriSikayet.YapilanAnalizler.ToString();
+                        }
+                        fisDetays.UretimYorum = qdms_MusteriSikayet.UretimYorum;
+                        fisDetays.BukumYorum = qdms_MusteriSikayet.BukumYorum;
+                        fisDetays.TekstureYorum = qdms_MusteriSikayet.TekstureYorum;
+                        fisDetays.TTYorum = qdms_MusteriSikayet.TTYorum;
+                        fisDetays.SevkiyatYorum = qdms_MusteriSikayet.SevkiyatYorum;
+                        fisDetays.SatinalmaYorum = qdms_MusteriSikayet.SatinalmaYorum;
+                        fisDetays.MBYorum = qdms_MusteriSikayet.MBYorum;
+                        fisDetays.EEYorum = qdms_MusteriSikayet.EEYorum;
+                        fisDetays.ProsesYorum = qdms_MusteriSikayet.ProsesYorum;
+                        fisDetays.LabYorum = qdms_MusteriSikayet.LabYorum;
+                        fisDetays.PaketlemeYorum = qdms_MusteriSikayet.PaketlemeYorum;
+
+                        fisDetays.Durum = "Sonuç Bekleniyor";
+                        fisDetays.Status = 2;
+
+                        db.SaveChanges();
+
+                    }
+                    if (i == 0)
+                    {
+                        if (qdms_MusteriSikayet.YapilanAnalizler != null)
+                        {
+                            fisDetays.YapilanAnalizler = qdms_MusteriSikayet.YapilanAnalizler.ToString();
+                        }
+                        fisDetays.UretimYorum = qdms_MusteriSikayet.UretimYorum;
+                        fisDetays.BukumYorum = qdms_MusteriSikayet.BukumYorum;
+                        fisDetays.TekstureYorum = qdms_MusteriSikayet.TekstureYorum;
+                        fisDetays.TTYorum = qdms_MusteriSikayet.TTYorum;
+                        fisDetays.SevkiyatYorum = qdms_MusteriSikayet.SevkiyatYorum;
+                        fisDetays.SatinalmaYorum = qdms_MusteriSikayet.SatinalmaYorum;
+                        fisDetays.MBYorum = qdms_MusteriSikayet.MBYorum;
+                        fisDetays.EEYorum = qdms_MusteriSikayet.EEYorum;
+                        fisDetays.ProsesYorum = qdms_MusteriSikayet.ProsesYorum;
+                        fisDetays.LabYorum = qdms_MusteriSikayet.LabYorum;
+
+                        fisDetays.PaketlemeYorum = qdms_MusteriSikayet.PaketlemeYorum;
+                        fisDetays.Durum = "Sonuç Bekleniyor";
+                        fisDetays.Status = 2;
+                        db.SaveChanges();
+
+
+
+                    }
+                }
+                //if (qdms_MusteriSikayet.BukumSeciliMi == true && qdms_MusteriSikayet.BukumYorum != null ||
+                //    qdms_MusteriSikayet.LabSeciliMi == true && qdms_MusteriSikayet.LabYorum != null ||
+                //    qdms_MusteriSikayet.SevkiyatSeciliMi == true && qdms_MusteriSikayet.SevkiyatYorum != null ||
+                //        qdms_MusteriSikayet.EESeciliMi == true && qdms_MusteriSikayet.EEYorum != null ||
+                //    qdms_MusteriSikayet.PaketlemeSeciliMi == true && qdms_MusteriSikayet.PaketlemeYorum != null ||
+                //    qdms_MusteriSikayet.ProsesSeciliMi == true && qdms_MusteriSikayet.ProsesYorum != null ||
+                //    qdms_MusteriSikayet.TTSeciliMi == true && qdms_MusteriSikayet.TTYorum != null ||
+                //    qdms_MusteriSikayet.UretimSeciliMi == true && qdms_MusteriSikayet.UretimYorum != null ||
+                //    qdms_MusteriSikayet.SatinalmaSeciliMi == true && qdms_MusteriSikayet.SatinalmaYorum != null ||
+                //    qdms_MusteriSikayet.TekstureSeciliMi == true && qdms_MusteriSikayet.TekstureYorum != null ||
+                //    qdms_MusteriSikayet.MBSeciliMi == true && qdms_MusteriSikayet.MBYorum != null)
+                //{
+                //    fisDetays.Durum = "Sonuç Bekleniyor";
+
+                //}
+                //else if (fisDetays.SevkiyatSeciliMi == true && fisDetays.SevkiyatYorum == null)
+                //{
+                //    fisDetays.UretimYorum = qdms_MusteriSikayet.UretimYorum;
+                //    fisDetays.BukumYorum = qdms_MusteriSikayet.BukumYorum;
+                //    fisDetays.TekstureYorum = qdms_MusteriSikayet.TekstureYorum;
+                //    fisDetays.TTYorum = qdms_MusteriSikayet.TTYorum;
+                //    fisDetays.SevkiyatYorum = qdms_MusteriSikayet.SevkiyatYorum;
+                //    fisDetays.SatinalmaYorum = qdms_MusteriSikayet.SatinalmaYorum;
+                //    fisDetays.MBYorum = qdms_MusteriSikayet.MBYorum;
+                //    fisDetays.EEYorum = qdms_MusteriSikayet.EEYorum;
+                //    fisDetays.ProsesYorum = qdms_MusteriSikayet.ProsesYorum;
+                //    fisDetays.LabYorum = qdms_MusteriSikayet.LabYorum;
+                //    fisDetays.PaketlemeYorum = qdms_MusteriSikayet.PaketlemeYorum;
+                //}
+
+                //    else if ((fisDetays.BukumSeciliMi == true && fisDetays.BukumYorum == null) ||
+                //     fisDetays.EEYorum == null && fisDetays.EESeciliMi == true ||
+                //     fisDetays.TekstureYorum == null && fisDetays.TekstureSeciliMi == true ||
+                //      fisDetays.TTYorum == null && fisDetays.TTSeciliMi == true ||
+                //       fisDetays.UretimYorum == null && fisDetays.UretimSeciliMi == true ||
+                //        fisDetays.LabYorum == null && fisDetays.LabSeciliMi == true ||
+                //         fisDetays.SevkiyatYorum == null && fisDetays.SevkiyatSeciliMi == true ||
+                //          fisDetays.SatinalmaYorum == null && fisDetays.SatinalmaSeciliMi == true ||
+                //           fisDetays.ProsesYorum == null && fisDetays.ProsesSeciliMi == true ||
+                //           fisDetays.MBYorum == null && fisDetays.MBSeciliMi == true ||
+
+                //        fisDetays.PaketlemeYorum == null && fisDetays.PaketlemeSeciliMi == true)
+                //{
+                //    fisDetays.UretimYorum = qdms_MusteriSikayet.UretimYorum;
+                //    fisDetays.BukumYorum = qdms_MusteriSikayet.BukumYorum;
+                //    fisDetays.TekstureYorum = qdms_MusteriSikayet.TekstureYorum;
+                //    fisDetays.TTYorum = qdms_MusteriSikayet.TTYorum;
+                //    fisDetays.SevkiyatYorum = qdms_MusteriSikayet.SevkiyatYorum;
+                //    fisDetays.SatinalmaYorum = qdms_MusteriSikayet.SatinalmaYorum;
+                //    fisDetays.MBYorum = qdms_MusteriSikayet.MBYorum;
+                //    fisDetays.EEYorum = qdms_MusteriSikayet.EEYorum;
+                //    fisDetays.ProsesYorum = qdms_MusteriSikayet.ProsesYorum;
+                //    fisDetays.LabYorum = qdms_MusteriSikayet.LabYorum;
+                //    fisDetays.PaketlemeYorum = qdms_MusteriSikayet.PaketlemeYorum;
+
+
+                //}
+
+
+                else
+                {
+                    fisDetays.Durum = "Sonuç Bekleniyor";
+                    fisDetays.Status = 2;
+                    db.SaveChanges();
+                }
+
+
+
+
             }
 
 
-
-
-            return View(qdms_MusteriSikayet);
+            return RedirectToAction("DevamEdenSikayet");
         }
         #endregion
 
