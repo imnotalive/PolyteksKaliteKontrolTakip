@@ -1,0 +1,170 @@
+﻿
+
+@model IEnumerable<PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet>
+@{
+    ViewBag.Title = "MusteriSikayetiAnaliz2026";
+    Layout = null;
+}
+
+
+
+<center><h2><b>2026 MÜŞTERİ ŞİKAYETİ ANALİZİ</b></h2></center>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+
+            <div class="card card-dark card-outline">
+
+                <div class="card-header">
+                    <center> <h3><b>MÜŞTERİYE GÖRE ŞİKAYETLER</b> </h3></center>
+
+                </div>
+                <br />
+                <div class="container">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="Search" placeholder="ARA">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><i class="fa fa-search"></i></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-striped table-bordered table-responsive-sm">
+                        @foreach (var plan in Model.GroupBy(p => p.Qdms_Cari.CariAdi))
+                        {
+                            <thead>
+                                <tr class="Search">
+                                    <th> @plan.Key</th>
+                                    <th>
+                                        Lot No
+                                    </th>
+                                    <th>
+                                        Şikayet Grubu
+                                    </th>
+                                    <th>
+                                        Şikayet Sebebi
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var plan1 in plan)
+                                {
+                                    <tr class="Search">
+                                        <td>   @Convert.ToDateTime(plan1.SatisMusteriTemsilcisiTarih).ToString("dd.MM.yyyy")</td>
+                                        <td>@plan1.Qdms_PartiNo.LotNo</td>
+                                        <td>@plan1.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu</td>
+                                        <td>@plan1.Qdms_SikayetSebebi.SikayetSebebi</td>
+
+                                    </tr>
+
+                                }
+                            </tbody>
+
+                            <tfoot>
+
+                            </tfoot>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-6">
+
+            <div class="card card-dark card-outline">
+
+                <div class="card-header">
+                    <center>  <h3><b>ŞİKAYETLERE GÖRE MÜŞTERİLER</b> </h3></center>
+
+                </div>
+                <br />
+                <div class="container">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="Search" placeholder="ARA">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><i class="fa fa-search"></i></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-striped table-bordered table-responsive-sm">
+                        @foreach (var plan in Model.GroupBy(p => p.Qdms_SikayetSebebi.SikayetSebebi))
+                        {
+                            <thead>
+                                <tr class="Search">
+                                    <th> @plan.Key</th>
+                                    <th>
+                                        Lot No
+                                    </th>
+                                    <th>
+                                        Cari
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var plan1 in plan)
+                                {
+                                    <tr class="Searchs">
+                                        <td>   @Convert.ToDateTime(plan1.SatisMusteriTemsilcisiTarih).ToString("dd.MM.yyyy")</td>
+                                        <td>@plan1.Qdms_PartiNo.LotNo</td>
+                                        <td>@plan1.Qdms_Cari.CariAdi</td>
+
+
+                                    </tr>
+
+                                }
+                            </tbody>
+
+                            <tfoot>
+
+                            </tfoot>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            })
+        });
+    });
+
+</script>
+
+

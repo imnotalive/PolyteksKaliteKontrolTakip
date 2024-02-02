@@ -1,0 +1,267 @@
+﻿
+@model IList<PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet>
+
+
+@{
+    Layout = null;
+
+}
+
+
+
+
+<div class="container text-lg-center">
+
+    <div class="bs-example">
+        <table class="table table-bordered table-hover table-striped table-responsive-xxl">
+            <thead class="table-striped">
+
+
+
+            </thead>
+            <tbody>
+            <td style="color: black" colspan="3"><b>2022 HATA SEBEPLERİ</b></td>
+            <tr>
+                <td style="color: black"><b>ABRAJ</b></td>
+
+
+                <td>
+                    <b>ABRAJ HATA SEBEPLERİ</b>
+                    <table class="table center">
+
+                        <tr>
+                            <td style="color: black"><b>ABRAJ</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 2)</td>
+                        </tr>
+                        <tr>
+                            <td style="color: black"><b>TON FARKI</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 3)</td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td style="color: black"><b>TOPLAM</b>:<br /> @Model.Count(x => x.SikayetGrubuID == 1) </td>
+
+            </tr>
+
+
+
+
+            <tr>
+                <td style="color: black"><b>IMG PROBLEMİ</b></td>
+
+
+                <td>
+                    <b>IMG PROBLEMİ HATASI SEBEPLERİ</b>
+                    <table class="table center">
+
+
+
+                        <tr>
+                            <td style="color: black"><b>PUNTA AÇILMASI</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 77)</td>
+                        </tr>
+             
+                        <tr>
+                            <td style="color: black"><b>MARBLE EFEKT</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 84)</td>
+                        </tr>
+                    
+                        <tr>
+                            <td style="color: black"><b>PUNTASIZ</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 88)</td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td style="color: black"> <b>TOPLAM</b>:<br />@Model.Count(x => x.SikayetGrubuID == 7) </td>
+            </tr>
+        
+           
+            <tr>
+                <td style="color: black"><b>KOPMA</b></td>
+
+
+                <td>
+                    <b>KOPMA HATA SEBEPLERİ</b>
+                    <table class="table center">
+
+                        <tr>
+                            <td style="color: black"><b>MUKAVEMET DÜŞÜKLÜĞÜNDEN KOPMA</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 116)</td>
+
+                        </tr>
+                       
+                        <tr>
+                            <td style="color: black"><b>MUKAVEMET PROBLEMİ</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 125)</td>
+
+                        </tr>
+
+
+                    </table>
+                </td>
+                <td style="color: black"> <b>TOPLAM</b>:<br />@Model.Count(x => x.SikayetGrubuID == 10) </td>
+            </tr>
+            <tr>
+                <td style="color: black"><b>KUMAŞTA İZ</b></td>
+
+
+                <td>
+                    <b>KUMAŞTA İZ HATA SEBEPLERİ</b>
+                    <table class="table center">
+
+                 
+                        <tr>
+                            <td style="color: black"><b>ÇİZGİLENME</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 138)</td>
+
+                        </tr>
+              
+                        <tr>
+                            <td style="color: black"><b>ÇİZGİ VE BANT</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 147)</td>
+
+                        </tr>
+                       
+
+                    </table>
+                </td>
+                <td style="color: black"> <b>TOPLAM</b>:<br />@Model.Count(x => x.SikayetGrubuID == 11) </td>
+            </tr>
+            <tr>
+                <td style="color: black"><b>LEKE</b></td>
+
+
+                <td>
+                    <b>LEKE HATA SEBEPLERİ</b>
+                    <table class="table center">
+
+               
+                        <tr>
+                            <td style="color: black"><b>YAĞ LEKESİ</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 182)</td>
+                        </tr>
+                       
+
+                    </table>
+                </td>
+                <td style="color: black"> <b>TOPLAM</b>:<br />@Model.Count(x => x.SikayetGrubuID == 12) </td>
+            </tr>
+            <tr>
+                <td style="color: black"><b>LİKRA PROBLEMİ</b></td>
+
+
+                <td>
+                    <b>LİKRA PROBLEMİ SEBEPLERİ</b>
+                    <table class="table center">
+
+                   
+                        <tr>
+                            <td style="color: black"><b>ELASTAN KOPUĞU</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 190)</td>
+                        </tr>
+                      
+                        <tr>
+                            <td style="color: black"><b>ELASTANSIZ BÖLGE</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 193)</td>
+
+                        </tr>
+               
+
+
+                    </table>
+                </td>
+                <td style="color: black"> <b>TOPLAM</b>:<br />@Model.Count(x => x.SikayetGrubuID == 13) </td>
+            </tr>
+
+            <tr>
+                <td style="color: black"><b>RENK VE PARLAKLIK FARKI PROBLEMİ</b></td>
+
+
+                <td>
+                    <b>RENK VE PARLAKLIK FARKI PROBLEMİ SEBEPLERİ</b>
+                    <table class="table center">
+
+
+                        <tr>
+                            <td style="color: black"><b>RENK FARKI</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 265)</td>
+
+                        </tr>
+
+                    </table>
+                </td>
+                <td style="color: black"> <b>TOPLAM</b>:<br />@Model.Count(x => x.SikayetGrubuID == 16) </td>
+            </tr>
+
+
+            <tr>
+                <td style="color: black"><b>SARIM HATASI PROBLEMİ</b></td>
+
+
+                <td>
+                    <b>SARIM HATASI PROBLEMİ SEBEPLERİ</b>
+                    <table class="table center">
+
+                        <tr>
+                            <td style="color: black"><b>SARIM HATASI PROBLEMİ</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 366)</td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td style="color: black"> <b>TOPLAM</b>:<br />@Model.Count(x => x.SikayetGrubuID == 19) </td>
+            </tr>
+
+
+
+            <tr>
+                <td style="color: black"><b>TUŞE VE EFEKT FARKI PROBLEMİ</b></td>
+
+
+                <td>
+                    <b>TUŞE VE EFEKT FARKI PROBLEMİ</b>
+                    <table class="table center">
+
+
+                        <tr>
+                            <td style="color: black"><b>SERT TUŞE</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 347)</td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td style="color: black"> <b>TOPLAM</b>:<br />@Model.Count(x => x.SikayetGrubuID == 24) </td>
+            </tr>
+
+
+            <tr>
+                <td style="color: black"><b>KOD KARIŞIKLIĞI PROBLEMİ</b></td>
+
+
+                <td>
+                    <b>KOD KARIŞIKLIĞI PROBLEMİ</b>
+                    <table class="table center">
+
+
+                        <tr>
+                            <td style="color: black"><b>DTEX FARKI</b></td>
+                            <td style="color: black">  @Model.Count(x => x.SikayetSebebiID == 106)</td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="color: black"> <b>TOPLAM</b>:<br />@Model.Count(x => x.SikayetGrubuID == 29) </td>
+            </tr>
+           
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+
+

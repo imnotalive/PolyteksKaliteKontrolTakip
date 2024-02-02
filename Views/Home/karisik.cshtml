@@ -1,0 +1,496 @@
+﻿@model IEnumerable<PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet>
+
+@{
+    ViewBag.Title = "karisik";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>karisik</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IcDis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SikayetReklamasyonDuyuruTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartiNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DtexFlaman)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KabulEdilenSikayetReklamasyonMiktari)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kalite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SikayetSonucu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumuneGelisTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CevapTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TeknikZiyareti)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KapatilmaSuresi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GecikmeNedeni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IadeMiktari)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IadeBedeli)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IadeBedelBirimi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IskontoBedeli)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IskontoBedeliBirimi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MutabakatFormu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KokNeden)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SonucOlarakYapilacakCalisma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sorumlu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AksiyonTermini)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AksiyonGerceklestirmeTermini)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumuneTipi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SikayetReklamasyonGelisTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IplikKullanimYeri)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirmaYetkilisi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SatisMusteriTemsilcisiAd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SatisMusteriTemsilcisiTarih)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bobin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kumas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Diger)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DtexFlamanIplikOzeliigi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SikayetIletisim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Durum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SevkTarihi1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SevkTarihi2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SevkTarihi3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SevkMiktari1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SevkMiktari2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SevkMiktari3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SikayetDiger)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SikayetGrubuID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LabOzet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YapilanAnalizler)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TekstureYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BukumYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UretimYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TTYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LabYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaketlemeYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SevkiyatYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SatinalmaYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MBYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EEYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProsesYorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TekstureSeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UretimSeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BukumSeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TTSeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LabSeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaketlemeSeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SevkiyatSeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SatinalmaSeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MBSeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EESeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProsesSeciliMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hazirlayan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Onaylayan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kalite2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OnaylandiMi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SikayetKabulRed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qdms_Cari.CariNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qdms_MusteriSikayetAna.MusteriTemsilcisi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qdms_PartiNo.LotNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qdms_SikayetSebebi.SikayetSebebi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IcDis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SikayetReklamasyonDuyuruTarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartiNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DtexFlaman)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KabulEdilenSikayetReklamasyonMiktari)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kalite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SikayetSonucu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumuneGelisTarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CevapTarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TeknikZiyareti)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KapatilmaSuresi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GecikmeNedeni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IadeMiktari)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IadeBedeli)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IadeBedelBirimi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IskontoBedeli)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IskontoBedeliBirimi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MutabakatFormu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KokNeden)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SonucOlarakYapilacakCalisma)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sorumlu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AksiyonTermini)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AksiyonGerceklestirmeTermini)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumuneTipi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SikayetReklamasyonGelisTarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IplikKullanimYeri)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirmaYetkilisi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SatisMusteriTemsilcisiAd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SatisMusteriTemsilcisiTarih)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bobin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kumas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Diger)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DtexFlamanIplikOzeliigi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SikayetIletisim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Durum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SevkTarihi1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SevkTarihi2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SevkTarihi3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SevkMiktari1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SevkMiktari2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SevkMiktari3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SikayetDiger)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SikayetGrubuID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LabOzet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YapilanAnalizler)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TekstureYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BukumYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UretimYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TTYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LabYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaketlemeYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SevkiyatYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SatinalmaYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MBYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EEYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProsesYorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TekstureSeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UretimSeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BukumSeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TTSeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LabSeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaketlemeSeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SevkiyatSeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SatinalmaSeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MBSeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EESeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProsesSeciliMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hazirlayan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Onaylayan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kalite2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OnaylandiMi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SikayetKabulRed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qdms_Cari.CariNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qdms_MusteriSikayetAna.MusteriTemsilcisi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qdms_PartiNo.LotNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qdms_SikayetSebebi.SikayetSebebi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

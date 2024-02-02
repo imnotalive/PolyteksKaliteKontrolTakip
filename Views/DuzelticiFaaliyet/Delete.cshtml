@@ -1,0 +1,169 @@
+﻿@model PolyteksKaliteKontrolTakip.Models.Qdms_DuzelticiFaaliyetFormu
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<h3>SİLMEK İSTEDİĞİNİZDEN EMİN MİSİNİZ?</h3>
+<div>
+  
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UygunsuzlukTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UygunsuzlukTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UygunsuzlukTespitSekli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UygunsuzlukTespitSekli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UygunsuzlukDepartmani)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UygunsuzlukDepartmani)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UygunsuzlukDurumu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UygunsuzlukDurumu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UygunsuzlukBildiren)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UygunsuzlukBildiren)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UygunsuzlukNedeni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UygunsuzlukNedeni)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UygunsuzlukInceleyen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UygunsuzlukInceleyen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YapilacakFaaliyet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YapilacakFaaliyet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OnguruGerceklesmeTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OnguruGerceklesmeTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdSoyadCozum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdSoyadCozum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DuzelticiFaaliyetTakibi1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DuzelticiFaaliyetTakibi1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SonucAciklama)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SonucAciklama)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SonucTakipTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SonucTakipTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdSoyadSonuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdSoyadSonuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DuzelticiFaaliyetTakibi2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DuzelticiFaaliyetTakibi2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GGAciklama)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GGAciklama)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GGTakipTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GGTakipTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GGAdSoyad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GGAdSoyad)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="SİL" class="btn btn-danger" /> |
+            @Html.ActionLink("LİSTEYE GERİ GÖN", "Index")
+        </div>
+    }
+</div>

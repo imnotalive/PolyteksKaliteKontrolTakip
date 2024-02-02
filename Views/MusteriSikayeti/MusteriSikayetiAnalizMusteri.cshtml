@@ -1,0 +1,80 @@
+﻿
+@model IEnumerable<PolyteksKaliteKontrolTakip.Models.Qdms_MusteriSikayet>
+@{
+    ViewBag.Title = "MusteriSikayetiAnalizMusteri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid">
+    <div class="col-sm-12">
+
+        <div class="card card-dark card-outline">
+
+            <div class="card-header">
+                <center> <h3><b>MÜŞTERİYE GÖRE ŞİKAYETLER</b></h3></center>
+
+            </div>
+            <br />
+     
+        <p>
+            @using (Html.BeginForm("MusteriSikayetiAnalizMusteri", "MusteriSikayeti", FormMethod.Get))
+            {
+                <b>Ara:</b><br />
+                @Html.RadioButton("SearchBy", "PartiNo", true)<text>PARTİ NO</text>
+                @Html.RadioButton("SearchBy", "Musteri")<text>MÜŞTERİ</text>
+                @Html.TextBox("search", "", htmlAttributes: new { @class = "form-control" })
+                <input type="submit" value="ARA" class="btn btn-success" />
+            }
+        </p>
+            @if (Model.Count() == 0)
+            {
+                <strong>Gösterilecek kayıt bulanamadı</strong>
+            }
+            else
+            {
+            <div class="card-body">
+
+                <table class="table table-striped table-bordered table-sm">
+
+                    @foreach (var plan in Model.GroupBy(p => p.Qdms_Cari.CariAdi))
+                    {
+                        <thead>
+                            <tr class="Search">
+                                <th scope="col"> @plan.Key</th>
+                                <th scope="col">
+                                    Lot No
+                                </th>
+                                <th scope="col">
+                                    Şikayet Grubu
+                                </th>
+                                <th scope="col">
+                                    Şikayet Sebebi
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var plan1 in plan)
+                            {
+                                <tr class="Search">
+                                    <td>   @Convert.ToDateTime(plan1.SatisMusteriTemsilcisiTarih).ToString("dd.MM.yyyy")</td>
+                                    <td>@plan1.Qdms_PartiNo.LotNo</td>
+                                    <td>@plan1.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu</td>
+                                    <td scope="col">  @plan1.Qdms_SikayetSebebi.SikayetSebebi</td>
+
+                                </tr>
+
+                            }
+                        </tbody>
+
+                        <tfoot>
+
+                        </tfoot>
+                    }
+
+                </table>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+

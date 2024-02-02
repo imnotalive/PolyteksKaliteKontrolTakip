@@ -1,0 +1,324 @@
+﻿<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+@*<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start">
+                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><b>2022</b></button>
+                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"><b>2023</b></button>
+                            <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"><b>2024</b></button>
+                            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><b>2025</b></button>
+                            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><b>2026</b></button>
+                        </div>
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                <div id="result1"></div>
+                                <script>
+
+                                            $(document).ready(function () {
+
+
+                                                    $("#result1").load("@(Url.Action("MusteriSikayetiAnaliz2022", "MusteriSikayeti"))");
+
+                                            });
+                                </script>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                <div id="result2"></div>
+                                <script>
+
+                                    $(document).ready(function () {
+
+                                        $('#result2').load('/MusteriSikayeti/MusteriSikayetiAnaliz2023');
+
+
+                                    });
+                                </script>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                <div id="result3"></div>
+                                <script>
+
+                                    $(document).ready(function () {
+
+                                        $('#result3').load('/MusteriSikayeti/MusteriSikayetiAnaliz2024');
+
+
+                                    });
+                                </script>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                <div id="result4"></div>
+                                <script>
+
+                                    $(document).ready(function () {
+
+                                        $('#result4').load('/MusteriSikayeti/MusteriSikayetiAnaliz2025');
+
+
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>*@
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+
+                    <center><h1><b>YILLARA GÖRE ŞİKAYET ANALİZLERİ</b></h1></center>
+
+
+                </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-start">
+                           
+                            <div class="vertical-tab" role="tabpanel">
+
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#Section1" aria-controls="2022" role="tab" data-toggle="tab">2023</a></li>
+                                    <li role="presentation"><a href="#Section2" aria-controls="2023" role="tab" data-toggle="tab">2024</a></li>
+                                    <li role="presentation"><a href="#Section3" aria-controls="2024" role="tab" data-toggle="tab">2025</a></li>
+                                    <li role="presentation"><a href="#Section4" aria-controls="2025" role="tab" data-toggle="tab">2026</a></li>
+                                   
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content tabs">
+                                    
+                                    <div role="tabpanel" class="tab-pane active" id="Section1">
+                                        <div id="result1"></div>
+                                        <script>
+
+                                            $(document).ready(function () {
+
+                                                $('#result1').load('/MusteriSikayeti/MusteriSikayetiAnaliz2023');
+
+
+                                            });
+                                        </script>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="Section2">
+                                        <div id="result2"></div>
+                                        <script>
+
+                                            $(document).ready(function () {
+
+                                                $('#result2').load('/MusteriSikayeti/MusteriSikayetiAnaliz2024');
+
+
+                                            });
+                                        </script>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="Section3">
+                                        <div id="result3"></div>
+                                        <script>
+
+                                            $(document).ready(function () {
+
+                                                $('#result3').load('/MusteriSikayeti/MusteriSikayetiAnaliz2025');
+
+
+                                            });
+                                        </script>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+
+            <style>
+                a:hover, a:focus {
+                    text-decoration: none;
+                    outline: none;
+                }
+
+                .vertical-tab {
+                    font-family: 'Poppins', sans-serif;
+                    display: table;
+                }
+
+                    .vertical-tab .nav-tabs {
+                        display: table-cell;
+                        width: 10%;
+                        min-width: 10%;
+                        vertical-align: top;
+                        border: none;
+                    }
+
+                        .vertical-tab .nav-tabs li {
+                            float: none;
+                            vertical-align: top;
+                        }
+
+                            .vertical-tab .nav-tabs li a {
+                                color: #333;
+                                background: #8b96a6;
+                                font-size: 18px;
+                                font-weight: 800;
+                                letter-spacing: 1px;
+                                text-align: center;
+                                text-transform: uppercase;
+                                padding: 13px 10px 12px;
+                                margin: 0 0 10px 0;
+                                border: none;
+                                border-top: 4px solid #d1d1d1;
+                                border-radius: 0;
+                                display: block;
+                                position: relative;
+                                z-index: 1;
+                                transition: all 0.3s ease 0s;
+                            }
+
+                            .vertical-tab .nav-tabs li:last-child a {
+                                margin-bottom: 0;
+                            }
+
+                            .vertical-tab .nav-tabs li a:hover,
+                            .vertical-tab .nav-tabs li.active a,
+                            .vertical-tab .nav-tabs li.active a:hover {
+                                color: #fff;
+                                background: #fff;
+                                border: none;
+                                border-top: 4px solid #d1d1d1;
+                                text-shadow: 0 0 5px rgba(0,0,0,0.3);
+                            }
+
+                            .vertical-tab .nav-tabs li a:before,
+                            .vertical-tab .nav-tabs li a:after {
+                                content: '';
+                                background: #8b96a6;
+                                height: 0;
+                                width: 100%;
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                z-index: -1;
+                                transition: all 0.3s ease;
+                            }
+
+                            .vertical-tab .nav-tabs li a:before {
+                                width: 0;
+                                height: 4px;
+                                top: -4px;
+                            }
+
+                            .vertical-tab .nav-tabs li a:hover:before,
+                            .vertical-tab .nav-tabs li.active a:before,
+                            .vertical-tab .nav-tabs li.active a:hover:before {
+                                width: 100%;
+                            }
+
+                            .vertical-tab .nav-tabs li a:hover:after,
+                            .vertical-tab .nav-tabs li.active a:after,
+                            .vertical-tab .nav-tabs li.active a:hover:after {
+                                height: 100%;
+                            }
+
+                    .vertical-tab .tab-content {
+                        color: #333;
+                        background: #fff;
+                        font-size: 14px;
+                        letter-spacing: 0.5px;
+                        line-height: 25px;
+                        padding: 20px 20px 10px;
+                        margin-top: 10px;
+                        border: 4px solid #8b96a6;
+                        display: table-cell;
+                        position: relative;
+                    }
+
+                        .vertical-tab .tab-content h3 {
+                            color: #8b96a6;
+                            font-weight: 800;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                            margin: 0 0 7px 0;
+                        }
+
+                @@media only screen and (max-width: 479px) {
+                    .vertical-tab .nav-tabs {
+                        width: 100%;
+                        display: block;
+                        border: none;
+                    }
+
+                        .vertical-tab .nav-tabs li a {
+                            margin: 0 0 10px;
+                        }
+
+                    .vertical-tab .tab-content {
+                        padding: 25px 20px;
+                        display: block;
+                    }
+
+                        .vertical-tab .tab-content h3 {
+                            font-size: 18px;
+                        }
+                }
+            </style>
+
+            @*<div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="table-responsive">
+                                        <div id="result1"></div>
+                                        <script>
+
+                                            $(document).ready(function () {
+
+                    $("#posuvnik").click();
+                                                $('#result1').load('/MusteriSikayeti/MusteriSikayetiAnaliz2022');
+
+
+                                            });
+                                        </script>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="table-responsive">
+                                        <div id="result2"></div>
+                                        <script>
+
+                                            $(document).ready(function () {
+
+                                                $('#result2').load('/MusteriSikayeti/MusteriSikayetiAnaliz2023');
+
+
+                                            });
+                                        </script>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>*@

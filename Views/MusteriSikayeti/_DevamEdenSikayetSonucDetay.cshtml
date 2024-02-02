@@ -194,17 +194,17 @@
                         <td style="color: black">  @Convert.ToDateTime(Model.SatisMusteriTemsilcisiTarih).ToString("dd.MM.yyyy")</td>
 
                     </tr>
-                    @foreach (var item in Model.Qdms_MusteriSikayetResim)
+                    @*@foreach (var item in Model.Qdms_MusteriSikayetResim)
                     {
                         if (Model.Qdms_MusteriSikayetResim != null)
                         {
                             <tr>
                                 <td style="color: black"><b>RESİM</b></td>
-                                <td style="color: black"> <img src="@Url.Content(item.ImagePath)" width="600" height="600" /> @*<img src="~/Content/upload/@Model.Resims"*@   @*/></td>*@
+                                <td style="color: black"> <img src="@Url.Content(item.ImagePath)" width="600" height="600" /> <img src="~/Content/upload/@Model.Resims"   /></td>
 
                             </tr>
                         }
-                    }
+                    }*@
 
 
                     @if (Model.BukumYorum != null)

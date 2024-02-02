@@ -70,16 +70,42 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Qdms_MusteriSikayet qdms_MusteriTakipFormu)
+        public ActionResult Edit(Qdms_MusteriSikayet qdms_MusteriTakipFormu,int? id)
         {
+            Qdms_MusteriSikayet fisDetays = db.Qdms_MusteriSikayet.FirstOrDefault(x => x.ID == id);
             if (ModelState.IsValid)
             {
-               
+                fisDetays.AksiyonGerceklestirmeTermini = qdms_MusteriTakipFormu.AksiyonGerceklestirmeTermini;
+                fisDetays.AksiyonTermini = qdms_MusteriTakipFormu.AksiyonTermini;
+                fisDetays.CevapTarihi = qdms_MusteriTakipFormu.CevapTarihi;
+                fisDetays.Cile = qdms_MusteriTakipFormu.Cile;
+                fisDetays.FirmaYetkilisi = qdms_MusteriTakipFormu.FirmaYetkilisi;
+                fisDetays.GecikmeNedeni = qdms_MusteriTakipFormu.GecikmeNedeni;
+                fisDetays.IadeBedelBirimi = qdms_MusteriTakipFormu.IadeBedelBirimi;
+                fisDetays.IadeBedeli = qdms_MusteriTakipFormu.IadeBedeli;
+                fisDetays.IadeMiktari = qdms_MusteriTakipFormu.IadeMiktari;
+                fisDetays.IskontoBedeli = qdms_MusteriTakipFormu.IskontoBedeli;
+                fisDetays.IskontoBedeliBirimi = qdms_MusteriTakipFormu.IskontoBedeliBirimi;
+                fisDetays.KabulEdilenSikayetReklamasyonMiktari = qdms_MusteriTakipFormu.KabulEdilenSikayetReklamasyonMiktari;
+                fisDetays.KapatilmaSuresi = qdms_MusteriTakipFormu.KapatilmaSuresi;
+                fisDetays.KokNeden = qdms_MusteriTakipFormu.KokNeden;
+                fisDetays.MutabakatFormu = qdms_MusteriTakipFormu.MutabakatFormu;
+                fisDetays.NumuneGelisTarihi = qdms_MusteriTakipFormu.NumuneGelisTarihi;
+                fisDetays.NumuneTipi = qdms_MusteriTakipFormu.NumuneTipi;
+                fisDetays.OnaylandiMi = qdms_MusteriTakipFormu.OnaylandiMi;
+                fisDetays.Onaylayan = qdms_MusteriTakipFormu.Onaylayan;
+                fisDetays.SikayetReklamasyonDuyuruTarihi = qdms_MusteriTakipFormu.SikayetReklamasyonDuyuruTarihi;
+                fisDetays.SonucOlarakYapilacakCalisma = qdms_MusteriTakipFormu.SonucOlarakYapilacakCalisma;
+                fisDetays.Sorumlu = qdms_MusteriTakipFormu.Sorumlu;
+                fisDetays.TeknikZiyareti = qdms_MusteriTakipFormu.TeknikZiyareti;
+                fisDetays.SikayetKabulRed = qdms_MusteriTakipFormu.SikayetKabulRed;
+                fisDetays.Hazirlayan = qdms_MusteriTakipFormu.Hazirlayan;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-           
+            ViewBag.SikayetSebebiID = new SelectList(db.Qdms_SikayetSebebi, "SikayetSebebiID", "SikayetSebebi");
+            ViewBag.SikayetGrubuID = new SelectList(db.Qdms_SikayetGrubu, "SikayetGrubuID", "SikayetGrubu");
             return View(qdms_MusteriTakipFormu);
         }
 
@@ -110,6 +136,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
             if (ModelState.IsValid)
             {
                 fisDetays.AksiyonGerceklestirmeTermini = qdms_MusteriTakipFormu.AksiyonGerceklestirmeTermini;
+                //fisDetays.NumuneTipi = qdms_MusteriTakipFormu.NumuneTipi;
                 fisDetays.AksiyonTermini = qdms_MusteriTakipFormu.AksiyonTermini;
                 fisDetays.Bobin = qdms_MusteriTakipFormu.Bobin;
                 fisDetays.BukumSeciliMi = qdms_MusteriTakipFormu.BukumSeciliMi;
@@ -171,6 +198,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
                 fisDetays.Sorumlu = qdms_MusteriTakipFormu.Sorumlu;
                 fisDetays.Status = qdms_MusteriTakipFormu.Status;
                 fisDetays.TeknikZiyareti = qdms_MusteriTakipFormu.TeknikZiyareti;
+                fisDetays.SikayetKabulRed = qdms_MusteriTakipFormu.SikayetKabulRed;
                 fisDetays.TekstureSeciliMi = qdms_MusteriTakipFormu.TekstureSeciliMi;
                 fisDetays.TekstureYorum = qdms_MusteriTakipFormu.TekstureYorum;
                 fisDetays.TTSeciliMi = qdms_MusteriTakipFormu.TTSeciliMi;
@@ -227,6 +255,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 
                                         new DataColumn("AKSİYON TERMİNİ"),
                                         new DataColumn("TEKNİK ZİYARET"),
+                                          new DataColumn("ŞİKAYET KABUL/RED"),
                                         new DataColumn("İADE MİKTARI"),
 
 
@@ -272,6 +301,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
                   list.AksiyonTermini.GetValueOrDefault().ToString("dd.MM.yyyy"),
 
                   list.TeknikZiyareti.GetValueOrDefault() ? "EVET":"HAYIR",
+                  list.SikayetKabulRed.GetValueOrDefault() ? "EVET":"HAYIR",
                   list.IadeMiktari.GetValueOrDefault().ToString("N")
 
 

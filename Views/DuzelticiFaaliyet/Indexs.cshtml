@@ -1,0 +1,174 @@
+﻿@model IEnumerable<PolyteksKaliteKontrolTakip.Models.Qdms_DuzelticiFaaliyetFormu>
+
+@{
+    ViewBag.Title = "Indexs";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<head>
+
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<h4>
+
+
+    <center><h2><b>DÜZELTİCİ FAALİYET FORMU LİSTESİ</b></h2></center>
+    
+    <br />
+    @using (Html.BeginForm("FaturaExcel", "Admin", FormMethod.Post))
+    {
+        <input type="submit" value="EXCEL İNDİR" class="btn btn-danger btn-sm" />
+    }
+
+</h4>
+<style>
+    h3 {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+
+<br />
+<div class="container-fluid">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" id="Search" placeholder="Ara..." class="form-control" />
+
+        </div>
+    </div>
+</div>
+<br />
+<p>
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">YENİ EKLE</button>
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayName("UYGUNSUZLUK TARİHİ")
+        </th>
+        <th>
+            @Html.DisplayName("UYGUNSUZLUK TESPİT ŞEKLİ")
+        </th>
+        <th>
+            @Html.DisplayName("UYGUNSUZLUK DEPARTMANI")
+        </th>
+        <th>
+            @Html.DisplayName("UYGUNSUZLUK DURUMU")
+        </th>
+        <th>
+            @Html.DisplayName("UYGUNSUZLUK BİLDİREN")
+        </th>
+        <th>
+            @Html.DisplayName("UYGUNSUZLUK NEDENİ")
+        </th>
+
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Convert.ToDateTime(item.UygunsuzlukTarihi).ToString("dd.MM.yyyy")
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UygunsuzlukTespitSekli)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UygunsuzlukDepartmani)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UygunsuzlukDurumu)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UygunsuzlukBildiren)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UygunsuzlukNedeni)
+    </td>
+
+
+    <td>
+        <center>
+            <a href="@Url.Action("Edit", "DuzelticiFaaliyet", new { id = item.ID })" title="DÜZENLE" class="btn btn-outline-primary py-0"> <i class="fa fa-pen" aria-hidden="true">  </i></a>
+        </center>
+
+    </td>
+    <td>
+        <center>
+            <a href="@Url.Action("Details", "DuzelticiFaaliyet", new { id = item.ID })" title="DETAYLAR" class="btn btn-outline-info py-0"> <i class="fa fa-book" aria-hidden="true">  </i></a>
+        </center>
+
+    </td>
+    <td>
+        <center>
+            <a href="@Url.Action("PDFFormat", "DuzelticiFaaliyet", new { id = item.ID })" title="PDF" class="btn btn-outline-success py-0"> <i class="fa fa-file-pdf" aria-hidden="true">  </i></a>
+        </center>
+
+    </td>
+    <td>
+        <center>
+            <a href="@Url.Action("Delete", "DuzelticiFaaliyet", new { id = item.ID })" title="SİL" class="btn btn-outline-danger py-0"> <i class="fa fa-trash" aria-hidden="true">  </i></a>
+        </center>
+
+    </td>
+</tr>
+    }
+
+</table>
+
+
+@using (Html.BeginForm("Create", "DuzelticiFaaliyet", FormMethod.Post))
+{
+
+ 
+    <div class="container">
+        <div class="modal" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                    </div>
+                    <div class="modal-body">
+                        <CENTER><h4><b>YENİ DÜZELTİCİ FAALİYET FORMU</b></h4></CENTER>
+
+
+                        <div id="result1"></div>
+                        <script type="text/javascript">
+
+                            $(document).ready(function () {
+
+                                $('#result1').load('/DuzelticiFaaliyet/Create');
+
+                            });
+
+
+                        </script>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group">
+
+                            <div style="float:right">
+                                <button class="btn btn-danger" data-dismiss="modal">Kapat</button>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

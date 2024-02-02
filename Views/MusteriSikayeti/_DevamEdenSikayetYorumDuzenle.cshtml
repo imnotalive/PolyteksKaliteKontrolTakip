@@ -4,7 +4,11 @@
     ViewBag.Title = "_DevamEdenSikayetYorumDuzenle";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@*<head>
+    <meta http-equiv="Content-Type" content="text/html;" charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+</head>*@
 <script src="~/Scripts/jquery-3.7.0.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 @using (Html.BeginForm())
@@ -76,28 +80,24 @@
                                         @Html.Label("ÖZET", htmlAttributes: new { @class = "control-label col-md-12" })
                                         <div class="col-md-12">
 
-                                            @Html.TextAreaFor(model => model.LabOzet, 3, 50, new { @class = "form-control", @readonly = true })
+                                            @Html.TextAreaFor(model => model.LabOzet, 5, 100, new { @class = "form-control", @readonly = true })
                                             @Html.ValidationMessageFor(model => model.LabOzet, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
 
-                                @*@if (Model.YapilanAnalizler != null)
-                                    {
-                                        <div class="col-md-12" style="color:black">
-                                            <div class="card" style="background-color:darkgray">
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-12">
-                                                        @Html.Label("YAPILAN ANALİZ ve İNCELEMELER", htmlAttributes: new { @class = "control-label col-md-12" })
-                                                        <div class="col-md-12 center">
-                                                            @Html.Raw(Model.YapilanAnalizler)
-
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        @foreach (var item in Model.Qdms_MusteriSikayetResim)
+                                        {
+                                            <div class="photo" id="photo">
+                                                <img src="@item.ImagePath" />
                                             </div>
-                                        </div>
-                                    }*@
+                                            <br />
+                                        }
+                                    </div>
+                                </div>
+
                                 <hr />
                                 @if (Model.BukumSeciliMi == true)
                                 {
@@ -117,6 +117,8 @@
                                     }
                                     if (Model.BukumYorum == null)
                                     {
+                                        if (User.IsInRole("B"))
+                                        {
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 @Html.Label("BÜKÜM YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
@@ -128,6 +130,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        }
 
                                     }
                                 }
@@ -147,6 +150,8 @@
                                     }
                                     if (Model.TekstureYorum == null)
                                     {
+                                        if (User.IsInRole("T"))
+                                        {
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 @Html.Label("TEKSTÜRE YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
@@ -156,6 +161,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        }
                                     }
 
                                 }
@@ -175,6 +181,8 @@
                                     }
                                     if (Model.UretimYorum == null)
                                     {
+                                        if (User.IsInRole("U"))
+                                        {
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 @Html.Label("ÜRETİM YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
@@ -184,6 +192,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        }
                                     }
 
                                 }
@@ -203,6 +212,8 @@
                                     }
                                     if (Model.TTYorum == null)
                                     {
+                                        if (User.IsInRole("TT"))
+                                        {
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 @Html.Label("TEKNİK TEKSTİL YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
@@ -212,6 +223,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        }
                                     }
 
                                 }
@@ -231,6 +243,8 @@
                                     }
                                     if (Model.SevkiyatYorum == null)
                                     {
+                                        if (User.IsInRole("SV"))
+                                        {
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 @Html.Label("SEVKİYAT YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
@@ -240,6 +254,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        }
                                     }
                                 }
                                 @if (Model.PaketlemeSeciliMi == true)
@@ -258,6 +273,8 @@
                                     }
                                     if (Model.PaketlemeYorum == null)
                                     {
+                                        if (User.IsInRole("PK"))
+                                        {
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 @Html.Label("PAKETLEME YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
@@ -267,6 +284,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        }
 
                                     }
                                 }
@@ -286,6 +304,8 @@
                                     }
                                     if (Model.MBYorum != null)
                                     {
+                                        if (User.IsInRole("MB"))
+                                        {
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 @Html.Label("MAKİNE BAKIM YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
@@ -295,6 +315,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        }
                                     }
 
                                 }
@@ -314,6 +335,8 @@
                                     }
                                     if (Model.EEYorum == null)
                                     {
+                                        if (User.IsInRole("EE"))
+                                        {
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 @Html.Label("ELEKTRİK ELEKTRONİK YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
@@ -323,6 +346,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        }
                                     }
                                 }
                                 @if (Model.LabSeciliMi == true)
@@ -335,7 +359,7 @@
                                                 @Html.Label("LABORATUVAR YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
                                                 <div class="col-md-12">
                                                     @Html.Raw(Model.YapilanAnalizler)
-                                                    @Html.ValidationMessageFor(model => model.LabYorum, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessageFor(model => model.YapilanAnalizler, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
                                         </div>
@@ -373,16 +397,19 @@
                                     }
                                     if (Model.ProsesYorum == null)
                                     {
+                                        if (User.IsInRole("P"))
+                                        {
 
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                @Html.Label("PROSES YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
-                                                <div class="col-md-12">
-                                                    @Html.TextAreaFor(model => model.ProsesYorum, 10, 100, new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(model => model.ProsesYorum, "", new { @class = "text-danger" })
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    @Html.Label("PROSES YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
+                                                    <div class="col-md-12">
+                                                        @Html.TextAreaFor(model => model.ProsesYorum, 10, 100, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.ProsesYorum, "", new { @class = "text-danger" })
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
                                     }
 
                                 }
@@ -403,6 +430,8 @@
                                     }
                                     if (Model.SatinalmaYorum == null)
                                     {
+                                        if (User.IsInRole("SA"))
+                                        {
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 @Html.Label("SATIN ALMA YORUM", htmlAttributes: new { @class = "control-label col-md-12" })
@@ -412,6 +441,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        }
                                     }
                                 }
                                 <div class="form-group">
@@ -421,8 +451,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                                </div>
+                            </div>
                 </div>
             </div>
         </div>

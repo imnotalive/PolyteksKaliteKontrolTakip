@@ -100,6 +100,7 @@ namespace PolyteksKaliteKontrolTakip.Models
         public string Kalite2 { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<bool> OnaylandiMi { get; set; }
+        public Nullable<bool> SikayetKabulRed { get; set; }
     
         public virtual Qdms_Cari Qdms_Cari { get; set; }
         public virtual Qdms_MusteriSikayetAna Qdms_MusteriSikayetAna { get; set; }

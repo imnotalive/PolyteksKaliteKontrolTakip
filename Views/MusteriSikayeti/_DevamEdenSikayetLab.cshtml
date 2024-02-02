@@ -27,6 +27,9 @@
                 @Html.DisplayName("ŞİKAYET KONUSU")
             </th>
             <th>
+                @Html.DisplayName("PARTİ NUMARASI")
+            </th>
+            <th>
                 @Html.DisplayName("GÜNCEL DURUM")
             </th>
             <th>
@@ -35,62 +38,72 @@
             <th>
                 #
             </th>
+            <th>
+                #
+            </th>
+            @if (User.IsInRole("A"))
+            {
+                <th>#</th>
+            }
 
-
-            @*<th></th>
-                <th></th>
-                <th></th>*@
         </tr>
     </thead>
     @foreach (var item in Model)
     {
-        <tr class="Search more">
+<tr class="Search more">
 
-            <td>
-                <b> #@Html.DisplayFor(modelItem => item.ID)</b>
-            </td>
-            <td>
-                @Convert.ToDateTime(item.SikayetReklamasyonGelisTarihi).ToString("dd.MM.yyyy")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SatisMusteriTemsilcisiAd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Qdms_Cari.CariAdi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu) / @Html.DisplayFor(modelItem => item.Qdms_SikayetSebebi.SikayetSebebi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Durum)
-            </td>
+    <td>
+        <b> #@Html.DisplayFor(modelItem => item.ID)</b>
+    </td>
+    <td>
+        @Convert.ToDateTime(item.SikayetReklamasyonGelisTarihi).ToString("dd.MM.yyyy")
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SatisMusteriTemsilcisiAd)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Qdms_Cari.CariAdi)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Qdms_SikayetSebebi.Qdms_SikayetGrubu.SikayetGrubu) / @Html.DisplayFor(modelItem => item.Qdms_SikayetSebebi.SikayetSebebi)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Qdms_PartiNo.LotNo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Durum)
+    </td>
 
 
-            <td style="color: black">
-                <center>
+    <td style="color: black">
+        <center>
 
-                    <a href="@Url.Action("_DevamEdenSikayetLabDuzenle", "MusteriSikayeti", new { id = item.ID })" title="DÜZENLE" class="btn btn-primary"> <i class="fas fa-pen">   </i></a>
-                </center>
-            </td>
-            <td style="color: black" class="button_class">
-                @*@Html.ActionLink("DETAYLAR", "Details", new { id = item.ID }, new { @class = "btn btn-info" })*@
-                <center>
-                    <a href="@Url.Action("DevamEdenSikayetSatisDetayi", "MusteriSikayeti",new { id = item.ID })" title="DETAYLAR" class="btn btn-info"> <i class="fa fa-book" aria-hidden="true">  </i></a>
-                </center>
-            </td>
+            <a href="@Url.Action("_DevamEdenSikayetLabDuzenle", "MusteriSikayeti", new { id = item.ID })" title="DÜZENLE" class="btn btn-primary"> <i class="fas fa-pen">   </i></a>
+        </center>
+    </td>
 
-            <td style="color: black">
-                <center>
-                    <a href="@Url.Action("SikayetResimEkleme", "MusteriSikayeti",new { id = item.ID })" title="RESİM EKLE" class="btn btn-outline-dark"> <i class="fas fa-angle-double-up" aria-hidden="true">  </i></a>
-                    @*<a href="" title="RESİM EKLE" data-toggle="modal" data-target="#myModal" class="btn btn-outline-primary">   </a>*@
-                    @*<button class="btn btn-success" title="RESİM EKLE" data-toggle="modal" data-target="#myModal"> <i class="fas fa-angle-double-up"> </i></button>*@
-                </center>
-            </td>
+    <td style="color: black" class="button_class">
+        <center>
+            <a href="@Url.Action("DevamEdenSikayetSatisDetayi", "MusteriSikayeti",new { id = item.ID })" title="DETAYLAR" class="btn btn-info"> <i class="fa fa-book" aria-hidden="true">  </i></a>
+        </center>
+    </td>
+    @if (User.IsInRole("A"))
+    {
+        <td style="color: black">
+            <center>
+                <a href="@Url.Action("_DevamEdenSikayetSil", "MusteriSikayeti", new { id = item.ID })" title="SİL" class="btn btn-danger deleteLink">   <i class="fas fa-trash"> </i></a>
+            </center>
+        </td>
+    }
+    <td style="color: black">
+        <center>
+            <a href="@Url.Action("SikayetResimEkleme", "MusteriSikayeti",new { id = item.ID })" title="RESİM EKLE" class="btn btn-outline-dark"> <i class="fas fa-angle-double-up" aria-hidden="true">  </i></a>
+            @*<a href="" title="RESİM EKLE" data-toggle="modal" data-target="#myModal" class="btn btn-outline-primary">   </a>*@
+            @*<button class="btn btn-success" title="RESİM EKLE" data-toggle="modal" data-target="#myModal"> <i class="fas fa-angle-double-up"> </i></button>*@
+        </center>
+    </td>
 
-            @*<td>
-                    <i class="fas fa-envelope"></i>
-                </td>*@
-        </tr>
+</tr>
     }
 
 </table>

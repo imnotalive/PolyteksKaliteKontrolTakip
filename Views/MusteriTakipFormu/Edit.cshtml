@@ -104,29 +104,9 @@
                         </div>
                     </div>
                     <hr />
-                    @*<div class="form-row">
-                        @Html.Label("DEĞİŞTİRİLMEK İSTENEN :", htmlAttributes: new { @class = "control-label col-md-12" })
-                     
-                            <div class="form-group col-md-6">
-                                <b> ŞİKAYET GRUBU</b>
-                                <div class="col-md-12">
-                                    @if (ViewBag.CountryList != null)
-                                    {
-                                        @Html.DropDownListFor(model => model.SikayetGrubuID, ViewBag.CountryList as SelectList, "--Seçiniz--", new { @class = "form-control" })
-                                    }
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <b> ŞİKAYET SEBEBİ</b>
-                                <div class="col-md-12">
-
-                                    @Html.DropDownListFor(model => model.SikayetSebebiID, new SelectList(" "), "--Seçiniz--", new { @class = "form-control" })
-                                </div>
-
-                            </div>
-                        </div>*@
+         
                     
-                    <hr />
+               
                     <div class="form-row">
                         <div class="form-group col-md-6">
 
@@ -363,13 +343,22 @@
                                 @Html.ValidationMessageFor(model => model.CevapTarihi, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            <center> @Html.Label("TEKNİK ZİYARET", htmlAttributes: new { @class = "control-label col-md-12" })</center> 
+                        <div class="form-group col-md-2">
+                            <center> @Html.Label("TEKNİK ZİYARET", htmlAttributes: new { @class = "control-label col-md-12" })</center>
                             <div class="col-md-12">
-                               
-                                <center> @Html.CheckBox("TeknikZiyareti", new { htmlAttributes = new { @class = "form-control" ,required="required"} })</center>  
-                                    @Html.ValidationMessageFor(model => model.TeknikZiyareti, "", new { @class = "text-danger" })
-                               
+
+                                <center> @Html.CheckBox("TeknikZiyareti", new { htmlAttributes = new { @class = "form-control", required = "required" } })</center>
+                                @Html.ValidationMessageFor(model => model.TeknikZiyareti, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <center> @Html.Label("ŞİKAYET KABUL/RED", htmlAttributes: new { @class = "control-label col-md-12" })</center>
+                            <div class="col-md-12">
+
+                                <center> @Html.CheckBox("SikayetKabulRed", new { htmlAttributes = new { @class = "form-control", required = "required" } })</center>
+                                @Html.ValidationMessageFor(model => model.TeknikZiyareti, "", new { @class = "text-danger" })
+
                             </div>
                         </div>
                         <div class="form-group col-md-4">
@@ -385,14 +374,24 @@
                     </div>
                     <hr />
                     <div class="form-row">
-
-                        <div class="form-group col-md-6">
-                            @Html.Label("KÖK NEDEN", htmlAttributes: new { @class = "control-label col-md-12" })
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.KokNeden, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.KokNeden, "", new { @class = "text-danger" })
+                        @if (User.IsInRole("A") || User.IsInRole("L"))
+                        {
+                            <div class="form-group col-md-6">
+                                @Html.Label("KÖK NEDEN", htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.KokNeden, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.KokNeden, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        { <div class="form-group col-md-6">
+                                @Html.Label("KÖK NEDEN", htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.KokNeden, new { htmlAttributes = new { @class = "form-control",@readonly = true } })
+                                    @Html.ValidationMessageFor(model => model.KokNeden, "", new { @class = "text-danger" })
+                                </div>
+                            </div>}
 
 
 
@@ -409,6 +408,7 @@
                                                                                        new  SelectListItem { Text = "FİLE", Value = "FİLE" },
 
                                         new  SelectListItem { Text = "İPLİK", Value = "İPLİK" },
+                                        new  SelectListItem { Text = "GÖRSEL", Value = "GÖRSEL" },
 
 
 
@@ -511,7 +511,7 @@
                                         <div class="form-group col-md-6">
                                             @Html.Label("AKSİYON TERMİNİ", htmlAttributes: new { @class = "control-label col-md-12" })
                                             <div class="col-md-12">
-                                                @Html.TextBoxFor(model => model.AksiyonTermini, "{0:dd.MM.yyyy}", new { type = "date", @class = "form-control" })
+                                                @Html.TextBoxFor(model => model.AksiyonTermini, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.AksiyonTermini, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -519,7 +519,7 @@
                                         <div class="form-group col-md-6">
                                             @Html.Label("AKSİYON GERÇEKLEŞTİRME TERMİNİ", htmlAttributes: new { @class = "control-label col-md-12" })
                                             <div class="col-md-12">
-                                                @Html.TextBoxFor(model => model.AksiyonGerceklestirmeTermini, "{0:dd.MM.yyyy}", new { type = "date", @class = "form-control" })
+                                                @Html.TextBoxFor(model => model.AksiyonGerceklestirmeTermini, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.AksiyonGerceklestirmeTermini, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -549,12 +549,13 @@
                                                                                          {
                                                                                                    new  SelectListItem { Text = "GAMZE KARALÖK", Value = "GAMZE KARALÖK" },
                                                                                          new  SelectListItem { Text = "SEZİN SUSMUŞ", Value = "SEZİN SUSMUŞ" },
+                                                                                         new  SelectListItem { Text = "BERAT SÜZGÜN", Value = "BERAT SÜZGÜN" },
 
 
 
 
 
-                                                                                         }, "LÜTFEN SEÇİNİZ", new { @style = "color:black", @class = "form-control", title = "Lütfen Seçiniz!" , required = "required" })
+                                                                                         }, "LÜTFEN SEÇİNİZ", new { @style = "color:black", @class = "form-control", title = "Lütfen Seçiniz!" })
                                 @Html.ValidationMessageFor(model => model.Hazirlayan, "", new { @class = "text-danger" })
                        
                             </div>

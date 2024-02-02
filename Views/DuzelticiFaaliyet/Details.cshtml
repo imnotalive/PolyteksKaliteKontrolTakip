@@ -1,0 +1,142 @@
+﻿@model PolyteksKaliteKontrolTakip.Models.Qdms_DuzelticiFaaliyetFormu
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<center><h2><b>DÜZELTİCİ FAALİYET FORMU</b></h2></center>
+<br />
+<a class="btn btn-danger" href="@Url.Action("PDFFormat","DuzelticiFaaliyet",new {id=Model.ID})">PDF RAPORLAMA</a>
+<div>
+    @Html.HiddenFor(model => model.ID)
+</div>
+<hr />
+<body>
+    <div class="container text-lg-center">
+        @*<div class="row">*@
+        <div class="bs-example">
+            <table class="table table-bordered table-hover table-striped table-responsive-lg">
+                <thead class="table-striped">
+
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: black"><b>UYGUNSUZLUK NUMARASI</b></td>
+                        <td style="color: black"> <b>#@Html.DisplayFor(model => model.ID)</b> </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>UYGUNSUZLUK TARİHİ</b></td>
+                        <td style="color: black">  @Convert.ToDateTime(Model.UygunsuzlukTarihi).ToString("dd.MM.yyyy")</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>UYGUNSUZLUK TESPİT ŞEKLİ</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.UygunsuzlukTespitSekli)</td>
+                    </tr>
+
+                    <tr>
+                        <td style="color: black"><b>UYGUNSUZLUĞUN BULUNDUĞU DEPARTMANI</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.UygunsuzlukDepartmani)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>UYGUNSUZLUK DURUMU</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.UygunsuzlukDurumu)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>UYGUNSUZLUĞU BİLDİREN</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.UygunsuzlukBildiren)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>UYGUNSUZLUK NEDENİ</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.UygunsuzlukNedeni)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>YAPILACAK DÜZELTİCİ FAALİYET</b></td>
+                        <td style="color: black">
+                            @Html.DisplayFor(model => model.YapilacakFaaliyet)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>ÇÖZÜMÜN ÖNGÖRÜLEN GERÇEKLEŞME TARİHİ</b></td>
+                       
+                        <td style="color: black">  @Convert.ToDateTime(Model.OnguruGerceklesmeTarihi).ToString("dd.MM.yyyy")</td>
+                      
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>ÇÖZÜM - AD SOYAD</b></td>
+                        <td style="color: black">
+                            @Html.DisplayFor(model => model.AdSoyadCozum)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>SONUÇ DÜZELTİCİ FAALİYET TAKİBİ</b></td>
+                        <td style="color: black">
+                            @if (Model.DuzelticiFaaliyetTakibi1 == true)
+                            {
+                                @Html.Encode("GERÇEKLEŞMİŞTİR");
+                            }
+                            @if (Model.DuzelticiFaaliyetTakibi1 == false)
+                            {
+                                @Html.Encode("GERÇEKLEŞMEMİŞTİR");
+
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>SONUÇ AÇIKLAMA</b></td>
+                        <td style="color: black">
+                            @Html.DisplayFor(model => model.SonucAciklama)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>SONUÇ TAKİP TARİHİ</b></td>
+                        <td style="color: black">
+                            @Convert.ToDateTime(Model.SonucTakipTarihi).ToString("dd.MM.yyyy")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>SONUÇ - AD SOYAD</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.AdSoyadSonuc)</td>
+                    </tr>
+
+                    <tr>
+                        <td style="color: black"><b>GÖZDEN GEÇİRME DÜZELTİCİ FALİYET TAKİBİ</b></td>
+                        <td style="color: black">
+                            @if (Model.DuzelticiFaaliyetTakibi2 == true)
+                            {
+                                @Html.Encode("UYGUN")
+                            }
+                            @if (Model.DuzelticiFaaliyetTakibi2 == false)
+                            {
+                                @Html.Encode("UYGUN DEĞİL")
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>GÖZDEN GEÇİRME AÇIKLAMA</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.GGAciklama)</td>
+                    </tr>
+                    <tr>
+                        <td style="color: black"><b>GÖZDEN GEÇİRME AD-SOYAD</b></td>
+                        <td style="color: black">  @Html.DisplayFor(model => model.GGAdSoyad)</td>
+                    </tr>
+
+
+                   
+             
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+    @*</div>*@
+</body>
+
+<br />
+<p>
+    @Html.ActionLink("DÜZENLE", "Edit", "DuzelticiFaaliyet", new { id = Model.ID, @class = "btn btn-primary" }) |
+    @Html.ActionLink("LİSTEYE GERİ DÖN", "Indexs", "DuzelticiFaaliyet", new { @class = "btn btn-info" })
+
+</p>
+

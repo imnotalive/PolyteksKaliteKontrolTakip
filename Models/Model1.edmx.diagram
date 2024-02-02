@@ -4,22 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d1a7edb3db4745bb86055d4eca45039a" Name="Diagram1">
+      <Diagram DiagramId="d1a7edb3db4745bb86055d4eca45039a" Name="Diagram1" ZoomLevel="89">
         <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_Bolumler" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_Cari" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_Kullanici" Width="1.5" PointX="7.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_MusteriSikayet" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_MusteriSikayetAna" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_MusteriSikayetResim" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_PartiNo" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_SikayetGrubu" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_SikayetSebebi" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
-        <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_MusteriTakipFormu_Qdms_Cari1" ManuallyRouted="false" />
-        <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_MusteriSikayet_Qdms_MusteriSikayetAna" ManuallyRouted="false" />
-        <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_MusteriSikayet_Qdms_PartiNo" ManuallyRouted="false" />
-        <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_MusteriSikayet_Qdms_SikayetGrubu" ManuallyRouted="false" />
-        <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_MusteriSikayetResim_Qdms_MusteriSikayet" ManuallyRouted="false" />
         <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_SikayetSebebi_Qdms_SikayetGrubu" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="POLY_QDMSModel.TOPLAM_SIKAYET" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_DuzelticiFaaliyetFormu" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="POLY_QDMSModel.Qdms_MusteriSikayet" Width="1.5" PointX="5.25" PointY="1" />
+        <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_MusteriTakipFormu_Qdms_Cari1" />
+        <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_MusteriSikayet_Qdms_MusteriSikayetAna" />
+        <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_MusteriSikayet_Qdms_PartiNo" />
+        <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_MusteriSikayet_Qdms_SikayetGrubu" />
+        <AssociationConnector Association="POLY_QDMSModel.FK_Qdms_MusteriSikayetResim_Qdms_MusteriSikayet" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,240 @@
+﻿@model PolyteksKaliteKontrolTakip.Models.Qdms_DuzelticiFaaliyetFormu
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+
+
+    
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UygunsuzlukTarihi, "UYGUNSUZLUK TARİHİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.UygunsuzlukTarihi, "{0:yyyy-MM-dd}", new { htmlAttributes = new { type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UygunsuzlukTarihi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UygunsuzlukTespitSekli, "UYGUNSUZLUK TESPİT TÜRÜ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.UygunsuzlukTespitSekli, new List<SelectListItem>
+                         {
+                                new  SelectListItem { Text = "ÇALIŞMA ANINDA", Value = "ÇALIŞMA ANINDA" },
+                                new  SelectListItem { Text = "MÜŞTERİ ŞİKAYETİ", Value = "MÜŞTERİ ŞİKAYETİ" },
+
+                   new  SelectListItem { Text = "DENETİM", Value = "DENETİM" },
+
+                       new  SelectListItem { Text = "DENETİM", Value = "DENETİM" },
+
+
+
+
+
+
+               }, "LÜTFEN SEÇİNİZ", new { @style = "color:black", @class = "form-control", title = "Lütfen Seçiniz!" })
+                        @Html.ValidationMessageFor(model => model.UygunsuzlukTespitSekli, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.UygunsuzlukDepartmani, "UYGUNSUZLUK DEPARTMAN", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.UygunsuzlukDepartmani, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UygunsuzlukDepartmani, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UygunsuzlukDurumu, "UYGUNSUZLUK DURUMU", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.UygunsuzlukDurumu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UygunsuzlukDurumu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UygunsuzlukBildiren, "UYGUNSUZLUK BİLDİREN", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.UygunsuzlukBildiren, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UygunsuzlukBildiren, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UygunsuzlukNedeni, "UYGUNSUZLUK NEDENİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.UygunsuzlukNedeni, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UygunsuzlukNedeni, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UygunsuzlukInceleyen, "UYGUNSUZLUĞU İNCELEYEN", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.UygunsuzlukInceleyen, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UygunsuzlukInceleyen, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.YapilacakFaaliyet, "YAPILACAK FAALİYET", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.YapilacakFaaliyet, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.YapilacakFaaliyet, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OnguruGerceklesmeTarihi, "ÖNGÖRÜLEN GERÇEKLEŞME TARİHİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.OnguruGerceklesmeTarihi, "{0:yyyy-MM-dd}", new { htmlAttributes = new { type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OnguruGerceklesmeTarihi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AdSoyadCozum, "AD-SOYAD ÇÖZÜM", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.AdSoyadCozum, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AdSoyadCozum, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DuzelticiFaaliyetTakibi1, "DÜZELTİCİ FAALİYET TAKİBİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <div>
+                            @Html.RadioButtonFor(model => model.DuzelticiFaaliyetTakibi1, true) GERÇEKLEŞMİŞTİR <br />
+                            @Html.RadioButtonFor(model => model.DuzelticiFaaliyetTakibi1, false) GERÇEKLEŞMEMİŞTİR
+
+                            @Html.ValidationMessageFor(model => model.DuzelticiFaaliyetTakibi1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SonucAciklama, "AÇIKLAMA SONUÇ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.SonucAciklama, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SonucAciklama, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SonucTakipTarihi, "SONUÇ TAKİP TARİHİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.SonucTakipTarihi, "{0:yyyy-MM-dd}", new { htmlAttributes = new { type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SonucTakipTarihi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AdSoyadSonuc, "SONUÇ AD SOYAD", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.AdSoyadSonuc, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AdSoyadSonuc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DuzelticiFaaliyetTakibi2, "DÜZELTİCİ FAALİYET TAKİBİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <div>
+                            @Html.RadioButtonFor(model => model.DuzelticiFaaliyetTakibi2, true) UYGUN <br />
+                            @Html.RadioButtonFor(model => model.DuzelticiFaaliyetTakibi2, false) UYGUN DEĞİL
+                            @Html.ValidationMessageFor(model => model.DuzelticiFaaliyetTakibi2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GGAciklama, "GÖZDEN GEÇİRME AÇIKLAMA", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.GGAciklama, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GGAciklama, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GGTakipTarihi, "GÖZDEN GEÇİRME TARİHİ", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.SonucTakipTarihi, "{0:yyyy-MM-dd}", new { htmlAttributes = new { type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GGTakipTarihi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GGAdSoyad, "GÖZDEN GEÇİRME AD SOYAD", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.GGAdSoyad, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GGAdSoyad, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-12 col-md-12">
+                <input type="submit" value="DEĞİŞİKLİKLERİ KAYDET" class="btn btn-success btn-block" />
+            </div>
+        </div>
+    </div>
+
+
+}
+
+<div>
+    @Html.ActionLink("GERİ GİT", "Index")
+</div>

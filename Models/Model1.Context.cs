@@ -28,11 +28,13 @@ namespace PolyteksKaliteKontrolTakip.Models
         public virtual DbSet<Qdms_Bolumler> Qdms_Bolumler { get; set; }
         public virtual DbSet<Qdms_Cari> Qdms_Cari { get; set; }
         public virtual DbSet<Qdms_Kullanici> Qdms_Kullanici { get; set; }
-        public virtual DbSet<Qdms_MusteriSikayet> Qdms_MusteriSikayet { get; set; }
         public virtual DbSet<Qdms_MusteriSikayetAna> Qdms_MusteriSikayetAna { get; set; }
         public virtual DbSet<Qdms_MusteriSikayetResim> Qdms_MusteriSikayetResim { get; set; }
         public virtual DbSet<Qdms_PartiNo> Qdms_PartiNo { get; set; }
         public virtual DbSet<Qdms_SikayetGrubu> Qdms_SikayetGrubu { get; set; }
         public virtual DbSet<Qdms_SikayetSebebi> Qdms_SikayetSebebi { get; set; }
+        public virtual DbSet<TOPLAM_SIKAYET> TOPLAM_SIKAYET { get; set; }
+        public virtual DbSet<Qdms_DuzelticiFaaliyetFormu> Qdms_DuzelticiFaaliyetFormu { get; set; }
+        public virtual DbSet<Qdms_MusteriSikayet> Qdms_MusteriSikayet { get; set; }
     }
 }

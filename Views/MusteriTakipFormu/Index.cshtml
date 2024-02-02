@@ -92,7 +92,7 @@
                                 @Html.DisplayFor(modelItem => item.NumuneTipi)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.IadeMiktari)
+                                @string.Format("{0:#,0.00}", item.IadeMiktari)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.KapatilmaSuresi)

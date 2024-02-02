@@ -19,10 +19,36 @@
     <link rel="stylesheet" href="/AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/AdminLTE-3.2.0/dist/css/adminlte.min.css">
+    <style>
 
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            font-size: 10px;
+            border: none;
+            outline: none;
+            background-color: lightblue;
+            color: white;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+            #myBtn:hover {
+                background-color: #000000;
+            }
+    </style>
 
 
 </head>
+<button onclick="topFunction()" id="myBtn" title="Yukarı Çık"><i class="fa fa-arrow-up" aria-hidden="true"></i> &nbsp;Yukarı Çık</button>
+@if (Request.IsAuthenticated)
+{
+    @Html.Partial("~/Views/Shared/_KeepAlive.cshtml")
+}
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
@@ -172,7 +198,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="/AdminLTE-3.2.0/index3.html" class="brand-link">
+            <a href="/Home/Home" class="brand-link">
 
                 <img src="~/AdminLTE-3.2.0/dist/img/credit/1996854-200.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 @*<img src="/AdminLTE-3.2.0/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">*@
@@ -230,12 +256,12 @@
                                         <p>Geliştirici Yönetimi</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                @*<li class="nav-item">
                                     <a href="../../index3.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Dashboard v3</p>
                                     </a>
-                                </li>
+                                </li>*@
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -266,7 +292,12 @@
                                         <p>MÜŞTERİ ŞİKAYET / REKLAMASYON VERİ TAKİP FORMU</p>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="/MusteriSikayeti/Raporlar" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>RAPORLAR</p>
+                                    </a>
+                                </li>
 
                             </ul>
                         </li>
@@ -278,14 +309,14 @@
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            @*<ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="../charts/chartjs.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>FORMLAR 1</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="../charts/chartjs.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>AKSİYON FALİYETLERİ</p>
+                                    </a>
+                                </li>
+                                @*<li class="nav-item">
                                         <a href="../charts/flot.html" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>FORMLAR 2</p>
@@ -308,18 +339,25 @@
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>FORMLAR 5</p>
                                         </a>
-                                    </li>
+                                    </li>*@
 
-                                </ul>*@
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-check-circle"></i>
                                 <p>
-                                    DİF
+                                    DÜZELTİCİ İYİLEŞTİRİCİ FALİYETLER
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
-                            </a>
+                            </a>   <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/DuzelticiFaaliyet/Indexs" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Düzeltici Faaliyet Formu</p>
+                                    </a>
+                                </li>
+                            </ul>
                             @*<ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="../charts/chartjs.html" class="nav-link">
@@ -1053,63 +1091,63 @@
 
             <!-- Content Header (Page header) -->
             <!--<section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Project Add</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Project Add</li>
-                            </ol>
-                        </div>
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Project Add</h1>
                     </div>
-                </div>-->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Project Add</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>-->
             <!-- /.container-fluid -->
             <!--</section>-->
             @RenderBody()
             <!-- Main content -->
             <!--<section class="content">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">General</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">General</h3>
 
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
                             </div>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="inputName">Project Name</label>
-                                    <input type="text" id="inputName" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputDescription">Project Description</label>
-                                    <textarea id="inputDescription" class="form-control" rows="4"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputStatus">Status</label>
-                                    <select id="inputStatus" class="form-control custom-select">
-                                        <option selected disabled>Select one</option>
-                                        <option>On Hold</option>
-                                        <option>Canceled</option>
-                                        <option>Success</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputClientCompany">Client Company</label>
-                                    <input type="text" id="inputClientCompany" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputProjectLeader">Project Leader</label>
-                                    <input type="text" id="inputProjectLeader" class="form-control">
-                                </div>
-                            </div>-->
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputName">Project Name</label>
+                                <input type="text" id="inputName" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDescription">Project Description</label>
+                                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputStatus">Status</label>
+                                <select id="inputStatus" class="form-control custom-select">
+                                    <option selected disabled>Select one</option>
+                                    <option>On Hold</option>
+                                    <option>Canceled</option>
+                                    <option>Success</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputClientCompany">Client Company</label>
+                                <input type="text" id="inputClientCompany" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputProjectLeader">Project Leader</label>
+                                <input type="text" id="inputProjectLeader" class="form-control">
+                            </div>
+                        </div>-->
             <!-- /.card-body -->
             <!--</div>-->
             <!-- /.card -->
@@ -1157,9 +1195,9 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                @*<b>Version</b> 3.2.0*@
+               
             </div>
-            <strong> &copy; @DateTime.Now.Year-TAŞDELEN GROUP - Her hakkı saklıdır.</strong>
+            <strong> &copy; 2022 - @DateTime.Now.Year TAŞDELEN GROUP - Her hakkı saklıdır.</strong> &#x2133;.
         </footer>
 
         <!-- Control Sidebar -->
@@ -1178,7 +1216,27 @@
     <script src="/AdminLTE-3.2.0/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/AdminLTE-3.2.0/dist/js/demo.js"></script>
+    <script>
+        // Get the button
+        let mybutton = document.getElementById("myBtn");
 
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 </body>
 </html>
 

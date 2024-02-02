@@ -24,8 +24,8 @@ namespace PolyteksKaliteKontrolTakip.Models
         public string SikayetSebebi { get; set; }
         public Nullable<int> SikayetGrubuID { get; set; }
     
+        public virtual Qdms_SikayetGrubu Qdms_SikayetGrubu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Qdms_MusteriSikayet> Qdms_MusteriSikayet { get; set; }
-        public virtual Qdms_SikayetGrubu Qdms_SikayetGrubu { get; set; }
     }
 }

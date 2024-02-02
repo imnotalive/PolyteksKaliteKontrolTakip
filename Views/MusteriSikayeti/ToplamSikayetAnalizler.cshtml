@@ -1,0 +1,39 @@
+﻿@model IEnumerable<PolyteksKaliteKontrolTakip.Models.TOPLAM_SIKAYET>
+
+
+@{
+    Layout = null;
+
+}
+
+<table class="table table-bordered table-primary table-sm table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayName("ŞİKAYET GRUBU")
+        </th>
+        <th>
+            @Html.DisplayName("ŞİKAYET SEBEBİ")
+        </th>
+        <th>
+            @Html.DisplayName("TOPLAM")
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.SikayetGrubu)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SikayetSebebi)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TOPLAM)
+    </td>
+
+</tr>
+    }
+
+</table>

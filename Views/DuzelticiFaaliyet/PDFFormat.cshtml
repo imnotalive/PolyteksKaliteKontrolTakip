@@ -1,0 +1,211 @@
+﻿
+@model PolyteksKaliteKontrolTakip.Models.Qdms_DuzelticiFaaliyetFormu
+
+@{
+    ViewBag.Title = "PDFFormat";
+    Layout = null;
+
+
+}
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+
+    img {
+        height: 50px;
+        width: 200px;
+    }
+
+    #left {
+        float: left;
+    }
+    .table td{
+        font-size:12px;
+    }
+
+ .rotate {
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  width: 1.5em;
+}
+   
+</style>
+
+
+
+<div>
+    @Html.HiddenFor(model => model.ID)
+</div>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="bs-example">
+                <table style="border: 1px solid black;" class="table table-bordered table-hover table-responsive-sm">
+
+                    <tr>
+                        <th style="width: 5px; padding:0;">
+                            <div id="left">
+                                <img src="~/Pictures/poly_logo.png" />
+                            </div>
+                        </th>
+                        <th>   <center><h4><b>  DÜZELTİCİ FAALİYET FORMU</b></h4></center></th>
+                        <th>   <h6><b> NO:</b></h6></th>
+                    </tr>
+                </table>
+                <table style="border: 1px solid black; padding-top: 0px;" class="table table-bordered table-hover table-responsive-sm">
+
+
+                    <tr>
+                        <td style="border-bottom: hidden;" rowspan="4" class="rotate"><center><b>PROBLEM</b></center></td>
+                        <td style="border-bottom: hidden;"><b>Uygunsuzluk Tarihi:</b></td>
+                        <td style="border-bottom: hidden;">    @Convert.ToDateTime(Model.UygunsuzlukTarihi).ToString("dd.MM.yyyy")</td>
+                    </tr>
+                    <tr>
+
+                        <td style="border-bottom: hidden;"><b>Uygunsuzluk Tespit Şekli:</b></td>
+                        <td style="border-bottom: hidden;">    @Html.DisplayFor(model => model.UygunsuzlukTespitSekli)</td>
+                    </tr>
+                    <tr>
+
+                        <td style="border-bottom: hidden;"><b>Uygunsuzluğun Bulunduğu Departman:</b></td>
+                        <td style="border-bottom: hidden;">  @Html.DisplayFor(model => model.UygunsuzlukDepartmani)</td>
+                    </tr>
+
+                    <tr>
+
+                        <td style="border-bottom: hidden;"><b>Uygunsuzluk Durumu:</b></td>
+                        <td style="border-bottom: hidden;">   @Html.DisplayFor(model => model.UygunsuzlukDurumu)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <center>
+                                <b>
+
+                                </b>
+                            </center>
+                        </td>
+
+                        <td><b>Uygunsuzluğu Bildiren:</b></td>
+                        <td>
+                            @Html.DisplayFor(model => model.UygunsuzlukBildiren)
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td rowspan="2" class="rotate"><center><b>ANALİZ</b></center></td>
+                        <td style="border-bottom: hidden;"><b>Uygunsuzluk Nedeni:</b></td>
+                        <td style="border-bottom: hidden;">    @Html.DisplayFor(model => model.UygunsuzlukNedeni)</td>
+                    </tr>
+                    <tr>
+
+                        <td><b>Uygunsuzluğu İnceleyen:</b></td>
+                        <td>    @Html.DisplayFor(model => model.UygunsuzlukInceleyen)</td>
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td rowspan="3" class="rotate"><center><b>ÇÖZÜM</b></center></td>
+                        <td style="border-bottom: hidden;"><b>Yapılacak Düzeltici Faaliyet:</b></td>
+                        <td style="border-bottom: hidden;">    @Html.DisplayFor(model => model.YapilacakFaaliyet)</td>
+                    </tr>
+                    <tr>
+
+                        <td style="border-bottom: hidden;"><b>Öngörülen Gerçekleşme Tarihi:</b></td>
+                        <td style="border-bottom: hidden;">   @Convert.ToDateTime(Model.OnguruGerceklesmeTarihi).ToString("dd.MM.yyyy")</td>
+                    </tr>
+                    <tr>
+
+                        <td><b>İsim/İmza:</b></td>
+                        <td>    @Html.DisplayFor(model => model.UygunsuzlukInceleyen)</td>
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td rowspan="4" class="rotate"><center><b>SONUÇ</b></center></td>
+                        <td style="border-bottom: hidden;"><b>Düzeltici Faaliyetin Takibi:</b></td>
+                        <td style="border-bottom: hidden;">
+                            @if (Model.DuzelticiFaaliyetTakibi1 == true)
+                            {
+                                @Html.Encode("GERCEKLESMİSTİR")
+                            }
+                            @if (Model.DuzelticiFaaliyetTakibi1 == false)
+                            {
+                                @Html.Encode("GERCEKLESMEMİSTİR")
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td style="border-bottom: hidden;"><b>Açıklama:</b></td>
+                        <td style="border-bottom: hidden;">    @Html.DisplayFor(model => model.SonucAciklama)</td>
+                    </tr>
+                    <tr>
+
+                        <td style="border-bottom: hidden;"><b>Takip Tarihi:</b></td>
+                        <td style="border-bottom: hidden;">   @Convert.ToDateTime(Model.SonucTakipTarihi).ToString("dd.MM.yyyy")</td>
+                    </tr>
+                    <tr>
+
+                        <td><b>İsim/İmza:</b></td>
+                        <td>    @Html.DisplayFor(model => model.AdSoyadSonuc)</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4" class="rotate"><center><b>GÖZDEN GEÇİRME</b></center></td>
+
+                        <td style="border-bottom: hidden;"><b>Düzeltici Faaliyetin Takibi:</b></td>
+                        <td style="border-bottom: hidden;">
+                            @if (Model.DuzelticiFaaliyetTakibi2 == true)
+                            {
+                                @Html.Encode("UYGUN")
+                            }
+                            @if (Model.DuzelticiFaaliyetTakibi2 == false)
+                            {
+                                @Html.Encode("UYGUN DEGIL")
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+
+
+                        <td style="border-bottom: hidden;"><b>Açıklama:</b></td>
+                        <td style="border-bottom: hidden;">    @Html.DisplayFor(model => model.GGAciklama)</td>
+                    </tr>
+                    <tr>
+
+                        <td style="border-bottom: hidden;"><b>Takip Tarihi:</b></td>
+                        <td style="border-bottom: hidden;">   @Convert.ToDateTime(Model.GGTakipTarihi).ToString("dd.MM.yyyy")</td>
+                    </tr>
+                    <tr>
+
+                        <td><b>İsim/İmza</b></td>
+                        <td>    @Html.DisplayFor(model => model.GGAdSoyad)</td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+
+
+
+            <div class="float:left"><b><i>F-140.01/04</i></b></div>
+        </div>
+    </div>
+
+    
+   
+    <div style="page-break-after: always;"></div>
+    <div>
+        @Html.ActionLink("PDF", "ExportPDFS", new { id = Model.ID }, new { @class = "btn btn-danger" })
+    </div>
+
+</body>
+

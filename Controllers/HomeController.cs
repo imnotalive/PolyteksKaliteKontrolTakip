@@ -11,7 +11,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 {
     public class HomeController : Controller
     {
-        POLY_QDMSEntities db = new POLY_QDMSEntities();
+        public POLY_QDMSEntities db = new POLY_QDMSEntities();
 
         public ActionResult Index()
         {
@@ -70,7 +70,55 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 
             return View();
         }
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Giris", "Home");
+        }
+        [HttpPost]
+        public JsonResult KeepSessionAlive()
+        {
 
-      
+            return new JsonResult
+            {
+                Data = "Beat Generated"
+            };
+        }
+        [AllowAnonymous]
+        public ActionResult Kullanici()
+        {
+
+            return View(db.Qdms_Kullanici.OrderBy(a=>a.AdSoyad).ToList());
+        }
+
+
+        public ActionResult karisik()
+        {
+            //var monthlists = db.Qdms_MusteriSikayet.OrderBy(a=>a.KokNeden).ToList();
+
+
+
+            //ViewBag.Exponate =
+            //    Newtonsoft.Json.JsonConvert.SerializeObject(monthlists);
+            var groups = db.Qdms_MusteriSikayet.GroupBy(p => p.KokNeden).OrderBy(p => p.Key).Select(g => new { g.Key, Count = g.Count() });
+
+            //var sorgu = from x in db.Qdms_MusteriSikayet
+            //            group x by x.KokNeden into g
+            //            select(g => new 
+            //            {
+            //                KokNeden = g,
+            //                MusteriSikayetId = g.Count()
+            //            };
+             ViewBag.asd =
+            Newtonsoft.Json.JsonConvert.SerializeObject(groups.ToList());
+            return View();
+         
+
+        
+        }
+
     }
 }

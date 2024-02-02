@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using PagedList;
 using PolyteksKaliteKontrolTakip.Models;
 using Rotativa;
 using Rotativa.Options;
@@ -19,68 +20,17 @@ namespace PolyteksKaliteKontrolTakip.Controllers
     {
         POLY_QDMSEntities db = new POLY_QDMSEntities();
 
+     
         [AllowAnonymous]
-        public ActionResult Formlar()
+        public ActionResult SikayetSebepler()
         {
-            return View();
+          
+
+            var deneme = db.Qdms_MusteriSikayet.ToList();
+            return View(deneme);
         }
 
-        public ActionResult MusteriRapor(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Qdms_MusteriSikayet qdms_MusteriSikayet = db.Qdms_MusteriSikayet.Find(id);
-            if (qdms_MusteriSikayet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(qdms_MusteriSikayet);
-        }
-        public ActionResult MusteriFormati(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Qdms_MusteriSikayet qdms_MusteriSikayet = db.Qdms_MusteriSikayet.Find(id);
-            if (qdms_MusteriSikayet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(qdms_MusteriSikayet);
-        }
-        [AllowAnonymous]
-        public ActionResult Analizler()
-        {
-            return View(db.Qdms_MusteriSikayet.ToList());
-        }
-
-        [AllowAnonymous]
-        public ActionResult Home()
-        {
-            return View();
-        }
-  
-
-
-
-
-        [AllowAnonymous]
-        public ActionResult ExportPDF(int? id)
-        {
-            return new ActionAsPdf("MusteriFormati", new { id = id })
-            {
-                //FileName=Server.MapPath("~/Temalar")
-                FileName = DateTime.Now.ToString("dd MMMM yyyy") + "-" + "MusteriSikayeti.pdf",
-                PageSize = Size.A4,
-
-                // PageMargins = { Left = 1, Right = 1 },
-                //CustomSwitches = "--page-offset 0 --footer-center [page] --footer-font-size 8"
-            };
-        }
-
+     
         [AllowAnonymous]
         public ActionResult TamamlananSikayet()
         {
@@ -160,7 +110,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _DevamEdenSikayetSatisDuzenle(Qdms_MusteriSikayet qdms_MusteriSikayet, int? id, HttpPostedFileBase imgfile)
         {
-            ////var kimlik = db.Qdms_MusteriSikayet.Find(id);
+            
             Random r = new Random();
             string path = "-1";
             int random = r.Next();
@@ -680,7 +630,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Qdms_MusteriSikayet qdms_MusteriSikayet = db.Qdms_MusteriSikayet.Find(id);
+            Qdms_MusteriSikayet qdms_MusteriSikayet = db.Qdms_MusteriSikayet.FirstOrDefault(a=>a.ID==id);
             if (qdms_MusteriSikayet == null)
             {
                 return HttpNotFound();
@@ -688,7 +638,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 
             ViewBag.Cari = new SelectList(db.Qdms_Cari, "ID", "CariNo", qdms_MusteriSikayet.Cari);
             ViewBag.PartiNoSecme = new SelectList(db.Qdms_PartiNo, "ID", "LotNo", qdms_MusteriSikayet.PartiNoSecme);
-            return PartialView(qdms_MusteriSikayet);
+            return View(qdms_MusteriSikayet);
         }
         [AllowAnonymous]
         [HttpPost]
@@ -849,63 +799,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 
                     }
                 }
-                //if (qdms_MusteriSikayet.BukumSeciliMi == true && qdms_MusteriSikayet.BukumYorum != null ||
-                //    qdms_MusteriSikayet.LabSeciliMi == true && qdms_MusteriSikayet.LabYorum != null ||
-                //    qdms_MusteriSikayet.SevkiyatSeciliMi == true && qdms_MusteriSikayet.SevkiyatYorum != null ||
-                //        qdms_MusteriSikayet.EESeciliMi == true && qdms_MusteriSikayet.EEYorum != null ||
-                //    qdms_MusteriSikayet.PaketlemeSeciliMi == true && qdms_MusteriSikayet.PaketlemeYorum != null ||
-                //    qdms_MusteriSikayet.ProsesSeciliMi == true && qdms_MusteriSikayet.ProsesYorum != null ||
-                //    qdms_MusteriSikayet.TTSeciliMi == true && qdms_MusteriSikayet.TTYorum != null ||
-                //    qdms_MusteriSikayet.UretimSeciliMi == true && qdms_MusteriSikayet.UretimYorum != null ||
-                //    qdms_MusteriSikayet.SatinalmaSeciliMi == true && qdms_MusteriSikayet.SatinalmaYorum != null ||
-                //    qdms_MusteriSikayet.TekstureSeciliMi == true && qdms_MusteriSikayet.TekstureYorum != null ||
-                //    qdms_MusteriSikayet.MBSeciliMi == true && qdms_MusteriSikayet.MBYorum != null)
-                //{
-                //    fisDetays.Durum = "Sonuç Bekleniyor";
-
-                //}
-                //else if (fisDetays.SevkiyatSeciliMi == true && fisDetays.SevkiyatYorum == null)
-                //{
-                //    fisDetays.UretimYorum = qdms_MusteriSikayet.UretimYorum;
-                //    fisDetays.BukumYorum = qdms_MusteriSikayet.BukumYorum;
-                //    fisDetays.TekstureYorum = qdms_MusteriSikayet.TekstureYorum;
-                //    fisDetays.TTYorum = qdms_MusteriSikayet.TTYorum;
-                //    fisDetays.SevkiyatYorum = qdms_MusteriSikayet.SevkiyatYorum;
-                //    fisDetays.SatinalmaYorum = qdms_MusteriSikayet.SatinalmaYorum;
-                //    fisDetays.MBYorum = qdms_MusteriSikayet.MBYorum;
-                //    fisDetays.EEYorum = qdms_MusteriSikayet.EEYorum;
-                //    fisDetays.ProsesYorum = qdms_MusteriSikayet.ProsesYorum;
-                //    fisDetays.LabYorum = qdms_MusteriSikayet.LabYorum;
-                //    fisDetays.PaketlemeYorum = qdms_MusteriSikayet.PaketlemeYorum;
-                //}
-
-                //    else if ((fisDetays.BukumSeciliMi == true && fisDetays.BukumYorum == null) ||
-                //     fisDetays.EEYorum == null && fisDetays.EESeciliMi == true ||
-                //     fisDetays.TekstureYorum == null && fisDetays.TekstureSeciliMi == true ||
-                //      fisDetays.TTYorum == null && fisDetays.TTSeciliMi == true ||
-                //       fisDetays.UretimYorum == null && fisDetays.UretimSeciliMi == true ||
-                //        fisDetays.LabYorum == null && fisDetays.LabSeciliMi == true ||
-                //         fisDetays.SevkiyatYorum == null && fisDetays.SevkiyatSeciliMi == true ||
-                //          fisDetays.SatinalmaYorum == null && fisDetays.SatinalmaSeciliMi == true ||
-                //           fisDetays.ProsesYorum == null && fisDetays.ProsesSeciliMi == true ||
-                //           fisDetays.MBYorum == null && fisDetays.MBSeciliMi == true ||
-
-                //        fisDetays.PaketlemeYorum == null && fisDetays.PaketlemeSeciliMi == true)
-                //{
-                //    fisDetays.UretimYorum = qdms_MusteriSikayet.UretimYorum;
-                //    fisDetays.BukumYorum = qdms_MusteriSikayet.BukumYorum;
-                //    fisDetays.TekstureYorum = qdms_MusteriSikayet.TekstureYorum;
-                //    fisDetays.TTYorum = qdms_MusteriSikayet.TTYorum;
-                //    fisDetays.SevkiyatYorum = qdms_MusteriSikayet.SevkiyatYorum;
-                //    fisDetays.SatinalmaYorum = qdms_MusteriSikayet.SatinalmaYorum;
-                //    fisDetays.MBYorum = qdms_MusteriSikayet.MBYorum;
-                //    fisDetays.EEYorum = qdms_MusteriSikayet.EEYorum;
-                //    fisDetays.ProsesYorum = qdms_MusteriSikayet.ProsesYorum;
-                //    fisDetays.LabYorum = qdms_MusteriSikayet.LabYorum;
-                //    fisDetays.PaketlemeYorum = qdms_MusteriSikayet.PaketlemeYorum;
-
-
-                //}
+            
 
 
                 else
@@ -962,7 +856,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 
             Qdms_MusteriSikayet fisDetays = db.Qdms_MusteriSikayet.FirstOrDefault(x => x.ID == id);
 
-            if (ModelState.IsValid && fisDetays.YapilanAnalizler != null)
+            if (ModelState.IsValid)
             {
                 fisDetays.SikayetSonucu = qdms_MusteriSikayet.SikayetSonucu;
 
@@ -1021,7 +915,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 
                                         new DataColumn("ANALİZ SONUÇ ve YORUMLAR:"),
                                     new DataColumn("ÖZET"),
-                            //new DataColumn("YAPILAN ANALİZLER ve İNCELEMELER"),
+                      
                                new DataColumn("SONUÇ"),
 
 
@@ -1049,8 +943,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 
                     list.LabOzet.ToString(),
 
-                //list.YapilanAnalizler.
-                //HttpUtility.HtmlEncode(list.YapilanAnalizler),
+           
 
 
 
@@ -1065,8 +958,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
             using (XLWorkbook wb = new XLWorkbook())
             {
 
-                //var imagePath = @"~/Images/Picture2.png";   
-                //var imagePath = @"C:\Users\MERVE\source\repos\POLYTEKS_QDMS_MVC\Pictures\poly_logo.png";
+            
 
                 var ws = wb.Worksheets.Add(dt, "MusteriSikayetFormu");
 
@@ -1080,15 +972,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
                 ws.Cell("B1").Style.Font.Bold = true;
                 ws.Cell("B1").Style.Font.FontSize = 18;
                 ws.Cell("B1").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
-                //ws.Column(1).CellsUsed().SetDataType(XLDataType.Text);
-                //ws.Cell("A39").Value = "Sayın Müşterimiz; \n Bu form Müşteri Memnuniyeti çerçevesinde bilgilendirme amaçlı gönderilmiştir. " + Environment.NewLine + "Hatalı bilgi olması halinde lütfen Müşteri Temsilcimiz ile irtibata geçiniz. \n Bu bilgiler Şikayet Birimi Bölümüne gönderilecek olup, tüm gerekli bilgi ve numuneler tamamlandıktan en geç 5 iş günü içerisinde şikayetin sonuçlandırılmasına özen gösterilecektir.\n Sürecin devam etmesi halinde şikayet hakkında bilgilendirme yapılacaktır.";
-                //ws.Cell(1, 1).Style.Font.FontSize = 30;
-                //ws.Cell("A39").Style.Alignment.Vertical = XLAlignmentVerticalValues.Distributed;
-
-
-                //ws.Cell("A39").Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
-                //ws.Cell("A25").Value = "F-142.05/00";
-                //ws.Cell("A25").Style.Font.Bold = true;
+         
 
                 ws.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 ws.ShowGridLines = false;
@@ -1104,31 +988,7 @@ namespace PolyteksKaliteKontrolTakip.Controllers
                 rngTable.Transpose(XLTransposeOptions.MoveCells);
                 rngTable.Style.Font.FontColor = XLColor.Black;
                 rngTable.Style.Border.OutsideBorder = XLBorderStyleValues.None;
-                //rngTable.Column(2).CellsUsed().SetDataType(XLDataType.Text);
-
-                //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                //Response.AddHeader("content-disposition", "attachment;filename=TrainCatExport.xlsx");
-
-                //rngTable.Range("A2:B30").Style.Border.TopBorder = XLBorderStyleValues.Thin;
-                //rngTable.Range("A2:B30").Style.Border.InsideBorder = XLBorderStyleValues.Dotted;
-                //rngTable.Range("A2:B30").Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
-                //rngTable.Range("A2:B30").Style.Border.LeftBorder = XLBorderStyleValues.Thin;
-                //rngTable.Range("A2:B30").Style.Border.RightBorder = XLBorderStyleValues.Thin;
-                //rngTable.Range("A2:B30").Style.Border.TopBorder = XLBorderStyleValues.Thin;
-                //rngTable.Range("A2:A30").Style.Font.Bold = true;
-
-
-                //rngTable.Range("A15:B20").Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
-                //rngTable.Range("A13:B13").Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
-                //rngTable.Range("A22:B26").Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
-                //rngTable.Range("A3:B11").Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
-                //rngTable.Range("A28:B30").Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
-                //IXLRange contents = rngTable.Range("A2:A23");
-                //contents.Style.Alignment.WrapText = true;
-                //Worksheet worksheet = workbook.Worksheets[0];
-                //Cell cell = worksheet.Cells["A1"];
-                //cell.HtmlString = "<Font Style=\"FONT-WEIGHT: bold;FONT-STYLE: italic;TEXT-DECORATION: underline;FONT-FAMILY: Arial;FONT-SIZE: 11pt;COLOR: #ff0000;\">This is simple HTML formatted text.</Font>";
-
+           
                 using (MemoryStream stream = new MemoryStream())
                 {
                     wb.SaveAs(stream);
@@ -1146,5 +1006,226 @@ namespace PolyteksKaliteKontrolTakip.Controllers
 
         }
         #endregion
+        #region RAPORLAR
+
+        [AllowAnonymous]
+        public ActionResult MusteriSikayetiAnalizMusteri(string searchBy, string search)
+        {if (searchBy == "PartiNo")
+            {
+                return View(db.Qdms_MusteriSikayet.Where(a => a.Qdms_PartiNo.LotNo.StartsWith(search) || search == null).OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList());
+            }
+
+            else
+            {
+                return View(db.Qdms_MusteriSikayet.Where(a=>a.Qdms_Cari.CariAdi.StartsWith(search) || search == null).OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList());
+            }
+        }
+        [AllowAnonymous]
+        public ActionResult MusteriSikayetiAnalizSikayet(string searchBy, string search)
+        {
+            if (searchBy == "PartiNo")
+            {
+                return View(db.Qdms_MusteriSikayet.Where(a => a.Qdms_PartiNo.LotNo.StartsWith(search) || search == null).OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList());
+            }
+
+            else
+            {
+                return View(db.Qdms_MusteriSikayet.Where(a => a.Qdms_Cari.CariAdi.StartsWith(search) || search == null).OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList());
+            }
+
+
+            //return View(db.Qdms_MusteriSikayet.OrderBy(a => a.Qdms_Cari.CariAdi).ThenByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList()); ;
+        }
+        [AllowAnonymous]
+        public ActionResult MusteriSikayetiAnaliz2022()
+        {
+
+            DateTime son = new DateTime(2022, 12, 31);
+            DateTime ilk = new DateTime(2023, 01, 01);
+            DateTime yil = new DateTime(2023, 12, 31);
+
+            var deneme = db.Qdms_MusteriSikayet.Where(a => a.SatisMusteriTemsilcisiTarih <= ilk).OrderByDescending(a=>a.SatisMusteriTemsilcisiTarih).ToList();
+            return View(deneme);
+        }
+        [AllowAnonymous]
+        public ActionResult MusteriSikayetiAnaliz2023()
+        {
+
+
+            DateTime son = new DateTime(2022, 12, 31);
+
+
+            var deneme = db.Qdms_MusteriSikayet.Where(a => a.SatisMusteriTemsilcisiTarih >= son).OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList();
+            return View(deneme); 
+        }
+        [AllowAnonymous]
+        public ActionResult MusteriSikayetiAnalizParti(string searchBy, string search)
+        {
+            if (searchBy == "PartiNo")
+            {
+                return View(db.Qdms_MusteriSikayet.Where(a => a.Qdms_PartiNo.LotNo.StartsWith(search) || search == null).OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList());
+            }
+
+            else
+            {
+                return View(db.Qdms_MusteriSikayet.Where(a => a.Qdms_Cari.CariAdi.StartsWith(search) || search == null).OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList());
+            }
+
+
+
+
+            //var deneme = db.Qdms_MusteriSikayet.OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList();
+            //return View(deneme);
+        }
+        [AllowAnonymous]
+        public ActionResult MusteriSikayetiAnaliz2024()
+        {
+
+
+            DateTime son = new DateTime(2023, 12, 31);
+
+
+            var deneme = db.Qdms_MusteriSikayet.Where(a => a.SatisMusteriTemsilcisiTarih > son).OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList();
+            return View(deneme);
+        }
+        [AllowAnonymous]
+        public ActionResult MusteriSikayetiAnaliz2025()
+        {
+
+
+            DateTime son = new DateTime(2024, 12, 31);
+
+
+            var deneme = db.Qdms_MusteriSikayet.Where(a => a.SatisMusteriTemsilcisiTarih > son).OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList();
+            return View(deneme);
+        }
+        [AllowAnonymous]
+        public ActionResult MusteriSikayetiAnaliz2026()
+        {
+
+
+            DateTime son = new DateTime(2025, 12, 31);
+
+
+            var deneme = db.Qdms_MusteriSikayet.Where(a => a.SatisMusteriTemsilcisiTarih > son).OrderByDescending(a => a.SatisMusteriTemsilcisiTarih).ToList();
+            return View(deneme);
+        }
+        [AllowAnonymous]
+        public ActionResult Formlar()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult MusteriRapor(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Qdms_MusteriSikayet qdms_MusteriSikayet = db.Qdms_MusteriSikayet.Find(id);
+            if (qdms_MusteriSikayet == null)
+            {
+                return HttpNotFound();
+            }
+            return View(qdms_MusteriSikayet);
+        }
+        [AllowAnonymous]
+        public ActionResult MusteriFormati(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Qdms_MusteriSikayet qdms_MusteriSikayet = db.Qdms_MusteriSikayet.Find(id);
+            if (qdms_MusteriSikayet == null)
+            {
+                return HttpNotFound();
+            }
+            return View(qdms_MusteriSikayet);
+        }
+        [AllowAnonymous]
+        public ActionResult Analizler()
+        {
+
+
+            return View(db.Qdms_MusteriSikayet.ToList());
+        }
+        [AllowAnonymous]
+        public ActionResult ToplamSikayetAnalizler()
+        {
+
+
+            return View(db.TOPLAM_SIKAYET.Distinct().AsNoTracking().OrderByDescending(a => a.TOPLAM).ToList());
+        }
+        [AllowAnonymous]
+        public ActionResult Home()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult Raporlar()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult YillaraGöreAnaliz()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult AylaraGöreAnaliz()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult Analizler2()
+        {
+            DateTime son = new DateTime(2022, 12, 31);
+            DateTime ilk = new DateTime(2023, 01, 01);
+            DateTime yil = new DateTime(2023, 12, 31);
+
+            var deneme = db.Qdms_MusteriSikayet.Where(a => a.SatisMusteriTemsilcisiTarih <= ilk).ToList();
+            return View(deneme);
+        }
+        [AllowAnonymous]
+        public ActionResult Analizler3()
+        {
+            DateTime son = new DateTime(2022, 12, 31);
+
+
+            var deneme = db.Qdms_MusteriSikayet.Where(a => a.SatisMusteriTemsilcisiTarih >= son).ToList();
+            return View(deneme);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ExportPDF(int? id)
+        {
+            Qdms_MusteriSikayet qdms_MusteriSikayet = db.Qdms_MusteriSikayet.Find(id);
+            return new ActionAsPdf("MusteriFormati", new { id = id })
+            {
+                //FileName=Server.MapPath("~/Temalar")
+                FileName = DateTime.Now.ToString("dd MMMM yyyy") + "-" + qdms_MusteriSikayet.Qdms_Cari.CariAdi.Trim() + "-" + "MusteriSikayeti.pdf",
+                PageSize = Size.A4,
+
+                // PageMargins = { Left = 1, Right = 1 },
+                //CustomSwitches = "--page-offset 0 --footer-center [page] --footer-font-size 8"
+            };
+        }
+        [AllowAnonymous]
+        public ActionResult ExportPDFS(int? id)
+        {
+            Qdms_MusteriSikayet qdms_MusteriSikayet = db.Qdms_MusteriSikayet.Find(id);
+            return new ActionAsPdf("MusteriRapor", new { id = id })
+            {
+                //FileName=Server.MapPath("~/Temalar")
+                FileName = DateTime.Now.ToString("dd MMMM yyyy") + "-" + qdms_MusteriSikayet.Qdms_Cari.CariAdi.Trim() + "-" + "MusteriSikayeti.pdf",
+                PageSize = Size.A4,
+              
+
+
+            };
+        }
+        #endregion
+
     }
 }
